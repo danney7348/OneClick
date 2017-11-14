@@ -4,7 +4,6 @@ android {
     dataBinding {
         enabled true
     }
-
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.zsd"
@@ -13,12 +12,34 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions"versionCode"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    signingConfigs {
+        debug {}
+        release {
+            storeFile file("one.jks")
+            storePassword "111111"
+            keyAlias "one"
+            keyPassword "111111"
+        }
+    }
+    productFlavors {
+
+        wandoujia {}
+        baidu {}
+        c360 {}
+        uc {}
+
+        productFlavors.all{ flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+
     }
 }
 
@@ -39,4 +60,5 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
+
 }
