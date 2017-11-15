@@ -11,6 +11,11 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [
+                GETUI_APP_ID : "9cMue4fpN39bgpaag3yH26",
+                GETUI_APP_KEY : "DM1m6EEtuY5daGsfPTKDE2",
+                GETUI_APP_SECRET : "LoVMCW8Fz98vYbKvVhgc5"
+        ]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         flavorDimensions"versionCode"
     }
@@ -60,5 +65,6 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.getui:sdk:2.11.1.0'
 
 }
