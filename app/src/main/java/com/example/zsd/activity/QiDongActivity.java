@@ -54,7 +54,7 @@ public class QiDongActivity extends BaseActivity {
                         if(i > 0){
                             i--;
                         }else if(i == 0){
-                            startActivity(MainActivity.class);
+                            startActivity(LoginActivity.class);
                             finish();
                             timer.cancel();
                         }else {
