@@ -38,16 +38,20 @@
             android:process=":pushservice" />
         <service android:name=".activity.DemoIntentService" />
 
-        <activity android:name=".activity.QiDongActivity">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.QiDongActivity" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.ZhuceActivity"></activity>
+        <activity android:name=".activity.MobileLoginActivity" />
+        <activity android:name=".activity.MobileZhuceActivity" />
+        <activity android:name=".activity.ChuangzuoActivity"></activity>
     </application>
 
 </manifest>

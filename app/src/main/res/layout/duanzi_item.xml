@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout
+    android:id="@+id/rl1"
+    android:padding="@dimen/x10"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y100">
+
+    <ImageView
+        android:id="@+id/iv_touxiang"
+        android:layout_width="@dimen/x75"
+        android:layout_height="@dimen/y75"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_launcher_background" />
+        <TextView
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_toRightOf="@+id/iv_touxiang"
+            android:id="@+id/duanziz_item_tv_name"
+            android:text="sssss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_toRightOf="@+id/iv_touxiang"
+            android:layout_below="@+id/duanziz_item_tv_name"
+            android:text="sssss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_width="@dimen/x75"
+        android:layout_height="@dimen/y75"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_launcher_background" />
+</RelativeLayout>
+<TextView
+    android:layout_marginLeft="@dimen/x8"
+    android:layout_below="@+id/rl1"
+    android:text="ssssssssss"
+    android:id="@+id/duanzi_tv_content"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+</RelativeLayout>

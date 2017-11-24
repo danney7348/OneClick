@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zsd.R;
 import com.example.zsd.base.BaseActivity;
@@ -34,22 +33,23 @@ public class LoginActivity extends BaseActivity {
     public void setListener() {
 
     }
+
     @OnClick({R.id.iv_back, R.id.relativeLayout2, R.id.relativeLayout, R.id.login_tv})
     @Override
     public void Click(View view) {
-            switch (view.getId()) {
-                case R.id.iv_back:
-                    showToast("返回");
-                    break;
-                case R.id.relativeLayout2:
-                    showToast("微信支付");
-                    break;
-                case R.id.relativeLayout:
-                    showToast("扣扣登陆");
-                    break;
-                case R.id.login_tv:
-                    startActivity(ZhuceActivity.class);
-                    break;
+        switch (view.getId()) {
+            case R.id.iv_back:
+                showToast("返回");
+                break;
+            case R.id.relativeLayout2:
+                showToast("微信支付");
+                break;
+            case R.id.relativeLayout:
+                showToast("扣扣登陆");
+                break;
+            case R.id.login_tv:
+                startActivity(MobileLoginActivity.class);
+                break;
         }
     }
 
@@ -64,5 +64,4 @@ public class LoginActivity extends BaseActivity {
     public void initData() {
 
     }
-
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.zsd.activity.ChuangzuoActivity">
+    <RelativeLayout
+        android:id="@+id/include1"
+        android:background="#03A9F4"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <TextView
+            android:id="@+id/chuangzuo_tv_quxiao"
+            android:padding="@dimen/x10"
+            android:text="取消"
+            android:textSize="@dimen/x40"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:paddingRight="@dimen/x40"
+            android:textColor="#fff"
+            android:textSize="@dimen/x40"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/img_icon"
+            android:layout_toLeftOf="@+id/img_biji"
+            android:layout_toRightOf="@+id/img_icon"
+            android:layout_toStartOf="@+id/img_biji"
+            android:gravity="center"
+            android:text="创作" />
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@id/include1"
+        android:layout_width="match_parent"
+        android:background="@drawable/raw_1500974494"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/chuangzuo_iv_shipin"
+            android:layout_marginTop="@dimen/y120"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/x150"
+            android:layout_height="@dimen/y150" />
+        <ImageView
+            android:id="@+id/chuangzuo_iv_duanzi"
+            android:layout_below="@+id/chuangzuo_iv_shipin"
+            android:layout_marginTop="@dimen/y120"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/x150"
+            android:layout_height="@dimen/y150" />
+    </RelativeLayout>
+</RelativeLayout>
