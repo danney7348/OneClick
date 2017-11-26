@@ -9,6 +9,11 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowAnimationStyle">@style/MyWindowAnimTheme</item>
     </style>
+    <style name="TabLayoutTextStyle"
+        parent="TextAppearance.AppCompat.Widget.ActionBar.Title"
+        >
+        <item name="android:textSize">20sp</item>
+    </style>
     <style name="MyWindowAnimTheme">
         <item name="android:activityOpenEnterAnimation">@anim/top_to_bottom_in</item>
         <item name="android:activityCloseExitAnimation">@anim/bottom_to_top_out</item>

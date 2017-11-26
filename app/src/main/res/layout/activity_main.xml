@@ -5,122 +5,137 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.zsd.MainActivity">
-    <RelativeLayout
-        android:id="@+id/include"
-        android:background="#03A9F4"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/main_dl"
         android:layout_width="match_parent"
-        android:layout_height="100px">
-        <ImageView
-            android:id="@+id/img_icon"
-            android:padding="@dimen/x10"
-            android:layout_width="@dimen/x180"
-            android:src="@mipmap/ic_launcher_round"
-            android:layout_height="match_parent"
-             />
-
-        <TextView
-            android:paddingRight="@dimen/x40"
-            android:textColor="#fff"
-            android:textSize="@dimen/x40"
+        android:layout_height="match_parent">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/img_icon"
-            android:layout_toLeftOf="@+id/img_biji"
-            android:layout_toRightOf="@+id/img_icon"
-            android:layout_toStartOf="@+id/img_biji"
-            android:gravity="center"
-            android:text="推荐" />
-
-        <ImageView
-            android:id="@+id/img_biji"
-            android:padding="@dimen/x35"
-            android:layout_width="@dimen/x130"
-            android:layout_height="match_parent"
-            android:src="@drawable/biji"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            />
-
-    </RelativeLayout>
-
-    <FrameLayout
-        android:id="@+id/frame_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/linearlaout"
-        android:layout_below="@+id/include">
-
-    </FrameLayout>
-    <LinearLayout
-        android:background="#FFFFFF"
-        android:id="@+id/linearlaout"
-        android:weightSum="3"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y110">
-        <LinearLayout
-            android:id="@+id/main_ll_tuijian"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/include"
+                android:background="#03A9F4"
+                android:layout_width="match_parent"
+                android:layout_height="100px">
+                <ImageView
+                    android:id="@+id/img_icon"
+                    android:padding="@dimen/x10"
+                    android:layout_width="@dimen/x180"
+                    android:src="@mipmap/ic_launcher_round"
+                    android:layout_height="match_parent"
+                    />
 
-            <ImageView
-                android:id="@+id/main_img_tuijian"
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/y60"
-                android:src="@drawable/tuijian2" />
-            <TextView
-                android:id="@+id/main_tv_tuijain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="推荐"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/main_ll_duanzi"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
+                <TextView
+                    android:paddingRight="@dimen/x40"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/x40"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/img_icon"
+                    android:layout_toLeftOf="@+id/img_biji"
+                    android:layout_toRightOf="@+id/img_icon"
+                    android:layout_toStartOf="@+id/img_biji"
+                    android:gravity="center"
+                    android:text="推荐" />
 
-            <ImageView
-                android:id="@+id/main_img_duanzi"
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/y60"
-                android:src="@drawable/duanzi1" />
-            <TextView
-                android:id="@+id/main_tv_dianzi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="段子"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/main_ll_shipin"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/main_img_shiping"
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/y60"
-                android:src="@drawable/shiping1" />
-            <TextView
-                android:id="@+id/main_tv_shipin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="视频"
-                />
-        </LinearLayout>
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/img_biji"
+                    android:padding="@dimen/x35"
+                    android:layout_width="@dimen/x130"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/biji"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    />
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/frame_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_above="@+id/linearlaout"
+                android:layout_below="@+id/include">
+
+            </FrameLayout>
+            <LinearLayout
+                android:background="#FFFFFF"
+                android:id="@+id/linearlaout"
+                android:weightSum="3"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y110">
+                <LinearLayout
+                    android:id="@+id/main_ll_tuijian"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/main_img_tuijian"
+                        android:layout_width="@dimen/x60"
+                        android:layout_height="@dimen/y60"
+                        android:src="@drawable/tuijian2" />
+                    <TextView
+                        android:id="@+id/main_tv_tuijain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="推荐"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/main_ll_duanzi"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/main_img_duanzi"
+                        android:layout_width="@dimen/x60"
+                        android:layout_height="@dimen/y60"
+                        android:src="@drawable/duanzi1" />
+                    <TextView
+                        android:id="@+id/main_tv_dianzi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="段子"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/main_ll_shipin"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/main_img_shiping"
+                        android:layout_width="@dimen/x60"
+
+                        android:layout_height="@dimen/y60"
+                        android:src="@drawable/shiping1" />
+                    <TextView
+                        android:id="@+id/main_tv_shipin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="视频"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+        <FrameLayout
+            android:id="@+id/main_fl"
+            android:layout_gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
+    </android.support.v4.widget.DrawerLayout>
 
 </RelativeLayout>

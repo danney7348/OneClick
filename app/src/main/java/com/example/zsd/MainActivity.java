@@ -3,8 +3,10 @@ package com.example.zsd;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -13,14 +15,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.zsd.activity.ChuangzuoActivity;
-import com.example.zsd.adapter.MyFragmentAdapter;
 import com.example.zsd.base.BaseActivity;
 import com.example.zsd.fragment.DuanziFragment;
+import com.example.zsd.fragment.LeftFragment;
 import com.example.zsd.fragment.ShipinFragment;
 import com.example.zsd.fragment.TuijianFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,6 +55,10 @@ public class MainActivity extends BaseActivity {
     LinearLayout mainLlShipin;
     @BindView(R.id.linearlaout)
     LinearLayout linearlaout;
+    @BindView(R.id.main_fl)
+    FrameLayout mainFl;
+    @BindView(R.id.main_dl)
+    DrawerLayout mainDl;
 
     @Override
     public int bindLayout() {
@@ -66,11 +69,13 @@ public class MainActivity extends BaseActivity {
     public void setListener() {
 
     }
+
     @OnClick({R.id.img_icon, R.id.img_biji, R.id.main_ll_tuijian, R.id.main_ll_duanzi, R.id.main_ll_shipin})
     @Override
     public void Click(View view) {
         switch (view.getId()) {
             case R.id.img_icon:
+                mainDl.openDrawer(Gravity.LEFT);
                 break;
             case R.id.img_biji:
                 startActivity(ChuangzuoActivity.class);
@@ -82,7 +87,7 @@ public class MainActivity extends BaseActivity {
                 mainTvDianzi.setTextColor(Color.parseColor("#C5C5C5"));
                 mainImgShiping.setImageResource(R.drawable.shiping1);
                 mainTvShipin.setTextColor(Color.parseColor("#C5C5C5"));
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new TuijianFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new TuijianFragment()).commit();
                 break;
             case R.id.main_ll_duanzi:
                 mainImgTuijian.setImageResource(R.drawable.tuijian1);
@@ -91,7 +96,7 @@ public class MainActivity extends BaseActivity {
                 mainTvDianzi.setTextColor(Color.parseColor("#1296DB"));
                 mainImgShiping.setImageResource(R.drawable.shiping1);
                 mainTvShipin.setTextColor(Color.parseColor("#C5C5C5"));
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new DuanziFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new DuanziFragment()).commit();
                 break;
             case R.id.main_ll_shipin:
                 mainImgTuijian.setImageResource(R.drawable.tuijian1);
@@ -100,7 +105,7 @@ public class MainActivity extends BaseActivity {
                 mainTvDianzi.setTextColor(Color.parseColor("#C5C5C5"));
                 mainImgShiping.setImageResource(R.drawable.shiping2);
                 mainTvShipin.setTextColor(Color.parseColor("#1296DB"));
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new ShipinFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new ShipinFragment()).commit();
                 break;
         }
     }
@@ -110,10 +115,48 @@ public class MainActivity extends BaseActivity {
     public void initView() {
         initStatusBar(Color.parseColor("#03A9F4"));
         ButterKnife.bind(this);
+        mainImgTuijian.setImageResource(R.drawable.tuijian2);
+        mainTvTuijain.setTextColor(Color.parseColor("#1296DB"));
+        mainImgDuanzi.setImageResource(R.drawable.duanzi1);
+        mainTvDianzi.setTextColor(Color.parseColor("#C5C5C5"));
+        mainImgShiping.setImageResource(R.drawable.shiping1);
+        mainTvShipin.setTextColor(Color.parseColor("#C5C5C5"));
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new TuijianFragment()).commit();
+
+        mainDl.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+                drawerView.setClickable(true);
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_fl, new LeftFragment()).commit();
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
+
     }
 
     @Override
     public void initData() {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

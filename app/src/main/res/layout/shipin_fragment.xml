@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#62CC5B"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.design.widget.TabLayout
+        android:id="@+id/shipin_timeline_tablayout"
+        android:layout_width="match_parent"
+        app:tabIndicatorColor="#39AEFB"
+        android:layout_height="@dimen/y120"
+        app:tabIndicatorHeight="@dimen/x15"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
+        app:tabSelectedTextColor="#39AEFB"
+        app:tabPadding="0dp"
+        app:tabMaxWidth="1080dp"
+        />
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/shipin_timeline_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/timeline_tablayout" />
 </RelativeLayout>

@@ -71,4 +71,7 @@ dependencies {
     //butterKnife配置
     compile 'com.jakewharton:butterknife:8.7.0'
     implementation project(':slidingmenu')
+    implementation 'com.android.support:design:27.0.1'
+    compile 'com.xhb:xbanner:1.2.2'
+    compile 'com.nineoldandroids:library:2.4.0'
 }
