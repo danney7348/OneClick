@@ -16,10 +16,13 @@ import android.widget.TextView;
 
 import com.example.zsd.activity.ChuangzuoActivity;
 import com.example.zsd.base.BaseActivity;
+import com.example.zsd.base.BasePresenter;
 import com.example.zsd.fragment.DuanziFragment;
 import com.example.zsd.fragment.LeftFragment;
 import com.example.zsd.fragment.ShipinFragment;
 import com.example.zsd.fragment.TuijianFragment;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -156,6 +159,11 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initData() {
 
+    }
+
+    @Override
+    public List<BasePresenter> initPresenter() {
+        return null;
     }
 
     @Override

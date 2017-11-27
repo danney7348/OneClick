@@ -6,7 +6,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.zsd.R;
 import com.example.zsd.base.BaseActivity;
+import com.example.zsd.base.BasePresenter;
 import com.example.zsd.utils.GlideCircleTransform;
+
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -50,5 +54,10 @@ public class ChuangzuoActivity extends BaseActivity {
         Glide.with(this).load(R.drawable.ic_launcher_background)
                 .bitmapTransform(new GlideCircleTransform(this, 360))
                 .into(chuangzuoIvDuanzi);
+    }
+
+    @Override
+    public List<BasePresenter> initPresenter() {
+        return null;
     }
 }

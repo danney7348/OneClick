@@ -7,8 +7,10 @@ import android.view.View;
 import com.example.zsd.MainActivity;
 import com.example.zsd.R;
 import com.example.zsd.base.BaseActivity;
+import com.example.zsd.base.BasePresenter;
 import com.umeng.analytics.MobclickAgent;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -67,6 +69,12 @@ public class QiDongActivity extends BaseActivity {
         };
         timer.schedule(task,1000,1000);
     }
+
+    @Override
+    public List<BasePresenter> initPresenter() {
+        return null;
+    }
+
     public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);

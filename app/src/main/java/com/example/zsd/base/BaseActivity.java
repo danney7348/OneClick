@@ -11,6 +11,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import java.util.List;
+
 /**
  * 作者： 张少丹
  * 时间：  2017/11/13.
@@ -27,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     public abstract void Click(View view);//点击事件的回调方法
     public abstract void initView();//初始化views
     public abstract void initData();//初始化数据
+    public abstract List<BasePresenter> initPresenter();//初始化数据
 
 
 
@@ -132,5 +135,14 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         startActivity(intent);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        List<BasePresenter> basePresenters = initPresenter();
+        if(basePresenters != null){
+            for (BasePresenter basePresenter : basePresenters) {
+                basePresenter.deatach();
+            }
+        }
+    }
 }

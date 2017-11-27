@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import com.example.zsd.R;
 import com.example.zsd.base.BaseActivity;
+import com.example.zsd.base.BasePresenter;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,5 +66,10 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void initData() {
 
+    }
+
+    @Override
+    public List<BasePresenter> initPresenter() {
+        return null;
     }
 }
