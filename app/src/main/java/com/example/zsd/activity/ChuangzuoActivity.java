@@ -1,17 +1,15 @@
 package com.example.zsd.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.zsd.R;
 import com.example.zsd.base.BaseActivity;
 import com.example.zsd.utils.GlideCircleTransform;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ChuangzuoActivity extends BaseActivity {
 
@@ -31,10 +29,14 @@ public class ChuangzuoActivity extends BaseActivity {
     public void setListener() {
 
     }
-
+    @OnClick(R.id.chuangzuo_tv_quxiao)
     @Override
     public void Click(View view) {
-
+        switch (view.getId()){
+            case R.id.chuangzuo_tv_quxiao:
+                finish();
+                break;
+        }
     }
 
     @Override
@@ -46,7 +48,7 @@ public class ChuangzuoActivity extends BaseActivity {
     public void initData() {
 
         Glide.with(this).load(R.drawable.ic_launcher_background)
-                .bitmapTransform(new GlideCircleTransform(this,360))
+                .bitmapTransform(new GlideCircleTransform(this, 360))
                 .into(chuangzuoIvDuanzi);
     }
 }

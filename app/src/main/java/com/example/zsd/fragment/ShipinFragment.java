@@ -58,7 +58,7 @@ public class ShipinFragment extends Fragment {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new ShipinremenFragment());
         fragments.add(new FujinFragment());
-        MyTuijianFragmentAdapter mypager = new MyTuijianFragmentAdapter(getActivity().getSupportFragmentManager(), menus, fragments);
+        MyTuijianFragmentAdapter mypager = new MyTuijianFragmentAdapter(getChildFragmentManager(), menus, fragments);
         xq_vp.setAdapter(mypager);
         tl.setupWithViewPager(xq_vp);
     }

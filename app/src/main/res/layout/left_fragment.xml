@@ -231,6 +231,7 @@
                 android:src="@drawable/raw_1500886654" />
 
             <Switch
+                android:id="@+id/left_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

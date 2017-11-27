@@ -51,7 +51,11 @@
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.MobileLoginActivity" />
         <activity android:name=".activity.MobileZhuceActivity" />
-        <activity android:name=".activity.ChuangzuoActivity"></activity>
+        <activity android:name=".activity.ChuangzuoActivity" />
+        <activity android:name=".activity.MyGuanzhuActivity" />
+        <activity android:name=".activity.MyShoucangActivity" />
+        <activity android:name=".activity.FindFriendsActivity" />
+        <activity android:name=".activity.MessageTongzhiActivity"></activity>
     </application>
 
 </manifest>

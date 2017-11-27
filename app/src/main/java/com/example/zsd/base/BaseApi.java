@@ -8,5 +8,5 @@ package com.example.zsd.base;
  */
 
 public class BaseApi {
-    public static final String BASE_API = "";
+    public static final String BASE_API = "https://www.zhaoapi.cn/";
 }

@@ -58,7 +58,7 @@ public class TuijianFragment extends Fragment {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new RemenFragment());
         fragments.add(new GuanzhuFragment());
-        MyTuijianFragmentAdapter mypager = new MyTuijianFragmentAdapter(getActivity().getSupportFragmentManager(), menus, fragments);
+        MyTuijianFragmentAdapter mypager = new MyTuijianFragmentAdapter(getChildFragmentManager(), menus, fragments);
         xq_vp.setAdapter(mypager);
         tl.setupWithViewPager(xq_vp);
     }

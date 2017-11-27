@@ -42,7 +42,6 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter {
     }
 
     private void initView() {
-
         mBanner = view.findViewById(R.id.banner);
         imgesUrl = new ArrayList<>();
         imgesUrl.add("http://pic1.cxtuku.com/00/06/78/b9903ad9ea2b.jpg");

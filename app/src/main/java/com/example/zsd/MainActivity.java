@@ -59,6 +59,8 @@ public class MainActivity extends BaseActivity {
     FrameLayout mainFl;
     @BindView(R.id.main_dl)
     DrawerLayout mainDl;
+    @BindView(R.id.main_tv_title)
+    TextView mainTvTitle;
 
     @Override
     public int bindLayout() {
@@ -81,6 +83,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(ChuangzuoActivity.class);
                 break;
             case R.id.main_ll_tuijian:
+                mainTvTitle.setText("推荐");
                 mainImgTuijian.setImageResource(R.drawable.tuijian2);
                 mainTvTuijain.setTextColor(Color.parseColor("#1296DB"));
                 mainImgDuanzi.setImageResource(R.drawable.duanzi1);
@@ -90,6 +93,7 @@ public class MainActivity extends BaseActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new TuijianFragment()).commit();
                 break;
             case R.id.main_ll_duanzi:
+                mainTvTitle.setText("段子");
                 mainImgTuijian.setImageResource(R.drawable.tuijian1);
                 mainTvTuijain.setTextColor(Color.parseColor("#C5C5C5"));
                 mainImgDuanzi.setImageResource(R.drawable.duanzi2);
@@ -99,6 +103,7 @@ public class MainActivity extends BaseActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new DuanziFragment()).commit();
                 break;
             case R.id.main_ll_shipin:
+                mainTvTitle.setText("视频");
                 mainImgTuijian.setImageResource(R.drawable.tuijian1);
                 mainTvTuijain.setTextColor(Color.parseColor("#C5C5C5"));
                 mainImgDuanzi.setImageResource(R.drawable.duanzi1);

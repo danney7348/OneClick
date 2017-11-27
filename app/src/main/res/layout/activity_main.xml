@@ -26,6 +26,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/main_tv_title"
                     android:paddingRight="@dimen/x40"
                     android:textColor="#fff"
                     android:textSize="@dimen/x40"
