@@ -1,5 +1,9 @@
 package com.example.zsd.service;
 
+import com.example.zsd.entity.GetJokes;
+import com.example.zsd.entity.GetUserInfo;
+import com.example.zsd.entity.GetVideos;
+
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
@@ -25,4 +29,12 @@ public interface ApiService {
     @POST("file/upload")
     Observable<ResponseBody> getFileUpload();
 
+    @POST("user/getUserInfo")
+    Observable<GetUserInfo> getUserInfo(@Query("uid") String uid,@Query("token") String token);
+
+    @POST("quarter/getJokes")
+    Observable<GetJokes> getJokes(@Query("page") String page,@Query("token") String token);
+
+    @POST("quarter/getVideos")
+    Observable<GetVideos> getVideos(@Query("uid") String uid,@Query("type") String type,@Query("page") String page);
 }

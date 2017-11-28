@@ -1,12 +1,12 @@
 package com.example.zsd.model;
 
+import com.example.zsd.entity.GetUserInfo;
 import com.example.zsd.utils.HttpUtils;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.ResponseBody;
 
 /**
  * 作者： 张少丹
@@ -15,30 +15,30 @@ import okhttp3.ResponseBody;
  * 类的用途：
  */
 
-public class UserRegModel {
-    public void getUserRegData(String mobile, String password, String token, final UserRegMessage userRegMessage){
+public class GetUserInfoModel {
+    public void getUserInfoData(String uid, String token, final GetUserInfoMessage getUserInfoMessage){
         new HttpUtils.Builder()
-                .addCallAdapterFactory()
                 .addConverterFactory()
+                .addCallAdapterFactory()
                 .build()
                 .getMyQusetUtils()
-                .getUserReg(mobile,password,token)
+                .getUserInfo(uid,token)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<ResponseBody>() {
+                .subscribe(new Observer<GetUserInfo>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(ResponseBody value) {
-                        userRegMessage.userregSuccess(value);
+                    public void onNext(GetUserInfo value) {
+                        getUserInfoMessage.getUserInfoSuccess(value);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        userRegMessage.userregFailue(e);
+                        getUserInfoMessage.getUserInfoFaile(e);
                     }
 
                     @Override
@@ -47,9 +47,8 @@ public class UserRegModel {
                     }
                 });
     }
-
-    public interface UserRegMessage{
-        void userregSuccess(ResponseBody value);
-        void userregFailue(Throwable e);
+    public interface GetUserInfoMessage{
+        void getUserInfoSuccess(GetUserInfo value);
+        void getUserInfoFaile(Throwable e);
     }
 }

@@ -22,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/duanzi_item_tv_time"
             android:layout_marginLeft="@dimen/x10"
             android:layout_toRightOf="@+id/iv_touxiang"
             android:layout_below="@+id/duanziz_item_tv_name"
@@ -29,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     <ImageView
+        android:id="@+id/duanzi_item_iv_bianji"
         android:layout_width="@dimen/x75"
         android:layout_height="@dimen/y75"
         android:layout_gravity="center"

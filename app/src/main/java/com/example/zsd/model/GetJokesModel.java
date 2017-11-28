@@ -1,14 +1,12 @@
 package com.example.zsd.model;
 
-import com.example.zsd.service.ApiService;
+import com.example.zsd.entity.GetJokes;
 import com.example.zsd.utils.HttpUtils;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.ResponseBody;
-import retrofit2.Response;
 
 /**
  * 作者： 张少丹
@@ -17,25 +15,30 @@ import retrofit2.Response;
  * 类的用途：
  */
 
-public class UserLoginModel {
-    public void getUserLoginData(String mobile, String password, String taken, final UserLoginMessage userLoginMessage){
-        new HttpUtils.Builder().addConverterFactory()
-                .addCallAdapterFactory().build().getMyQusetUtils().getUserLogin(mobile,password,null)
+public class GetJokesModel {
+    public void getJokesData(String page, String token, final GetJokensMessage getJokensMessage){
+        new HttpUtils.Builder()
+                .addCallAdapterFactory()
+                .addConverterFactory()
+                .build()
+                .getMyQusetUtils()
+                .getJokes(page,token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
+                .subscribe(new Observer<GetJokes>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
-                    public void onNext(ResponseBody value) {
-                        userLoginMessage.userloginSuccess(value);
+                    public void onNext(GetJokes value) {
+                        getJokensMessage.getJokesSuccess(value);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        userLoginMessage.userloginFailue(e);
+                        getJokensMessage.getJokesFailure(e);
                     }
 
                     @Override
@@ -44,8 +47,8 @@ public class UserLoginModel {
                     }
                 });
     }
-    public interface UserLoginMessage{
-        void userloginSuccess(ResponseBody value);
-        void userloginFailue(Throwable e);
+    public interface GetJokensMessage{
+        void getJokesSuccess(GetJokes value);
+        void getJokesFailure(Throwable e);
     }
 }

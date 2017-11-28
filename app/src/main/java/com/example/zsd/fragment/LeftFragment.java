@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatDelegate;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -21,14 +21,15 @@ import com.example.zsd.activity.FindFriendsActivity;
 import com.example.zsd.activity.MessageTongzhiActivity;
 import com.example.zsd.activity.MyGuanzhuActivity;
 import com.example.zsd.activity.MyShoucangActivity;
+import com.example.zsd.entity.GetUserInfo;
+import com.example.zsd.presenter.GetUserInfoPresenter;
 import com.example.zsd.utils.GlideCircleTransform;
+import com.example.zsd.view.GetUserInfoView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * 作者： 张少丹
@@ -37,7 +38,7 @@ import static android.content.Context.MODE_PRIVATE;
  * 类的用途：
  */
 
-public class LeftFragment extends Fragment {
+public class LeftFragment extends Fragment implements GetUserInfoView {
 
     @BindView(R.id.relativeLayout5)
     RelativeLayout relativeLayout5;
@@ -48,6 +49,10 @@ public class LeftFragment extends Fragment {
     @BindView(R.id.relativeLayout8)
     RelativeLayout relativeLayout8;
     Unbinder unbinder;
+    @BindView(R.id.left_icon)
+    ImageView leftIcon;
+    @BindView(R.id.textView2)
+    TextView textView2;
     private View view;
     private Switch left_switch;
     private ImageView moon;
@@ -68,14 +73,15 @@ public class LeftFragment extends Fragment {
     }
 
     private void initData() {
+        GetUserInfoPresenter getUserInfoPresenter = new GetUserInfoPresenter(this);
+        getUserInfoPresenter.getUserInfoData("170","");
         left_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 int uiMode;//夜间模式
-                uiMode = getResources().getConfiguration().uiMode& Configuration.UI_MODE_NIGHT_MASK;
-                if(b){
-                    if(uiMode == Configuration.UI_MODE_NIGHT_YES){
-
+                uiMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                if (b) {
+                    if (uiMode == Configuration.UI_MODE_NIGHT_YES) {
                       /*  getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                         getActivity().getSharedPreferences("theme",MODE_PRIVATE).edit().putBoolean("night_theme",false).commit();
                     }else if(uiMode == Configuration.UI_MODE_NIGHT_NO){
@@ -84,7 +90,7 @@ public class LeftFragment extends Fragment {
                     }*/
                         getActivity().recreate();
                         moon.setImageResource(R.drawable.shiping2);
-                    }else {
+                    } else {
                    /* if(uiMode == Configuration.UI_MODE_NIGHT_YES){
                         getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                         getActivity().getSharedPreferences("theme",MODE_PRIVATE).edit().putBoolean("night_theme",false).commit();
@@ -139,5 +145,26 @@ public class LeftFragment extends Fragment {
                 getActivity().startActivity(intent3);
                 break;
         }
+    }
+
+    @Override
+    public void success() {
+
+    }
+
+    @Override
+    public void failure() {
+
+    }
+
+    @Override
+    public void getUserInfoSuccess(GetUserInfo value) {
+
+        textView2.setText(value.data.nickname);
+    }
+
+    @Override
+    public void getUserInfoFaile(String string) {
+
     }
 }
