@@ -7,6 +7,7 @@ import com.example.zsd.entity.GetVideos;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -21,20 +22,26 @@ import retrofit2.http.Query;
 
 public interface ApiService {
     @POST("user/login")
-    Observable<ResponseBody> getUserLogin(@Query("mobile") String mobile, @Query("password") String password, @Query("token") String token);
+    @FormUrlEncoded
+    Observable<ResponseBody> getUserLogin(@Field("mobile") String mobile, @Field("password") String password, @Field("token") String token);
 
     @POST("user/reg")
-    Observable<ResponseBody> getUserReg(@Query("mobile") String mobile,@Query("password") String password,@Query("token") String token);
+    @FormUrlEncoded
+    Observable<ResponseBody> getUserReg(@Field("mobile") String mobile,@Field("password") String password,@Field("token") String token);
 
     @POST("file/upload")
+    @FormUrlEncoded
     Observable<ResponseBody> getFileUpload();
 
     @POST("user/getUserInfo")
-    Observable<GetUserInfo> getUserInfo(@Query("uid") String uid,@Query("token") String token);
+    @FormUrlEncoded
+    Observable<GetUserInfo> getUserInfo(@Field("uid") String uid,@Field("token") String token);
 
     @POST("quarter/getJokes")
-    Observable<GetJokes> getJokes(@Query("page") String page,@Query("token") String token);
+    @FormUrlEncoded
+    Observable<GetJokes> getJokes(@Field("page") String page,@Query("token") String token);
 
     @POST("quarter/getVideos")
-    Observable<GetVideos> getVideos(@Query("uid") String uid,@Query("type") String type,@Query("page") String page);
+    @FormUrlEncoded
+    Observable<GetVideos> getVideos(@Field("uid") String uid,@Field("type") String type,@Field("page") String page);
 }

@@ -89,7 +89,7 @@ public class MobileLoginActivity extends BaseActivity implements UserLoginView {
 
     @Override
     public void userloginSuccess(String value) {
-        showToast(value);
+        showToast(value+"成功了");
         startActivity(MainActivity.class);
     }
 
