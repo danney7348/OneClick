@@ -28,22 +28,14 @@ public class UserLoginPresenter extends BasePresenter {
         }
     }
 
-    public void getUserLoginData(String mobile,String password,String taken){
+    public void getUserLoginData(final String mobile, String password, String taken){
         userLoginModel.getUserLoginData(mobile, password, taken, new UserLoginModel.UserLoginMessage() {
             @Override
-            public void userloginSuccess(ResponseBody value) {
-                try {
-                    String json = value.string().toString();
-                    JSONObject jsonObject=new JSONObject(json);
-                    String code = jsonObject.getString("code");
-                    String msg = jsonObject.getString("msg");
-                    if(code.equals("0")){
-                        userLoginView.userloginSuccess(value.string().toString());
-                    }else {
-                        userLoginView.userloginFailue(value.string().toString());
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+            public void userloginSuccess(String msg, String code) {
+                if(code.equals("0")){
+                    userLoginView.userloginSuccess(msg);
+                }else {
+                    userLoginView.userloginFailue(msg);
                 }
             }
 

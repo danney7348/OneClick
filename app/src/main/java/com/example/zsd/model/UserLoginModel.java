@@ -3,6 +3,10 @@ package com.example.zsd.model;
 import com.example.zsd.service.ApiService;
 import com.example.zsd.utils.HttpUtils;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -30,7 +34,17 @@ public class UserLoginModel {
                     }
                     @Override
                     public void onNext(ResponseBody value) {
-                        userLoginMessage.userloginSuccess(value);
+                        String json = null;
+                        try {
+                            json = value.string().toString();
+                            JSONObject jsonObject=new JSONObject(json);
+                            String code = jsonObject.getString("code");
+                            String msg = jsonObject.getString("msg");
+                            userLoginMessage.userloginSuccess(code,msg);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                     }
 
                     @Override
@@ -45,7 +59,7 @@ public class UserLoginModel {
                 });
     }
     public interface UserLoginMessage{
-        void userloginSuccess(ResponseBody value);
+        void userloginSuccess(String msg,String code);
         void userloginFailue(Throwable e);
     }
 }
