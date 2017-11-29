@@ -7,6 +7,6 @@ package com.example.zsd.model;
  * 类的用途：
  */
 
-public class PublishJokeModel {
-    public void getPublishJoke(){}
+public class FollowModel {
+
 }

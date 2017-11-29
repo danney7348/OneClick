@@ -33,12 +33,15 @@ public class ChuangzuoActivity extends BaseActivity {
     public void setListener() {
 
     }
-    @OnClick(R.id.chuangzuo_tv_quxiao)
+    @OnClick({R.id.chuangzuo_tv_quxiao,R.id.chuangzuo_iv_duanzi})
     @Override
     public void Click(View view) {
         switch (view.getId()){
             case R.id.chuangzuo_tv_quxiao:
                 finish();
+                break;
+            case R.id.chuangzuo_iv_duanzi:
+                startActivity(BianxieDuanziActivity.class);
                 break;
         }
     }
@@ -58,6 +61,11 @@ public class ChuangzuoActivity extends BaseActivity {
 
     @Override
     public List<BasePresenter> initPresenter() {
+        return null;
+    }
+
+    @Override
+    public BasePresenter binView() {
         return null;
     }
 }

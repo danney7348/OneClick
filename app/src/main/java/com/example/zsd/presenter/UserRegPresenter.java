@@ -48,7 +48,7 @@ public class UserRegPresenter extends BasePresenter {
             }
             @Override
             public void userregFailue(Throwable e) {
-                userRegView.failure();
+                userRegView.failure("");
             }
         });
     }

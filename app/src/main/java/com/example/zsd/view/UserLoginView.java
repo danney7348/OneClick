@@ -1,6 +1,7 @@
 package com.example.zsd.view;
 
 import com.example.zsd.base.BaseView;
+import com.example.zsd.entity.LoginBean;
 
 import retrofit2.Response;
 
@@ -11,7 +12,6 @@ import retrofit2.Response;
  * 类的用途：
  */
 
-public interface UserLoginView extends BaseView{
-    void userloginSuccess(String string);
-    void userloginFailue(String string);
+public interface UserLoginView extends BaseView<LoginBean>{
+
 }

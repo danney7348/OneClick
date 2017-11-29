@@ -7,8 +7,8 @@ package com.example.zsd.base;
  * 类的用途：
  */
 
-public class BasePresenter<V> {
-    private V mView;
+public class BasePresenter<V extends BaseView> {
+    public V mView;
 
     public BasePresenter(V mView) {
         this.mView = mView;

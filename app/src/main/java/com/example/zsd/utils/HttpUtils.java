@@ -1,4 +1,6 @@
 package com.example.zsd.utils;
+import android.util.Log;
+
 import com.example.zsd.base.BaseApi;
 import com.example.zsd.service.ApiService;
 
@@ -30,7 +32,7 @@ public class HttpUtils {
 
     public static class  Builder{
         OkHttpClient okHttpClient=new OkHttpClient.Builder()
-                .addInterceptor(new MyInterceptor())
+                .addInterceptor(new MyIntercept())
                 .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.SECONDS)

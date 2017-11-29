@@ -35,7 +35,7 @@ public class GetVideosPresenter extends BasePresenter {
             }
             @Override
             public void getVideosFailure(Throwable e) {
-                getVideosView.failure();
+                getVideosView.failure("");
             }
         });
     }

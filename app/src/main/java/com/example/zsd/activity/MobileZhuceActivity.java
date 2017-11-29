@@ -75,16 +75,11 @@ public class MobileZhuceActivity extends BaseActivity implements UserRegView {
     }
 
     @Override
-    public void success() {
-
-        showToast("成功");
+    public BasePresenter binView() {
+        return null;
     }
 
-    @Override
-    public void failure() {
 
-        showToast("失败");
-    }
 
     @Override
     public void userregSuccess(String string) {
@@ -94,5 +89,20 @@ public class MobileZhuceActivity extends BaseActivity implements UserRegView {
     @Override
     public void userregFailue(String string) {
         showToast(string+zhuceMobile.getText().toString()+"失败了！");
+    }
+
+    @Override
+    public void success(Object o) {
+
+    }
+
+    @Override
+    public void failure(String msg) {
+
+    }
+
+    @Override
+    public void error(String msg) {
+
     }
 }

@@ -72,4 +72,9 @@ public class LoginActivity extends BaseActivity {
     public List<BasePresenter> initPresenter() {
         return null;
     }
+
+    @Override
+    public BasePresenter binView() {
+        return null;
+    }
 }

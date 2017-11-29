@@ -37,7 +37,7 @@ public class GetUserInfoPresenter extends BasePresenter {
             @Override
             public void getUserInfoFaile(Throwable e) {
 
-                getUserInfoView.failure();
+                getUserInfoView.failure("");
             }
         });
     }

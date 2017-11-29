@@ -147,15 +147,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView {
         }
     }
 
-    @Override
-    public void success() {
 
-    }
-
-    @Override
-    public void failure() {
-
-    }
 
     @Override
     public void getUserInfoSuccess(GetUserInfo value) {
@@ -165,6 +157,21 @@ public class LeftFragment extends Fragment implements GetUserInfoView {
 
     @Override
     public void getUserInfoFaile(String string) {
+
+    }
+
+    @Override
+    public void success(Object o) {
+
+    }
+
+    @Override
+    public void failure(String msg) {
+
+    }
+
+    @Override
+    public void error(String msg) {
 
     }
 }

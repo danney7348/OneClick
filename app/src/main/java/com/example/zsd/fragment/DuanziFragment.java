@@ -1,5 +1,6 @@
 package com.example.zsd.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,10 @@ import com.example.zsd.adapter.DuanziRecycleViewAdapter;
 import com.example.zsd.entity.GetJokes;
 import com.example.zsd.presenter.GetJokesPresenter;
 import com.example.zsd.view.GetJokesView;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者： 张少丹
@@ -26,7 +31,11 @@ import com.example.zsd.view.GetJokesView;
 public class DuanziFragment extends Fragment implements GetJokesView {
 
     private View view;
-    private RecyclerView duanzi_fragment_rv;
+    private XRecyclerView duanzi_fragment_rv;
+    private int page=1;
+    private DuanziRecycleViewAdapter adapter;
+    private GetJokesPresenter getJokesPresenter;
+    private List<GetJokes.DataBean> list;
 
     @Nullable
     @Override
@@ -43,37 +52,74 @@ public class DuanziFragment extends Fragment implements GetJokesView {
     }
 
     private void initData() {
-        GetJokesPresenter getJokesPresenter = new GetJokesPresenter(this);
-        getJokesPresenter.getJokesData("1","");
 
+        getJokesPresenter = new GetJokesPresenter(this);
+        getJokesPresenter.getJokesData("1");
     }
 
     private void initView() {
+        list = new ArrayList<>();
         duanzi_fragment_rv = view.findViewById(R.id.duanzi_fragment_rv);
-
+        duanzi_fragment_rv.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
-    @Override
-    public void success() {
 
-    }
-
-    @Override
-    public void failure() {
-
-    }
 
     @Override
     public void getJokesSuccess(GetJokes value) {
-        Toast.makeText(getContext(), value.msg, Toast.LENGTH_SHORT).show();
-        duanzi_fragment_rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        DuanziRecycleViewAdapter adapter = new DuanziRecycleViewAdapter(getActivity(),value.data);
-        duanzi_fragment_rv.setAdapter(adapter);
+        //Toast.makeText(getContext(), value.msg, Toast.LENGTH_SHORT).show();
+        list.addAll(value.data);
+        if(adapter == null){
+            adapter = new DuanziRecycleViewAdapter(getActivity(),list);
+            duanzi_fragment_rv.setAdapter(adapter);
+        }else {
+            /*if(type == 0){
+                adapter.Refresh(list);
+            }else {
+                adapter.LoadMore(list);
+            }*/
+            adapter.notifyDataSetChanged();
+        }
+        duanzi_fragment_rv.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(getContext(), "下拉刷新", Toast.LENGTH_SHORT).show();
+                list.clear();
+                page = 0;
+                getJokesPresenter.getJokesData(page+"");
+                duanzi_fragment_rv.refreshComplete();
+            }
+
+            @Override
+            public void onLoadMore() {
+                Toast.makeText(getContext(), "上拉加载", Toast.LENGTH_SHORT).show();
+                page++;
+                System.out.println("page ======================= " + page);
+                getJokesPresenter.getJokesData(page+"");
+                duanzi_fragment_rv.loadMoreComplete();
+            }
+        });
 
     }
 
     @Override
     public void getJokesFailure(String e) {
         Toast.makeText(getContext(), e, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void success(Object o) {
+
+    }
+
+    @Override
+    public void failure(String msg) {
+
+    }
+
+    @Override
+    public void error(String msg) {
+
     }
 }

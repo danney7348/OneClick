@@ -1,6 +1,7 @@
 package com.example.zsd.presenter;
 
 import com.example.zsd.base.BasePresenter;
+import com.example.zsd.entity.LoginBean;
 import com.example.zsd.model.UserLoginModel;
 import com.example.zsd.view.UserLoginView;
 
@@ -16,33 +17,37 @@ import retrofit2.Response;
  * 类的用途：
  */
 
-public class UserLoginPresenter extends BasePresenter {
+public class UserLoginPresenter  extends BasePresenter<UserLoginView> implements UserLoginModel.UserLoginMessage{
     private UserLoginModel userLoginModel;
-    private UserLoginView userLoginView;
+
 
     public UserLoginPresenter(UserLoginView userLoginView) {
         super(userLoginView);
-        this.userLoginView = userLoginView;
-        if(userLoginModel == null){
-            userLoginModel = new UserLoginModel();
-        }
+            userLoginModel = new UserLoginModel(this);
+
     }
 
-    public void getUserLoginData(final String mobile, String password, String taken){
-        userLoginModel.getUserLoginData(mobile, password, taken, new UserLoginModel.UserLoginMessage() {
-            @Override
-            public void userloginSuccess(String msg, String code) {
-                if(code.equals("0")){
-                    userLoginView.userloginSuccess(msg);
-                }else {
-                    userLoginView.userloginFailue(msg);
-                }
-            }
-
-            @Override
-            public void userloginFailue(Throwable e) {
-                userLoginView.failure();
-            }
-        });
+    public void getUserLoginData(String mobile, String password) {
+        userLoginModel.getUserLoginData(mobile, password);
     }
+
+
+
+
+    @Override
+    public void userloginSuccess(LoginBean loginBean) {
+        mView.success(loginBean);
+    }
+
+    @Override
+    public void userloginFailue(String e) {
+        mView.failure(e);
+    }
+
+    @Override
+    public void userLoginError(String e) {
+        mView.error(e);
+    }
+
+
 }

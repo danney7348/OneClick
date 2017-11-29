@@ -22,8 +22,8 @@ public class GetJokesPresenter extends BasePresenter {
             getJokesModel = new GetJokesModel();
         }
     }
-    public void getJokesData(String page,String token){
-        getJokesModel.getJokesData(page, token, new GetJokesModel.GetJokensMessage() {
+    public void getJokesData(String page){
+        getJokesModel.getJokesData(page, new GetJokesModel.GetJokensMessage() {
             @Override
             public void getJokesSuccess(GetJokes value) {
                 String code = value.code;
@@ -36,7 +36,7 @@ public class GetJokesPresenter extends BasePresenter {
 
             @Override
             public void getJokesFailure(Throwable e) {
-                getJokesView.failure();
+                getJokesView.failure("");
             }
         });
     }

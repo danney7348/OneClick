@@ -19,8 +19,9 @@ import java.util.List;
  * 邮箱：1455456581@qq.com
  * 类的用途：
  */
-public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener{
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements View.OnClickListener{
 
+    public T t;
     private boolean isStatus = false;//沉浸式状态栏（是否支持透明）
     private boolean isShowActionBar = false;//actionbar是否显示
     private boolean isFullScreen = false;//是否支持全屏
@@ -30,6 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     public abstract void initView();//初始化views
     public abstract void initData();//初始化数据
     public abstract List<BasePresenter> initPresenter();//初始化数据
+    public abstract T binView();
 
 
 
@@ -37,6 +39,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(bindLayout());
+        t=binView();
         initView();
         setListener();
         initData();
@@ -138,11 +141,11 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        List<BasePresenter> basePresenters = initPresenter();
-        if(basePresenters != null){
-            for (BasePresenter basePresenter : basePresenters) {
-                basePresenter.deatach();
-            }
+
+        if(t != null) {
+
+            t.deatach();
+
         }
     }
 }

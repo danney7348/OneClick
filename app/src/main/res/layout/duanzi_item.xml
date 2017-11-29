@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="10dp"
+    android:padding="@dimen/x20"
     android:layout_width="match_parent" android:layout_height="match_parent">
 <RelativeLayout
     android:id="@+id/rl1"
@@ -15,6 +15,7 @@
         android:layout_gravity="center"
         android:src="@drawable/ic_launcher_background" />
         <TextView
+            android:textColor="#ff0000"
             android:layout_marginLeft="@dimen/x10"
             android:layout_toRightOf="@+id/iv_touxiang"
             android:id="@+id/duanziz_item_tv_name"
@@ -29,6 +30,41 @@
             android:text="sssss"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+
+
+    <ImageView
+        android:id="@+id/duanzi_item_iv_bianji3"
+        android:layout_width="@dimen/x75"
+        android:layout_height="@dimen/y75"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/report1" />
+    <ImageView
+        android:id="@+id/duanzi_item_iv_bianji4"
+        android:layout_width="@dimen/x75"
+        android:layout_height="@dimen/y75"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/copylink1" />
+    <ImageView
+        android:id="@+id/duanzi_item_iv_bianji5"
+        android:layout_width="@dimen/x75"
+        android:layout_height="@dimen/y75"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/shiled1" />
+    <ImageView
+        android:id="@+id/duanzi_item_iv_bianji2"
+        android:layout_width="@dimen/x75"
+        android:layout_height="@dimen/y75"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/icon_packup" />
     <ImageView
         android:id="@+id/duanzi_item_iv_bianji"
         android:layout_width="@dimen/x75"
@@ -36,7 +72,7 @@
         android:layout_gravity="center"
         android:padding="5dp"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_launcher_background" />
+        android:src="@drawable/icon_open" />
 </RelativeLayout>
 <TextView
     android:layout_marginLeft="@dimen/x8"

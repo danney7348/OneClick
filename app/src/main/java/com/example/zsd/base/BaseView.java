@@ -7,7 +7,10 @@ package com.example.zsd.base;
  * 类的用途：
  */
 
-public interface BaseView {
-    public void success();
-    public void failure();
+public interface BaseView<T> {
+
+    void success(T t);
+    void failure(String msg);
+    void error(String msg);
+
 }

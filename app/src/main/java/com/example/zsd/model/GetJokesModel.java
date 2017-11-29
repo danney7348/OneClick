@@ -16,13 +16,13 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class GetJokesModel {
-    public void getJokesData(String page, String token, final GetJokensMessage getJokensMessage){
+    public void getJokesData(String page, final GetJokensMessage getJokensMessage){
         new HttpUtils.Builder()
                 .addCallAdapterFactory()
                 .addConverterFactory()
                 .build()
                 .getMyQusetUtils()
-                .getJokes(page,token)
+                .getJokes(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GetJokes>() {

@@ -10,6 +10,7 @@ import com.example.zsd.MainActivity;
 import com.example.zsd.R;
 import com.example.zsd.base.BaseActivity;
 import com.example.zsd.base.BasePresenter;
+import com.example.zsd.entity.LoginBean;
 import com.example.zsd.presenter.UserLoginPresenter;
 import com.example.zsd.view.UserLoginView;
 
@@ -20,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MobileLoginActivity extends BaseActivity implements UserLoginView {
+public class MobileLoginActivity extends BaseActivity<UserLoginPresenter> implements UserLoginView {
 
     @BindView(R.id.tv_zhucezhanghao)
     TextView tvZhucezhanghao;
@@ -54,7 +55,7 @@ public class MobileLoginActivity extends BaseActivity implements UserLoginView {
                     showToast("用户名或密码为空");
                     return;
                 }
-                userLoginPresenter.getUserLoginData(loginEtZhanghao.getText().toString(), loginEtMima.getText().toString(), null);
+                t.getUserLoginData(loginEtZhanghao.getText().toString(), loginEtMima.getText().toString());
                 break;
         }
     }
@@ -78,30 +79,38 @@ public class MobileLoginActivity extends BaseActivity implements UserLoginView {
     }
 
     @Override
-    public void success() {
-
+    public UserLoginPresenter binView() {
+        return new UserLoginPresenter(this);
     }
 
-    @Override
-    public void failure() {
-
-    }
-
-    @Override
-    public void userloginSuccess(String value) {
-        showToast(value+"成功了");
-        startActivity(MainActivity.class);
-    }
-
-    @Override
-    public void userloginFailue(String value) {
-        showToast(value);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @Override
+    public void success(LoginBean loginBean) {
+
+        showToast(loginBean.msg);
+        showToast(loginBean.msg);
+        getSharedPreferences("TOKEN",MODE_PRIVATE).edit().putString("token",loginBean.data.token).commit();
+        System.out.println("getSharedPreferences"+getSharedPreferences("TOKEN",MODE_PRIVATE).getString("token",null));
+        startActivity(MainActivity.class);
+
+    }
+
+    @Override
+    public void failure(String msg) {
+        showToast(msg);
+        System.out.println("=====failure========"+msg+"=============");
+    }
+
+    @Override
+    public void error(String msg) {
+        System.out.println("======error======="+msg+"=============");
+        showToast(msg);
     }
 }

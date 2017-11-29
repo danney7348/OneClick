@@ -75,6 +75,11 @@ public class QiDongActivity extends BaseActivity {
         return null;
     }
 
+    @Override
+    public BasePresenter binView() {
+        return null;
+    }
+
     public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);

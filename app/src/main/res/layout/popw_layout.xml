@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="@dimen/x800"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/popw"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:textSize="@dimen/x40"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:gravity="center"
+            android:text="是否保存包草稿箱?" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2"
+            android:background="#c4c4c4" />
+
+        <TextView
+            android:id="@+id/pop_baocun"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x120"
+            android:gravity="center"
+            android:text="保存"
+            android:textSize="@dimen/x40" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2"
+            android:background="#c4c4c4" />
+
+        <TextView
+            android:id="@+id/pop_bubaocun"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x120"
+            android:layout_alignBottom="@+id/linearLayout2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:text="不保存"
+            android:textColor="#f00"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/pop_finish"
+        android:layout_width="@dimen/x800"
+        android:layout_height="@dimen/x120"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_marginTop="@dimen/x40"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/popw"
+        android:textSize="@dimen/x40"
+        android:gravity="center"
+        android:text="取消" />
+</RelativeLayout>

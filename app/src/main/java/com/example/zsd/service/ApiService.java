@@ -3,6 +3,8 @@ package com.example.zsd.service;
 import com.example.zsd.entity.GetJokes;
 import com.example.zsd.entity.GetUserInfo;
 import com.example.zsd.entity.GetVideos;
+import com.example.zsd.entity.LoginBean;
+import com.example.zsd.entity.PublishJoke;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
@@ -23,7 +25,7 @@ import retrofit2.http.Query;
 public interface ApiService {
     @POST("user/login")
     @FormUrlEncoded
-    Observable<ResponseBody> getUserLogin(@Field("mobile") String mobile, @Field("password") String password, @Field("token") String token);
+    Observable<LoginBean> getUserLogin(@Field("mobile") String mobile, @Field("password") String password);
 
     @POST("user/reg")
     @FormUrlEncoded
@@ -39,9 +41,13 @@ public interface ApiService {
 
     @POST("quarter/getJokes")
     @FormUrlEncoded
-    Observable<GetJokes> getJokes(@Field("page") String page,@Query("token") String token);
+    Observable<GetJokes> getJokes(@Field("page") String page);
 
     @POST("quarter/getVideos")
     @FormUrlEncoded
     Observable<GetVideos> getVideos(@Field("uid") String uid,@Field("type") String type,@Field("page") String page);
+
+    @POST("quarter/publishJoke")
+    @FormUrlEncoded
+    Observable<PublishJoke> getPublishJoke(@Field("uid") String uid,@Field("content") String content);
 }

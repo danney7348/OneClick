@@ -1,5 +1,7 @@
 package com.example.zsd.model;
 
+import com.example.zsd.entity.LoginBean;
+import com.example.zsd.presenter.UserLoginPresenter;
 import com.example.zsd.service.ApiService;
 import com.example.zsd.utils.HttpUtils;
 
@@ -22,34 +24,41 @@ import retrofit2.Response;
  */
 
 public class UserLoginModel {
-    public void getUserLoginData(String mobile, String password, String taken, final UserLoginMessage userLoginMessage){
+
+
+    public UserLoginMessage userLoginMessage;
+
+    public UserLoginModel(UserLoginMessage userLoginMessage) {
+        this.userLoginMessage = userLoginMessage;
+    }
+
+    public void getUserLoginData(String mobile, String password){
         new HttpUtils.Builder().addConverterFactory()
-                .addCallAdapterFactory().build().getMyQusetUtils().getUserLogin(mobile,password,null)
+                .addCallAdapterFactory()
+                .build()
+                .getMyQusetUtils()
+                .getUserLogin(mobile,password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
+                .subscribe(new Observer<LoginBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
                     @Override
-                    public void onNext(ResponseBody value) {
-                        String json = null;
-                        try {
-                            json = value.string().toString();
-                            JSONObject jsonObject=new JSONObject(json);
-                            String code = jsonObject.getString("code");
-                            String msg = jsonObject.getString("msg");
-                            userLoginMessage.userloginSuccess(code,msg);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    public void onNext(LoginBean value) {
+                        System.out.println(value);
+                        if ("0".equals(value.code)){
 
-                    }
+                            userLoginMessage.userloginSuccess(value);
+                        }else {
+                            userLoginMessage.userLoginError(value.msg);
+                        }
+                }
 
                     @Override
                     public void onError(Throwable e) {
-                        userLoginMessage.userloginFailue(e);
+                        userLoginMessage.userloginFailue(e.getMessage());
                     }
 
                     @Override
@@ -58,8 +67,10 @@ public class UserLoginModel {
                     }
                 });
     }
+
     public interface UserLoginMessage{
-        void userloginSuccess(String msg,String code);
-        void userloginFailue(Throwable e);
+        void userloginSuccess(LoginBean loginBean);
+        void userloginFailue(String e);
+        void userLoginError(String e);
     }
 }

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/rl1"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context="com.example.zsd.activity.BianxieDuanziActivity">
+    <RelativeLayout
+        android:id="@+id/include"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y110"
+        android:background="#03A9F4">
+
+        <TextView
+            android:id="@+id/bianxie_tv_duanzi_quxiao"
+            android:layout_width="@dimen/x200"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10px"
+            android:src="@mipmap/ic_launcher_round"
+            android:text="取消"
+            android:textColor="#fff"
+            android:textSize="40px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="发表文章"
+            android:textColor="#fff"
+            android:textSize="@dimen/x40" />
+
+        <TextView
+            android:id="@+id/bianxie_tv_fabiao"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x20"
+            android:gravity="center"
+            android:padding="@dimen/x20"
+            android:text="发表"
+            android:textColor="#fff"
+            android:textSize="@dimen/x40" />
+    </RelativeLayout>
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y500"
+        android:textSize="@dimen/x35"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/include"
+        android:background="@null"
+        android:gravity="top"
+        android:padding="@dimen/x20"
+        android:hint="请输入内容,禁止输入色情,暴力等违法国家法律的内容,违者将以封号处理!"
+        android:id="@+id/ed_fabiao" />
+
+    <ImageView
+        android:layout_width="@dimen/x150"
+        android:layout_height="@dimen/y150"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ed_fabiao"
+        android:src="@drawable/add"
+        android:layout_marginLeft="@dimen/x50"/>
+</RelativeLayout>
