@@ -45,28 +45,43 @@
             android:textColor="#fff"
             android:textSize="@dimen/x40" />
     </RelativeLayout>
-
-    <EditText
-
+<ScrollView
+    android:layout_below="@+id/include"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y500"
-        android:textSize="@dimen/x35"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/include"
-        android:background="@null"
-        android:gravity="top"
-        android:padding="@dimen/x20"
-        android:hint="请输入内容,禁止输入色情,暴力等违法国家法律的内容,违者将以封号处理!"
-        android:id="@+id/ed_fabiao" />
+        android:layout_height="wrap_content">
+        <EditText
 
-    <ImageView
-        android:id="@+id/bianxie_iv_add"
-        android:layout_width="@dimen/x150"
-        android:layout_height="@dimen/y150"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/ed_fabiao"
-        android:src="@drawable/add"
-        android:layout_marginLeft="@dimen/x50"/>
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y500"
+            android:textSize="@dimen/x35"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/include"
+            android:background="@null"
+            android:gravity="top"
+            android:padding="@dimen/x20"
+            android:hint="请输入内容,禁止输入色情,暴力等违法国家法律的内容,违者将以封号处理!"
+            android:id="@+id/ed_fabiao" />
+
+        <ImageView
+            android:id="@+id/bianxie_iv_add"
+            android:layout_width="@dimen/x150"
+            android:layout_height="@dimen/y150"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/ed_fabiao"
+            android:src="@drawable/add"
+            android:layout_marginLeft="@dimen/x50"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_below="@+id/bianxie_iv_add"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+</ScrollView>
 </RelativeLayout>
