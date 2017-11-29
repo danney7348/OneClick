@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.example.zsd.activity.FindFriendsActivity;
 import com.example.zsd.activity.MessageTongzhiActivity;
 import com.example.zsd.activity.MyGuanzhuActivity;
 import com.example.zsd.activity.MyShoucangActivity;
+import com.example.zsd.activity.ShezhiActivity;
 import com.example.zsd.entity.GetUserInfo;
 import com.example.zsd.presenter.GetUserInfoPresenter;
 import com.example.zsd.utils.GlideCircleTransform;
@@ -53,9 +55,12 @@ public class LeftFragment extends Fragment implements GetUserInfoView {
     ImageView leftIcon;
     @BindView(R.id.textView2)
     TextView textView2;
+    @BindView(R.id.left_ll_shezhi)
+    LinearLayout leftLlShezhi;
     private View view;
     private Switch left_switch;
     private ImageView moon;
+    private ImageView left_icon;
 
     @Nullable
     @Override
@@ -74,7 +79,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView {
 
     private void initData() {
         GetUserInfoPresenter getUserInfoPresenter = new GetUserInfoPresenter(this);
-        getUserInfoPresenter.getUserInfoData("170","");
+        getUserInfoPresenter.getUserInfoData("170", "");
         left_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -109,8 +114,8 @@ public class LeftFragment extends Fragment implements GetUserInfoView {
     private void initView() {
         left_switch = view.findViewById(R.id.left_switch);
         moon = view.findViewById(R.id.imageView7);
-        ImageView left_icon = view.findViewById(R.id.left_icon);
-        Glide.with(getActivity()).load(R.drawable.raw_1499936862).bitmapTransform(new GlideCircleTransform(getActivity(), 360)).into(left_icon);
+        left_icon = view.findViewById(R.id.left_icon);
+
         left_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +130,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.relativeLayout5, R.id.relativeLayout6, R.id.relativeLayout7, R.id.relativeLayout8})
+    @OnClick({R.id.relativeLayout5, R.id.relativeLayout6, R.id.relativeLayout7, R.id.relativeLayout8,R.id.left_ll_shezhi})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.relativeLayout5:
@@ -144,15 +149,19 @@ public class LeftFragment extends Fragment implements GetUserInfoView {
                 Intent intent3 = new Intent(getContext(), MessageTongzhiActivity.class);
                 getActivity().startActivity(intent3);
                 break;
+            case R.id.left_ll_shezhi:
+                Intent intent4 = new Intent(getContext(), ShezhiActivity.class);
+                getActivity().startActivity(intent4);
+                break;
         }
     }
-
 
 
     @Override
     public void getUserInfoSuccess(GetUserInfo value) {
 
         textView2.setText(value.data.nickname);
+        Glide.with(getActivity()).load(value.data.icon).bitmapTransform(new GlideCircleTransform(getActivity(), 360)).into(left_icon);
     }
 
     @Override

@@ -54,9 +54,6 @@ public class ChuangzuoActivity extends BaseActivity {
     @Override
     public void initData() {
 
-        Glide.with(this).load(R.drawable.ic_launcher_background)
-                .bitmapTransform(new GlideCircleTransform(this, 360))
-                .into(chuangzuoIvDuanzi);
     }
 
     @Override

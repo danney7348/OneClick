@@ -61,6 +61,7 @@
         android:id="@+id/ed_fabiao" />
 
     <ImageView
+        android:id="@+id/bianxie_iv_add"
         android:layout_width="@dimen/x150"
         android:layout_height="@dimen/y150"
         android:layout_alignParentLeft="true"

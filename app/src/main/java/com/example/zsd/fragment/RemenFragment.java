@@ -10,6 +10,10 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.zsd.R;
+import com.example.zsd.entity.GetAd;
+import com.example.zsd.model.GetAdModel;
+import com.example.zsd.presenter.GetAdPresenter;
+import com.example.zsd.view.GetAdView;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;
@@ -22,7 +26,7 @@ import java.util.List;
  * 类的用途：
  */
 
-public class RemenFragment extends Fragment implements XBanner.XBannerAdapter {
+public class RemenFragment extends Fragment implements XBanner.XBannerAdapter, GetAdView {
 
     private View view;
     private List<String> imgesUrl;
@@ -43,14 +47,8 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter {
 
     private void initView() {
         mBanner = view.findViewById(R.id.banner);
-        imgesUrl = new ArrayList<>();
-        imgesUrl.add("http://pic1.cxtuku.com/00/06/78/b9903ad9ea2b.jpg");
-        imgesUrl.add("http://pic1.cxtuku.com/00/06/78/b9903ad9ea2b.jpg");
-        imgesUrl.add("http://pic1.cxtuku.com/00/06/78/b9903ad9ea2b.jpg");
-        imgesUrl.add("http://pic1.cxtuku.com/00/06/78/b9903ad9ea2b.jpg");
-        mBanner.setData(imgesUrl,null);
-        mBanner.setPoinstPosition(XBanner.RIGHT);
-        mBanner.setmAdapter(this);
+        GetAdPresenter getAdPresenter = new GetAdPresenter(this);
+        getAdPresenter.getAdData();
     }
 
     @Override
@@ -65,5 +63,28 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter {
     @Override public void onStop() {
         super.onStop();
         mBanner.stopAutoPlay();
+    }
+
+    @Override
+    public void success(GetAd getAd) {
+
+        imgesUrl = new ArrayList<>();
+        for (int i = 0; i < getAd.data.size(); i++) {
+            imgesUrl.add(getAd.data.get(i).icon);
+            System.out.println("getAd.data.get(i).url = " + getAd.data.get(i).icon);
+        }
+        mBanner.setData(imgesUrl,null);
+        mBanner.setPoinstPosition(XBanner.RIGHT);
+        mBanner.setmAdapter(this);
+    }
+
+    @Override
+    public void failure(String msg) {
+
+    }
+
+    @Override
+    public void error(String msg) {
+
     }
 }

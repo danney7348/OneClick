@@ -1,7 +1,9 @@
 package com.example.zsd.service;
 
+import com.example.zsd.entity.GetAd;
 import com.example.zsd.entity.GetJokes;
 import com.example.zsd.entity.GetUserInfo;
+import com.example.zsd.entity.GetVersion;
 import com.example.zsd.entity.GetVideos;
 import com.example.zsd.entity.LoginBean;
 import com.example.zsd.entity.PublishJoke;
@@ -12,6 +14,7 @@ import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -50,4 +53,10 @@ public interface ApiService {
     @POST("quarter/publishJoke")
     @FormUrlEncoded
     Observable<PublishJoke> getPublishJoke(@Field("uid") String uid,@Field("content") String content);
+
+    @GET("quarter/getAd")
+    Observable<GetAd> getAd();
+
+    @GET("quarter/getVersion")
+    Observable<GetVersion> getVersion();
 }

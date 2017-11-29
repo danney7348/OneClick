@@ -56,6 +56,7 @@
 
 
         <RelativeLayout
+            android:background="@drawable/ripple_bg"
             android:id="@+id/relativeLayout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,6 +95,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:background="@drawable/ripple_bg"
             android:id="@+id/relativeLayout6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -132,6 +134,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:background="@drawable/ripple_bg"
             android:id="@+id/relativeLayout7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -170,6 +173,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:background="@drawable/ripple_bg"
             android:id="@+id/relativeLayout8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -269,6 +273,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/left_ll_shezhi"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

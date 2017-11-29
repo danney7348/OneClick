@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.zsd.R;
+import com.example.zsd.activity.UserInfoActivity;
 import com.example.zsd.entity.GetJokes;
+import com.example.zsd.utils.GlideCircleTransform;
 
 import java.util.List;
 
@@ -69,7 +72,14 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
         holder.content.setText(data.get(position).content);
         holder.name.setText(data.get(position).user.nickname);
         holder.time.setText(data.get(position).createTime);
-        Glide.with(context).load(data.get(position).user.icon).into(holder.touxiang);
+        Glide.with(context).load(data.get(position).user.icon).bitmapTransform(new GlideCircleTransform(context,360)).into(holder.touxiang);
+        holder.touxiang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, UserInfoActivity.class);
+                context.startActivity(intent);
+            }
+        });
         animator = ObjectAnimator.ofFloat(holder.bianji, "rotation", 0f, 180f);
         animator1 = ObjectAnimator.ofFloat(holder.bianji5, "translationX", 0f,-80f);
         animator2 = ObjectAnimator.ofFloat(holder.bianji3, "translationX", 0f,-160f);

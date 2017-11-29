@@ -2,6 +2,7 @@ package com.example.zsd.activity;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
     private PopupWindow mPopWindow;
     private RelativeLayout rl;
     private EditText ed_fabiao;
+
     @Override
     public int bindLayout() {
         return R.layout.activity_bianxie_duanzi;
@@ -39,6 +41,7 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
     public void setListener() {
 
     }
+
     @OnClick({R.id.bianxie_tv_duanzi_quxiao, R.id.bianxie_tv_fabiao})
     @Override
     public void Click(View view) {
@@ -53,8 +56,8 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
                 break;
             case R.id.bianxie_tv_fabiao:
                 System.out.println(getSharedPreferences("TOKEN", MODE_PRIVATE).getString("uid", null) + "++++++++++++");
-                t.getPublishJokeData("170",ed_fabiao.getText().toString());
-               showToast("我走了");
+                t.getPublishJokeData("170", ed_fabiao.getText().toString());
+                showToast("我走了");
                 break;
             case R.id.pop_finish:
                 ColorDrawable dw1 = new ColorDrawable(0000000);
@@ -104,20 +107,20 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
 
     @Override
     public void getPublishJokeSuccess(PublishJoke value) {
-        showToast(value.msg+"=============");
-        Intent intent = new Intent(this,DuanziFragment.class);
+        showToast(value.msg + "=============");
+        Intent intent = new Intent(this, DuanziFragment.class);
         startActivity(intent);
     }
 
     @Override
     public void getPublishJokeFaliure(String s) {
 
-        showToast(s+"////////////////");
+        showToast(s + "////////////////");
     }
 
     @Override
     public void getPublishJokeTokenFaliure(String s) {
-        showToast(s+"===============");
+        showToast(s + "===============");
     }
 
     @Override
@@ -128,11 +131,22 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
     @Override
     public void failure(String msg) {
 
-        showToast(msg+"++++++++++++++");
+        showToast(msg + "++++++++++++++");
     }
 
     @Override
     public void error(String msg) {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.bianxie_iv_add)
+    public void onViewClicked() {
     }
 }
