@@ -38,8 +38,7 @@
             android:process=":pushservice" />
         <service android:name=".activity.DemoIntentService" />
 
-        <activity
-            android:name=".activity.QiDongActivity">
+        <activity android:name=".activity.QiDongActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,7 +56,8 @@
         <activity android:name=".activity.MessageTongzhiActivity" />
         <activity android:name=".activity.BianxieDuanziActivity" />
         <activity android:name=".activity.ShezhiActivity" />
-        <activity android:name=".activity.UserInfoActivity"></activity>
+        <activity android:name=".activity.UserInfoActivity" />
+        <activity android:name=".activity.FabiaoSuccessActivity"></activity>
     </application>
 
 </manifest>

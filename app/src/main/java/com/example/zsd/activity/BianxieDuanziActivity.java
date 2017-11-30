@@ -186,8 +186,8 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
     @Override
     public void getPublishJokeSuccess(PublishJoke value) {
         showToast(value.msg + "=============");
-        /*Intent intent = new Intent(this, DuanziFragment.class);
-        startActivity(intent);*/
+        Intent intent = new Intent(this, FabiaoSuccessActivity.class);
+        startActivity(intent);
     }
 
     @Override

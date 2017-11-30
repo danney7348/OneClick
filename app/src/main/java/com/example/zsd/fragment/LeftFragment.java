@@ -382,7 +382,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
      */
     private void  uploadPic() {
 
-        File img=new File("mnt/sdcard/mo.jpg");
+        File img=new File("data/data/z.jpg");///data/data/z.jpg
         System.out.println(img.getName() + img.toString() + "===========================");
 
         Retrofit retrofit= new Retrofit.Builder().baseUrl(BaseApi.BASE_API)
