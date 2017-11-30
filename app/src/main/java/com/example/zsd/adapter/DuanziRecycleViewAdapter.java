@@ -68,10 +68,22 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
                 imgUrls.add(split1[i]);
                 System.out.println("i = " + split1[i]);
             }
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
-            MyImgUrlsAdapter adapter = new MyImgUrlsAdapter(context,imgUrls);
-            holder.recycler.setLayoutManager(gridLayoutManager);
-            holder.recycler.setAdapter(adapter);
+            if(imgUrls.size()==4||imgUrls.size()==2){
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2);
+                MyImgUrlsAdapter adapter = new MyImgUrlsAdapter(context,imgUrls);
+                holder.recycler.setLayoutManager(gridLayoutManager);
+                holder.recycler.setAdapter(adapter);
+            }else if(imgUrls.size()==1){
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 1);
+                MyImgUrlsAdapter adapter = new MyImgUrlsAdapter(context,imgUrls);
+                holder.recycler.setLayoutManager(gridLayoutManager);
+                holder.recycler.setAdapter(adapter);
+            }else {
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
+                MyImgUrlsAdapter adapter = new MyImgUrlsAdapter(context, imgUrls);
+                holder.recycler.setLayoutManager(gridLayoutManager);
+                holder.recycler.setAdapter(adapter);
+            }
         }
         Glide.with(context).load(data.get(position).user.icon).bitmapTransform(new GlideCircleTransform(context,360)).into(holder.touxiang);
         holder.touxiang.setOnClickListener(new View.OnClickListener() {

@@ -85,6 +85,13 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
     }
 
     private void initData() {
+        leftIcon.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                return false;
+            }
+        });
         GetUserInfoPresenter getUserInfoPresenter = new GetUserInfoPresenter(this);
         getUserInfoPresenter.getUserInfoData("170", "");
         updateNickNamePresenter = new UpdateNickNamePresenter(this);
