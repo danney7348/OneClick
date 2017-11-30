@@ -1,14 +1,17 @@
 package com.example.zsd.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,9 +27,12 @@ import com.example.zsd.activity.MyGuanzhuActivity;
 import com.example.zsd.activity.MyShoucangActivity;
 import com.example.zsd.activity.ShezhiActivity;
 import com.example.zsd.entity.GetUserInfo;
+import com.example.zsd.entity.UpdateNickName;
 import com.example.zsd.presenter.GetUserInfoPresenter;
+import com.example.zsd.presenter.UpdateNickNamePresenter;
 import com.example.zsd.utils.GlideCircleTransform;
 import com.example.zsd.view.GetUserInfoView;
+import com.example.zsd.view.UpdateNickNameView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +46,7 @@ import butterknife.Unbinder;
  * 类的用途：
  */
 
-public class LeftFragment extends Fragment implements GetUserInfoView {
+public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNickNameView {
 
     @BindView(R.id.relativeLayout5)
     RelativeLayout relativeLayout5;
@@ -61,6 +67,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView {
     private Switch left_switch;
     private ImageView moon;
     private ImageView left_icon;
+    private UpdateNickNamePresenter updateNickNamePresenter;
 
     @Nullable
     @Override
@@ -80,6 +87,23 @@ public class LeftFragment extends Fragment implements GetUserInfoView {
     private void initData() {
         GetUserInfoPresenter getUserInfoPresenter = new GetUserInfoPresenter(this);
         getUserInfoPresenter.getUserInfoData("170", "");
+        updateNickNamePresenter = new UpdateNickNamePresenter(this);
+        textView2.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                final EditText inputServer = new EditText(getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("修改昵称").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer)
+                        .setNegativeButton("取消", null);
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        updateNickNamePresenter.updateNickNameData("170",inputServer.getText().toString());
+                    }
+                });
+                builder.show();
+                return false;
+            }
+        });
         left_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -174,13 +198,27 @@ public class LeftFragment extends Fragment implements GetUserInfoView {
 
     }
 
+
     @Override
     public void failure(String msg) {
+
 
     }
 
     @Override
     public void error(String msg) {
+
+    }
+
+    @Override
+    public void updateNickNameScuuess(String msg) {
+
+
+
+    }
+
+    @Override
+    public void updateNickNameFailure(String msg) {
 
     }
 }

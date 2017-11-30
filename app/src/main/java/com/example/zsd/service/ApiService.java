@@ -7,6 +7,7 @@ import com.example.zsd.entity.GetVersion;
 import com.example.zsd.entity.GetVideos;
 import com.example.zsd.entity.LoginBean;
 import com.example.zsd.entity.PublishJoke;
+import com.example.zsd.entity.UpdateNickName;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
@@ -60,4 +61,8 @@ public interface ApiService {
 
     @GET("quarter/getVersion")
     Observable<GetVersion> getVersion();
+
+    @POST("user/updateNickName")
+    @FormUrlEncoded
+    Observable<UpdateNickName> getUpdateNickName(@Field("uid") String uid,@Field("nickname") String nickname);
 }

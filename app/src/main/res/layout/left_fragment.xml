@@ -6,6 +6,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_gravity="start"
         android:background="#ffffff">
 
@@ -21,9 +24,9 @@
             android:id="@+id/left_icon"
             android:layout_width="@dimen/x120"
             android:layout_height="@dimen/y120"
-            android:src="@drawable/raw_1499936862"
             android:layout_marginLeft="@dimen/x30"
-            android:layout_marginTop="@dimen/y150" />
+            android:layout_marginTop="@dimen/y150"
+            android:src="@drawable/raw_1499936862" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,9 +35,9 @@
             android:layout_alignStart="@+id/left_icon"
             android:layout_below="@+id/left_icon"
             android:gravity="center"
-            android:textSize="@dimen/x35"
             android:text="编辑个性签名"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:textSize="@dimen/x35" />
 
         <TextView
             android:id="@+id/textView2"
@@ -43,8 +46,8 @@
             android:layout_marginLeft="@dimen/x190"
             android:layout_marginTop="@dimen/y150"
             android:text="椰果奶茶"
-            android:textSize="@dimen/x35"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:textSize="@dimen/x35" />
 
         <ImageView
             android:layout_width="@dimen/x90"
@@ -56,7 +59,6 @@
 
 
         <RelativeLayout
-            android:background="@drawable/ripple_bg"
             android:id="@+id/relativeLayout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,7 +97,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:background="@drawable/ripple_bg"
             android:id="@+id/relativeLayout6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -134,7 +135,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:background="@drawable/ripple_bg"
             android:id="@+id/relativeLayout7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -173,7 +173,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:background="@drawable/ripple_bg"
             android:id="@+id/relativeLayout8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -195,9 +194,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/x90"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_marginStart="@dimen/x30"
+                android:layout_alignBottom="@+id/imageView5"
+                android:layout_marginLeft="13dp"
+                android:layout_marginStart="13dp"
                 android:layout_toEndOf="@+id/imageView5"
                 android:layout_toRightOf="@+id/imageView5"
                 android:gravity="center"
@@ -213,24 +212,23 @@
         </RelativeLayout>
 
 
-
         <RelativeLayout
 
+            android:id="@+id/relativeLayout9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/relativeLayout10"
             android:layout_alignLeft="@+id/relativeLayout8"
             android:layout_alignStart="@+id/relativeLayout8"
-            android:layout_marginRight="90px"
-            android:id="@+id/relativeLayout9">
+            android:layout_marginRight="90px">
 
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_width="@dimen/x60"
                 android:layout_height="@dimen/y60"
-                android:layout_centerHorizontal="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/raw_1500886654" />
 
@@ -240,8 +238,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                />
+                android:layout_centerVertical="true" />
         </RelativeLayout>
 
 
@@ -266,10 +263,10 @@
                     android:src="@drawable/raw_1499947056" />
 
                 <TextView
-                    android:textSize="@dimen/x33"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="我的作品" />
+                    android:text="我的作品"
+                    android:textSize="@dimen/x33" />
             </LinearLayout>
 
             <LinearLayout
@@ -288,10 +285,10 @@
                     android:src="@drawable/raw_1499947157" />
 
                 <TextView
-                    android:textSize="@dimen/x40"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="设置" />
+                    android:text="设置"
+                    android:textSize="@dimen/x40" />
             </LinearLayout>
 
         </LinearLayout>

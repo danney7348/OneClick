@@ -54,32 +54,13 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
-
-   /* public void Refresh(List<GetJokes.DataBean> list) {
-        if(data != null){
-            data.clear();
-            data.addAll(list);
-            this.notifyDataSetChanged();
-        }
-
-
-    }
-    public void LoadMore(List<GetJokes.DataBean> list) {
-        if(data != null){
-            data.addAll(list);
-            this.notifyDataSetChanged();
-        }
-
-    }*/
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.content.setText(data.get(position).content);
         holder.name.setText(data.get(position).user.nickname);
         holder.time.setText(data.get(position).createTime);
-        Object imgUrls1 = data.get(position).imgUrls;
-        System.out.println("imgUrls1 = " + imgUrls1);
-        if(imgUrls1 != null){
-            String string = imgUrls1.toString();
+        if(data.get(position).imgUrls != null){
+            String string = data.get(position).imgUrls.toString();
             System.out.println("string = " + string);
             String[] split1 = string.split("\\|");
             List<String> imgUrls = new ArrayList<>();

@@ -10,7 +10,7 @@ package com.example.zsd.base;
 public interface BaseView<T> {
 
     void success(T t);
-    void failure(String msg);
     void error(String msg);
+    void failure(String msg);
 
 }
