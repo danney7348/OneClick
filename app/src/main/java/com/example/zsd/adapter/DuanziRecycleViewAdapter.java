@@ -50,7 +50,7 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.duanzi_item, null);
+        View view = View.inflate(context, R.layout.rv_item2, null);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -80,9 +80,9 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
                 holder.recycler.setAdapter(adapter);
             }else {
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
-                MyImgUrlsAdapter1 adapter1 = new MyImgUrlsAdapter1(context, imgUrls);
+                MyImgUrlsAdapter adapter = new MyImgUrlsAdapter(context, imgUrls);
                 holder.recycler.setLayoutManager(gridLayoutManager);
-                holder.recycler.setAdapter(adapter1);
+                holder.recycler.setAdapter(adapter);
             }
         }
         Glide.with(context).load(data.get(position).user.icon).bitmapTransform(new GlideCircleTransform(context,360)).into(holder.touxiang);
