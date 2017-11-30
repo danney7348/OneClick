@@ -31,6 +31,7 @@ import com.yancy.imageselector.ImageConfig;
 import com.yancy.imageselector.ImageSelector;
 import com.yancy.imageselector.ImageSelectorActivity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
     private ImageView bianxie_iv_add;
     private ArrayList<String> path = new ArrayList<>();
     private AddImagesAdapter adapter;
+    private List<String> pathList;
 
     @Override
     public int bindLayout() {
@@ -73,7 +75,10 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
                 break;
             case R.id.bianxie_tv_fabiao:
                 System.out.println(getSharedPreferences("TOKEN", MODE_PRIVATE).getString("uid", null) + "++++++++++++");
-                t.getPublishJokeData("170", ed_fabiao.getText().toString());
+                for (int i = 0; i < path.size(); i++) {
+
+                }
+                t.getPublishJokeData("170", ed_fabiao.getText().toString(),"");
                 showToast("我走了");
                 break;
             case R.id.pop_finish:
@@ -116,24 +121,23 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
                 break;
         }
     }
-
     public static final int REQUEST_CODE = 1000;
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
-
+            pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+           /* List<File> listFile = new ArrayList<>();
+            for (int i = 0; i < pathList.size(); i++) {
+                File file = new File(pathList.get(i));
+                listFile.add(file);
+            }*/
             for (String path : pathList) {
                 Log.i("ImagePathList", path);
             }
-
             path.clear();
             path.addAll(pathList);
             adapter.notifyDataSetChanged();
-
-
         }
     }
 

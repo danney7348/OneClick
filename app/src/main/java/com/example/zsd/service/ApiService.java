@@ -16,6 +16,7 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 /**
@@ -52,7 +53,7 @@ public interface ApiService {
 
     @POST("quarter/publishJoke")
     @FormUrlEncoded
-    Observable<PublishJoke> getPublishJoke(@Field("uid") String uid,@Field("content") String content);
+    Observable<PublishJoke> getPublishJoke(@Part("uid") String uid, @Part("content") String content, @Part("jokeFiles") String jokeFiles);
 
     @GET("quarter/getAd")
     Observable<GetAd> getAd();

@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,10 @@ import com.example.zsd.activity.UserInfoActivity;
 import com.example.zsd.entity.GetJokes;
 import com.example.zsd.utils.GlideCircleTransform;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.zsd.R2.id.recycler;
 
 /**
  * 作者： 张少丹
@@ -72,6 +76,22 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
         holder.content.setText(data.get(position).content);
         holder.name.setText(data.get(position).user.nickname);
         holder.time.setText(data.get(position).createTime);
+        Object imgUrls1 = data.get(position).imgUrls;
+        System.out.println("imgUrls1 = " + imgUrls1);
+        if(imgUrls1 != null){
+            String string = imgUrls1.toString();
+            System.out.println("string = " + string);
+            String[] split1 = string.split("\\|");
+            List<String> imgUrls = new ArrayList<>();
+            for (int i = 0; i < split1.length; i++) {
+                imgUrls.add(split1[i]);
+                System.out.println("i = " + split1[i]);
+            }
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
+            MyImgUrlsAdapter adapter = new MyImgUrlsAdapter(context,imgUrls);
+            holder.recycler.setLayoutManager(gridLayoutManager);
+            holder.recycler.setAdapter(adapter);
+        }
         Glide.with(context).load(data.get(position).user.icon).bitmapTransform(new GlideCircleTransform(context,360)).into(holder.touxiang);
         holder.touxiang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,9 +194,11 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
         private final TextView name;
         private final ImageView touxiang;
         private final ImageView bianji,bianji2,bianji3,bianji4,bianji5;
+        private final RecyclerView recycler;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            recycler = itemView.findViewById(R.id.imgurlsRecycler);
             time = itemView.findViewById(R.id.duanzi_item_tv_time);
             content = itemView.findViewById(R.id.duanzi_tv_content);
             name = itemView.findViewById(R.id.duanziz_item_tv_name);

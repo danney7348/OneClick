@@ -22,8 +22,8 @@ public class GetPublishJokePresenter extends BasePresenter {
             getPublishJokeModel = new GetPublishJokeModel();
         }
     }
-    public void getPublishJokeData(String uid,String content){
-        getPublishJokeModel.getPublishJoke(uid, content, new GetPublishJokeModel.GetPublishJokeMessage() {
+    public void getPublishJokeData(String uid,String content,String jokeFiles){
+        getPublishJokeModel.getPublishJoke(uid, content,jokeFiles, new GetPublishJokeModel.GetPublishJokeMessage() {
             @Override
             public void getPublishJokeSuccess(PublishJoke value) {
                 String code = value.code;

@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class GetPublishJokeModel {
-    public void getPublishJoke(String uid, String content, final GetPublishJokeMessage getPublishJokeMessage){
+    public void getPublishJoke(String uid, String content,String jokeFiles, final GetPublishJokeMessage getPublishJokeMessage){
         HttpUtils build = new HttpUtils.Builder()
                 .addCallAdapterFactory()
                 .addConverterFactory()
@@ -26,7 +26,7 @@ public class GetPublishJokeModel {
         System.out.println("build = " + build.toString());
         ApiService myQusetUtils = build.getMyQusetUtils();
         System.out.println("myQusetUtils = " + myQusetUtils.toString());
-        Observable<PublishJoke> publishJoke = myQusetUtils.getPublishJoke(uid, content);
+        Observable<PublishJoke> publishJoke = myQusetUtils.getPublishJoke(uid, content,jokeFiles);
         publishJoke.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<PublishJoke>() {
