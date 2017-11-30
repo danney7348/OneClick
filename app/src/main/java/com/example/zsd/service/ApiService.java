@@ -16,6 +16,7 @@ import java.util.jar.Manifest;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
@@ -42,9 +43,9 @@ public interface ApiService {
     @FormUrlEncoded
     Observable<ResponseBody> getUserReg(@Field("mobile") String mobile,@Field("password") String password,@Field("token") String token);
 
+    @Multipart
     @POST("file/upload")
-    @FormUrlEncoded
-    Observable<ResponseBody> getFileUpload();
+    Call<ResponseBody> upload(@Query("uid") int uid, @Part MultipartBody.Part img);
 
     @POST("user/getUserInfo")
     @FormUrlEncoded

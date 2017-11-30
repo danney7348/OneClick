@@ -11,7 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.zsd.R;
@@ -50,18 +52,17 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.rv_item2, null);
+        View view = View.inflate(context, R.layout.duanzi_item, null);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.content.setText(data.get(position).content);
         holder.name.setText(data.get(position).user.nickname);
+        holder.content.setText(data.get(position).content);
         holder.time.setText(data.get(position).createTime);
         if(data.get(position).imgUrls != null){
             String string = data.get(position).imgUrls.toString();
-            System.out.println("string = " + string);
             String[] split1 = string.split("\\|");
             List<String> imgUrls = new ArrayList<>();
             for (int i = 0; i < split1.length; i++) {
@@ -93,84 +94,60 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
                 context.startActivity(intent);
             }
         });
-        animator = ObjectAnimator.ofFloat(holder.bianji, "rotation", 0f, 180f);
-        animator1 = ObjectAnimator.ofFloat(holder.bianji5, "translationX", 0f,-80f);
-        animator2 = ObjectAnimator.ofFloat(holder.bianji3, "translationX", 0f,-160f);
-        animator3 = ObjectAnimator.ofFloat(holder.bianji4, "translationX", 0f,-240f);
-
-        fanimator = ObjectAnimator.ofFloat(holder.bianji, "rotation", 0f, -180f);
-        fanimator1 = ObjectAnimator.ofFloat(holder.bianji5, "translationX", -80f,0f);
-        fanimator2 = ObjectAnimator.ofFloat(holder.bianji3, "translationX", -160f,0f);
-        fanimator3 = ObjectAnimator.ofFloat(holder.bianji4, "translationX", -240f,0f);
-
-        animator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                holder.bianji.setImageResource(R.drawable.icon_packup);//动画结束改变图片
-
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        });
-
-        //给缩回动画设置监听
-
-        fanimator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                holder.bianji.setImageResource(R.drawable.icon_open);//改变图片
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        });
-
-
-        holder.bianji.setOnClickListener(new View.OnClickListener() {//图片的点击事件
+        holder.iv_animation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.a++;
-                if(holder.a%2==1){//第一次点击是实现伸出效果
-                    AnimatorSet animSet = new AnimatorSet();//动画集合
-                    animSet.play(animator).with(animator1).with(animator2).with(animator3);
-                    animSet.setDuration(500);
-                    animSet.start();
+                final ObjectAnimator animator0 = ObjectAnimator.ofFloat(holder.iv_shutdown, "rotation", 0, -180);
 
-                }else{//再点击一次实现缩回效果
-                    AnimatorSet animSet1 = new AnimatorSet();//动画集合
-                    animSet1.play(fanimator).with(fanimator1).with(fanimator2).with(fanimator3);
-                    animSet1.setDuration(500);
-                    animSet1.start();
-                }
+                animator1 = ObjectAnimator.ofFloat(holder.iv_animation1, "translationX", 0, -330);
+                animator2 = ObjectAnimator.ofFloat(holder.iv_animation2, "translationX", 0, -220);
+                animator3 = ObjectAnimator.ofFloat(holder.iv_animation3, "translationX", 0, -110);
+
+                holder.iv_shutdown.setVisibility(View.VISIBLE);
+                holder.iv_animation.setVisibility(View.GONE);
+                AnimatorSet set = new AnimatorSet();
+                set.play(animator0).with(animator1).with(animator2).with(animator3);
+                set.setDuration(500);
+                set.start();
+                holder.tv1.setVisibility(View.VISIBLE);
+                holder.tv2.setVisibility(View.VISIBLE);
+                holder.tv3.setVisibility(View.VISIBLE);
             }
+        });
+        holder.iv_shutdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                holder.iv_shutdown.setVisibility(View.GONE);
+                holder.iv_animation.setVisibility(View.VISIBLE);
+
+                //伸出的动画
+                final ObjectAnimator animator = ObjectAnimator.ofFloat(holder.iv_animation, "rotation", 0, 180);
+
+                //缩回的动画
+
+                fanimator = ObjectAnimator.ofFloat(holder.iv_animation, "rotation", 0, -180);
+                fanimator1 = ObjectAnimator.ofFloat(holder.iv_animation3, "translationX", -110, 0);
+                fanimator2 = ObjectAnimator.ofFloat(holder.iv_animation2, "translationX", -220, 0);
+                fanimator3 = ObjectAnimator.ofFloat(holder.iv_animation1, "translationX", -330, 0);
+
+                AnimatorSet set = new AnimatorSet();
+                set.play(animator).with(fanimator1).with(fanimator2).with(fanimator3);
+                set.setDuration(500);
+                set.start();
+                holder.tv1.setVisibility(View.GONE);
+                holder.tv2.setVisibility(View.GONE);
+                holder.tv3.setVisibility(View.GONE);
+            }
         });
 
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "点击了", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
@@ -186,9 +163,15 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
         private final TextView content;
         private final TextView name;
         private final ImageView touxiang;
-        private final ImageView bianji,bianji2,bianji3,bianji4,bianji5;
         private final RecyclerView recycler;
-
+        private final ImageView iv_animation;
+        private final ImageView iv_shutdown;
+        private final LinearLayout iv_animation1;
+        private final LinearLayout iv_animation2;
+        private final LinearLayout iv_animation3;
+        private final TextView tv1;
+        private final  TextView tv2;
+        private final  TextView tv3;
         public ViewHolder(View itemView) {
             super(itemView);
             recycler = itemView.findViewById(R.id.imgurlsRecycler);
@@ -196,11 +179,14 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
             content = itemView.findViewById(R.id.duanzi_tv_content);
             name = itemView.findViewById(R.id.duanziz_item_tv_name);
             touxiang = itemView.findViewById(R.id.iv_touxiang);
-            bianji = itemView.findViewById(R.id.duanzi_item_iv_bianji);
-            bianji2 = itemView.findViewById(R.id.duanzi_item_iv_bianji2);
-            bianji3 = itemView.findViewById(R.id.duanzi_item_iv_bianji3);
-            bianji4 = itemView.findViewById(R.id.duanzi_item_iv_bianji4);
-            bianji5 = itemView.findViewById(R.id.duanzi_item_iv_bianji5);
+            iv_animation = itemView.findViewById(R.id.iv_animation);
+            iv_animation1 = itemView.findViewById(R.id.iv_animation1);
+            iv_animation2 = itemView.findViewById(R.id.iv_animation2);
+            iv_animation3 = itemView.findViewById(R.id.iv_animation3);
+            iv_shutdown=itemView.findViewById(R.id.iv_shutdown);
+            tv1 = itemView.findViewById(R.id.tv1);
+            tv2 = itemView.findViewById(R.id.tv2);
+            tv3 = itemView.findViewById(R.id.tv3);
         }
     }
 }

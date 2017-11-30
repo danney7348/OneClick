@@ -3,12 +3,20 @@ package com.example.zsd.model;
 import com.example.zsd.entity.Upload;
 import com.example.zsd.utils.HttpUtils;
 
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
+import static java.lang.String.valueOf;
 
 /**
  * 作者： 张少丹
@@ -25,9 +33,14 @@ public class UploadModel {
                 .build()
                 .getMyQusetUtils()
                 .getUpload();
-        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        /*MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         builder.addFormDataPart("uid",uid);
         builder.addFormDataPart("file",path);
+        if(path != null){
+            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file);
+            builder.addFormDataPart("jokeFiles", file.getName(), requestBody);
+        }
+        List<MultipartBody.Part> parts = builder.build().parts();*/
         upload.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Upload>() {
