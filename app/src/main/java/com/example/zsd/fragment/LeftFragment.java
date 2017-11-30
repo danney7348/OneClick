@@ -3,6 +3,7 @@ package com.example.zsd.fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,16 +29,22 @@ import com.example.zsd.activity.MyShoucangActivity;
 import com.example.zsd.activity.ShezhiActivity;
 import com.example.zsd.entity.GetUserInfo;
 import com.example.zsd.entity.UpdateNickName;
+import com.example.zsd.entity.Upload;
 import com.example.zsd.presenter.GetUserInfoPresenter;
 import com.example.zsd.presenter.UpdateNickNamePresenter;
+import com.example.zsd.presenter.UploadPresenter;
 import com.example.zsd.utils.GlideCircleTransform;
+import com.example.zsd.utils.ImageUtils;
 import com.example.zsd.view.GetUserInfoView;
 import com.example.zsd.view.UpdateNickNameView;
+import com.example.zsd.view.UploadView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
+import static android.app.Activity.RESULT_CANCELED;
 
 /**
  * 作者： 张少丹
@@ -46,7 +53,7 @@ import butterknife.Unbinder;
  * 类的用途：
  */
 
-public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNickNameView {
+public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNickNameView, UploadView {
 
     @BindView(R.id.relativeLayout5)
     RelativeLayout relativeLayout5;
@@ -68,6 +75,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
     private ImageView moon;
     private ImageView left_icon;
     private UpdateNickNamePresenter updateNickNamePresenter;
+    private UploadPresenter presenter;
 
     @Nullable
     @Override
@@ -85,9 +93,11 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
     }
 
     private void initData() {
+        presenter = new UploadPresenter(this);
         leftIcon.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                ImageUtils.showImagePickDialog(getActivity());
 
                 return false;
             }
@@ -111,6 +121,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
                 return false;
             }
         });
+
         left_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -155,6 +166,48 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode){
+            case ImageUtils.REQUEST_CODE_FROM_ALBUM: {
+
+                if (resultCode == RESULT_CANCELED) {   //取消操作
+                    return;
+                }
+
+                Uri imageUri = data.getData();
+                ImageUtils.copyImageUri(getActivity(),imageUri);
+                ImageUtils.cropImageUri(getActivity(), ImageUtils.getCurrentUri(), 200, 200);
+                break;
+            }
+            case ImageUtils.REQUEST_CODE_FROM_CAMERA: {
+
+                if (resultCode == RESULT_CANCELED) {     //取消操作
+                    ImageUtils.deleteImageUri(getActivity(), ImageUtils.getCurrentUri());   //删除Uri
+                }
+
+                ImageUtils.cropImageUri(getActivity(), ImageUtils.getCurrentUri(), 200, 200);
+                break;
+            }
+            case ImageUtils.REQUEST_CODE_CROP: {
+
+                if (resultCode == RESULT_CANCELED) {     //取消操作
+                    return;
+                }
+
+                Uri imageUri = ImageUtils.getCurrentUri();
+                if (imageUri != null) {
+                    left_icon.setImageURI(imageUri);
+                    presenter.getUploadData("170",imageUri.getPath());
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -220,12 +273,20 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
     @Override
     public void updateNickNameScuuess(String msg) {
 
-
-
     }
 
     @Override
     public void updateNickNameFailure(String msg) {
+
+    }
+
+    @Override
+    public void getUploadSuccess(Upload value) {
+
+    }
+
+    @Override
+    public void getUploadFailure(String msg) {
 
     }
 }

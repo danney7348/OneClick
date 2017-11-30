@@ -80,9 +80,9 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
                 holder.recycler.setAdapter(adapter);
             }else {
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
-                MyImgUrlsAdapter adapter = new MyImgUrlsAdapter(context, imgUrls);
+                MyImgUrlsAdapter1 adapter1 = new MyImgUrlsAdapter1(context, imgUrls);
                 holder.recycler.setLayoutManager(gridLayoutManager);
-                holder.recycler.setAdapter(adapter);
+                holder.recycler.setAdapter(adapter1);
             }
         }
         Glide.with(context).load(data.get(position).user.icon).bitmapTransform(new GlideCircleTransform(context,360)).into(holder.touxiang);

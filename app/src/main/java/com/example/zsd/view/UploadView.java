@@ -10,5 +10,7 @@ import com.example.zsd.entity.Upload;
  * 类的用途：
  */
 
-public interface UploadView extends BaseView<Upload> {
+public interface UploadView {
+    void getUploadSuccess(Upload value);
+    void getUploadFailure(String msg);
 }
