@@ -5,6 +5,8 @@ import com.example.zsd.entity.PublishJoke;
 import com.example.zsd.model.GetPublishJokeModel;
 import com.example.zsd.view.GetPublishJokeView;
 
+import java.util.List;
+
 /**
  * 作者： 张少丹
  * 时间：  2017/11/28.
@@ -22,7 +24,7 @@ public class GetPublishJokePresenter extends BasePresenter {
             getPublishJokeModel = new GetPublishJokeModel();
         }
     }
-    public void getPublishJokeData(String uid,String content,String jokeFiles){
+    public void getPublishJokeData(String uid, String content, List<String> jokeFiles){
         getPublishJokeModel.getPublishJoke(uid, content,jokeFiles, new GetPublishJokeModel.GetPublishJokeMessage() {
             @Override
             public void getPublishJokeSuccess(PublishJoke value) {

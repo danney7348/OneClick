@@ -75,10 +75,7 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
                 break;
             case R.id.bianxie_tv_fabiao:
                 System.out.println(getSharedPreferences("TOKEN", MODE_PRIVATE).getString("uid", null) + "++++++++++++");
-                for (int i = 0; i < path.size(); i++) {
-
-                }
-                t.getPublishJokeData("170", ed_fabiao.getText().toString(),"");
+                t.getPublishJokeData("170", ed_fabiao.getText().toString(),path);
                 showToast("我走了");
                 break;
             case R.id.pop_finish:
@@ -182,8 +179,8 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
     @Override
     public void getPublishJokeSuccess(PublishJoke value) {
         showToast(value.msg + "=============");
-        Intent intent = new Intent(this, DuanziFragment.class);
-        startActivity(intent);
+        /*Intent intent = new Intent(this, DuanziFragment.class);
+        startActivity(intent);*/
     }
 
     @Override

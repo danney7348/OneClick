@@ -32,7 +32,7 @@ public class HttpUtils {
 
     public static class  Builder{
         OkHttpClient okHttpClient=new OkHttpClient.Builder()
-                .addInterceptor(new MyIntercept())
+                .addInterceptor(new MyInterceptor())
                 .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
