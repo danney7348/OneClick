@@ -1,8 +1,11 @@
 package com.example.zsd.service;
 
+import com.example.zsd.entity.Follow;
 import com.example.zsd.entity.GetAd;
+import com.example.zsd.entity.GetFollowUsers;
 import com.example.zsd.entity.GetJokes;
 import com.example.zsd.entity.GetUserInfo;
+import com.example.zsd.entity.GetUserVideos;
 import com.example.zsd.entity.GetVersion;
 import com.example.zsd.entity.GetVideos;
 import com.example.zsd.entity.LoginBean;
@@ -76,4 +79,16 @@ public interface ApiService {
     @POST("user/updateNickName")
     @FormUrlEncoded
     Observable<UpdateNickName> getUpdateNickName(@Field("uid") String uid,@Field("nickname") String nickname);
+
+    @POST("quarter/getUserVideos")
+    @FormUrlEncoded
+    Observable<GetUserVideos> getUserVideos(@Field("uid") String uid,@Field("page") String page);
+
+    @POST("quarter/follow")
+    @FormUrlEncoded
+    Observable<Follow> getFollow(@Field("uid") String uid, @Field("followId") String followId);
+
+    @POST("quarter/getFollowUsers")
+    @FormUrlEncoded
+    Observable<GetFollowUsers> getFollowUsers(@Field("uid") String uid);
 }

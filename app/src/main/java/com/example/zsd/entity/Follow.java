@@ -1,5 +1,7 @@
 package com.example.zsd.entity;
 
+import com.example.zsd.base.BaseView;
+
 /**
  * 作者： 张少丹
  * 时间：  2017/11/28.
@@ -7,7 +9,7 @@ package com.example.zsd.entity;
  * 类的用途：
  */
 
-public class Follow {
+public class Follow implements BaseView {
 
     /**
      * msg : 此用户已关注

@@ -1,6 +1,7 @@
 package com.example.zsd.view;
 
 import com.example.zsd.base.BaseView;
+import com.example.zsd.entity.Follow;
 
 /**
  * 作者： 张少丹
@@ -9,5 +10,5 @@ import com.example.zsd.base.BaseView;
  * 类的用途：
  */
 
-public interface FollowView extends BaseView {
+public interface FollowView extends BaseView<Follow> {
 }

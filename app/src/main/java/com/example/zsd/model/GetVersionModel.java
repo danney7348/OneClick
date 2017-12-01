@@ -1,6 +1,7 @@
 package com.example.zsd.model;
 
 import com.example.zsd.entity.GetAd;
+import com.example.zsd.entity.GetUserVideos;
 import com.example.zsd.entity.GetVersion;
 import com.example.zsd.utils.HttpUtils;
 
@@ -17,28 +18,29 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class GetVersionModel {
-    public void getVersionData(){
+    public void getVersionData(String uid,String page){
         new HttpUtils.Builder()
                 .addCallAdapterFactory()
                 .addConverterFactory()
                 .build()
                 .getMyQusetUtils()
-                .getVersion()
+                .getUserVideos(uid,page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<GetVersion>() {
+                .subscribe(new Observer<GetUserVideos>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(GetVersion value) {
+                    public void onNext(GetUserVideos value) {
 
-                        if(value.code.equals("0")){
-                            getVersionMessage.getVersionSuccess(value);
+                        String code = value.code;
+                        if(code.equals("0")){
+                            getUserVideosMessage.getVersionSuccess(value);
                         }else {
-                            getVersionMessage.getVersionFailure(value.msg);
+                            getUserVideosMessage.getVersionFailure(value.msg);
                         }
                     }
 
@@ -53,14 +55,14 @@ public class GetVersionModel {
                     }
                 });
     }
-    private GetVersionMessage getVersionMessage;
+    private GetUserVideosMessage getUserVideosMessage;
 
-    public void setGetVersionMessage(GetVersionMessage getVersionMessage) {
-        this.getVersionMessage = getVersionMessage;
+    public void setGetUserVideosMessage(GetUserVideosMessage getUserVideosMessage) {
+        this.getUserVideosMessage = getUserVideosMessage;
     }
 
-    public interface GetVersionMessage{
-        void getVersionSuccess(GetVersion value);
+    public interface GetUserVideosMessage{
+        void getVersionSuccess(GetUserVideos value);
         void getVersionFailure(String msg);
     }
 }
