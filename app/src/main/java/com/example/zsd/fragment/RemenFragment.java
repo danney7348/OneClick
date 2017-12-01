@@ -3,17 +3,24 @@ package com.example.zsd.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.zsd.R;
+import com.example.zsd.adapter.RemenRecycleViewAdapter;
 import com.example.zsd.entity.GetAd;
+import com.example.zsd.entity.GetVideos;
 import com.example.zsd.model.GetAdModel;
 import com.example.zsd.presenter.GetAdPresenter;
+import com.example.zsd.presenter.GetVideosPresenter;
 import com.example.zsd.view.GetAdView;
+import com.example.zsd.view.GetVideosView;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;
@@ -26,11 +33,14 @@ import java.util.List;
  * 类的用途：
  */
 
-public class RemenFragment extends Fragment implements XBanner.XBannerAdapter, GetAdView {
+public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,GetAdView{
 
     private View view;
     private List<String> imgesUrl;
     private XBanner mBanner;
+    private XRecyclerView lv;
+    private GetAdPresenter getAdPresenter;
+    private List<GetVideos.DataBean> list;
 
     @Nullable
     @Override
@@ -43,12 +53,24 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter, G
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+        initData();
+    }
+
+    private void initData() {
+        getAdPresenter.getAdData();
+       getAdPresenter.getVideos("170","1","1");
+
+
     }
 
     private void initView() {
+        list = new ArrayList<>();
         mBanner = view.findViewById(R.id.banner);
-        GetAdPresenter getAdPresenter = new GetAdPresenter(this);
-        getAdPresenter.getAdData();
+        lv = view.findViewById(R.id.remen_xrv);
+        getAdPresenter = new GetAdPresenter(this);
+
+
+
     }
 
     @Override
@@ -66,16 +88,8 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter, G
     }
 
     @Override
-    public void success(GetAd getAd) {
+    public void success(Object o) {
 
-        imgesUrl = new ArrayList<>();
-        for (int i = 0; i < getAd.data.size(); i++) {
-            imgesUrl.add(getAd.data.get(i).icon);
-            System.out.println("getAd.data.get(i).url = " + getAd.data.get(i).icon);
-        }
-        mBanner.setData(imgesUrl,null);
-        mBanner.setPoinstPosition(XBanner.RIGHT);
-        mBanner.setmAdapter(this);
     }
 
     @Override
@@ -84,7 +98,44 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter, G
     }
 
     @Override
+    public void getAdseccuss(GetAd ad) {
+        imgesUrl = new ArrayList<>();
+        for (int i = 0; i < ad.data.size(); i++) {
+            imgesUrl.add(ad.data.get(i).icon);
+            System.out.println("getAd.data.get(i).url = " + ad.data.get(i).icon);
+        }
+        mBanner.setData(imgesUrl,null);
+        mBanner.setPoinstPosition(XBanner.RIGHT);
+        mBanner.setmAdapter(this);
+    }
+
+    @Override
+    public void getVideosseccuss(GetVideos videos) {
+        System.out.println(videos.msg+"++++++++++++++++++++++++++++++++++++++++++++++");
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        lv.setLayoutManager(linearLayoutManager);
+        List<GetVideos.DataBean> data = videos.data;
+        list.addAll(data);
+        RemenRecycleViewAdapter adapter = new RemenRecycleViewAdapter(getActivity(),list);
+        lv.setAdapter(adapter);
+    }
+
+    @Override
     public void error(String msg) {
 
+        System.out.println("msg 999999+++++++++++= " + msg);
     }
+
+    @Override
+    public void failue(String msg) {
+        System.out.println("msg 999999+++++++++++= " + msg);
+    }
+
+
+    /*public void success(GetVideos o) {
+
+    }*/
+
+
+
 }

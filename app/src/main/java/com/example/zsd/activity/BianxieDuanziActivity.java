@@ -26,6 +26,7 @@ import com.example.zsd.entity.PublishJoke;
 import com.example.zsd.fragment.DuanziFragment;
 import com.example.zsd.presenter.GetPublishJokePresenter;
 import com.example.zsd.utils.GlideLoader;
+import com.example.zsd.utils.ShareprefrensUtils;
 import com.example.zsd.view.GetPublishJokeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yancy.imageselector.ImageConfig;
@@ -75,8 +76,7 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
                 rl.setBackgroundDrawable(dw);
                 break;
             case R.id.bianxie_tv_fabiao:
-                System.out.println(getSharedPreferences("TOKEN", MODE_PRIVATE).getString("uid", null) + "++++++++++++");
-                t.getPublishJokeData("170", ed_fabiao.getText().toString(),path);
+                t.getPublishJokeData((String) ShareprefrensUtils.get(this,"uid",null), ed_fabiao.getText().toString(),path);
                 showToast("我走了");
                 break;
             case R.id.pop_finish:

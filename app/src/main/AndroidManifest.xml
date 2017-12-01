@@ -31,12 +31,12 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
 
-        <service
+       <!-- <service
             android:name=".activity.DemoPushService"
             android:exported="true"
             android:label="PushService"
             android:process=":pushservice" />
-        <service android:name=".activity.DemoIntentService" />
+        <service android:name=".activity.DemoIntentService" />-->
 
         <activity android:name=".activity.QiDongActivity">
             <intent-filter>

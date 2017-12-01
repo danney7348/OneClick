@@ -364,8 +364,12 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
     }
 
 
+    /**
+     *
+     * @param photo
+     */
     private void setFile(Bitmap photo) {
-        File file=new File("mnt/sdcard/mo.jpg");
+        File file=new File("mnt/sdcard/1.jpg");
         try {
             BufferedOutputStream bout=new BufferedOutputStream(new FileOutputStream(file));
             photo.compress(Bitmap.CompressFormat.JPEG,100,bout);
@@ -382,7 +386,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
      */
     private void  uploadPic() {
 
-        File img=new File("mnt/sdcard/*.jpg");///data/data/z.jpg
+        File img=new File("mnt/sdcard/1.jpg");///data/data/z.jpg
         System.out.println(img.getName() + img.toString() + "===========================");
 
         Retrofit retrofit= new Retrofit.Builder().baseUrl(BaseApi.BASE_API)

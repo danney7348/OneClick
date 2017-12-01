@@ -24,23 +24,23 @@ public class GetVersionModel {
                 .addConverterFactory()
                 .build()
                 .getMyQusetUtils()
-                .getUserVideos(uid,page)
+                .getVersion()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<GetUserVideos>() {
+                .subscribe(new Observer<GetVersion>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(GetUserVideos value) {
+                    public void onNext(GetVersion value) {
 
                         String code = value.code;
                         if(code.equals("0")){
-                            getUserVideosMessage.getVersionSuccess(value);
+                            getVersionMessage.getVersionSuccess(value);
                         }else {
-                            getUserVideosMessage.getVersionFailure(value.msg);
+                            getVersionMessage.getVersionFailure(value.msg);
                         }
                     }
 
@@ -55,14 +55,14 @@ public class GetVersionModel {
                     }
                 });
     }
-    private GetUserVideosMessage getUserVideosMessage;
+    private GetVersionMessage getVersionMessage;
 
-    public void setGetUserVideosMessage(GetUserVideosMessage getUserVideosMessage) {
-        this.getUserVideosMessage = getUserVideosMessage;
+    public void setGetVersionMessage(GetVersionMessage getVersionMessage) {
+        this.getVersionMessage = getVersionMessage;
     }
 
-    public interface GetUserVideosMessage{
-        void getVersionSuccess(GetUserVideos value);
+    public interface GetVersionMessage{
+        void getVersionSuccess(GetVersion value);
         void getVersionFailure(String msg);
     }
 }

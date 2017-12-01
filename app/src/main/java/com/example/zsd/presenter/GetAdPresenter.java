@@ -1,9 +1,12 @@
 package com.example.zsd.presenter;
 
+
 import com.example.zsd.base.BasePresenter;
 import com.example.zsd.entity.GetAd;
+import com.example.zsd.entity.GetVideos;
 import com.example.zsd.model.GetAdModel;
 import com.example.zsd.view.GetAdView;
+
 
 import java.util.List;
 
@@ -15,27 +18,38 @@ import java.util.List;
  */
 
 public class GetAdPresenter extends BasePresenter<GetAdView> implements GetAdModel.GetAdMessage {
+
     private GetAdModel getAdModel;
 
     public GetAdPresenter(GetAdView mView) {
         super(mView);
-        if(getAdModel == null){
-            getAdModel = new GetAdModel();
-        }
-        getAdModel.setGetAdMessage(this);
+        getAdModel = new GetAdModel(this);
     }
-    public void getAdData(){
+
+    public void getAdData() {
         getAdModel.getAd();
+    }
+
+    public void getVideos(String uid, String type, String page) {
+        getAdModel.getVideosData(uid, type, page);
+
     }
 
     @Override
     public void getAdSuccess(GetAd value) {
-        mView.success(value);
+        mView.getAdseccuss(value);
+    }
+
+    @Override
+    public void getVideosSuccess(GetVideos value) {
+        mView.getVideosseccuss(value);
+        System.out.println("value ==================== " + value);
     }
 
     @Override
     public void getAdFailure(String msg) {
-        mView.failure(msg);
+        mView.failue(msg);
+        System.out.println("msg = " + msg);
     }
 }
 

@@ -26,10 +26,9 @@ public class MyInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         String  token = MyApp.context.getSharedPreferences("TOKEN",Context.MODE_PRIVATE).getString("token","A0C48974F2BBBA4EC3053CDE21328D70");
-        Log.d(TAG,"\n");
-        Log.d(TAG,"----------Start----------------");
         String method=request.method();
         if("POST".equals(method)){
+            Log.d(TAG,"----------Start----------------");
             FormBody.Builder sb = new FormBody.Builder();
             if (request.body() instanceof FormBody) {
                 FormBody body = (FormBody) request.body();

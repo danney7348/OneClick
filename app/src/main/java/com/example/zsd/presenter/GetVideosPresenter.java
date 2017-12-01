@@ -12,31 +12,29 @@ import com.example.zsd.view.GetVideosView;
  * 类的用途：
  */
 
-public class GetVideosPresenter extends BasePresenter {
+public class GetVideosPresenter extends BasePresenter<GetVideosView> {
     private GetVideosModel getVideosModel;
-    private GetVideosView getVideosView;
-    public GetVideosPresenter(GetVideosView getVideosView) {
-        super(getVideosView);
-        this.getVideosView = getVideosView;
-        if(getVideosModel == null){
+
+    public GetVideosPresenter(GetVideosView mView) {
+        super(mView);
+        if (getVideosModel == null) {
             getVideosModel = new GetVideosModel();
+
         }
+        //getVideosModel.setGetVideosMessage(this);
     }
-    public void getVideosData(String uid,String type,String page){
-        getVideosModel.getVideosData(uid, type, page, new GetVideosModel.GetVideosMessage() {
-            @Override
-            public void getVideosSuccess(GetVideos value) {
-                String code = value.code;
-                if(code.equals("0")){
-                    getVideosView.getVideosSuccess(value);
-                }else {
-                    getVideosView.getVideosFailure(value.msg);
-                }
-            }
-            @Override
-            public void getVideosFailure(Throwable e) {
-                getVideosView.failure("");
-            }
-        });
+
+    public void getVideosData(String uid, String type, String page) {
+       // getVideosModel.getVideosData(uid, type, page);
     }
+
+    /*@Override
+    public void getVideosSuccess(GetVideos value) {
+        mView.success(value);
+    }
+
+    @Override
+    public void getVideosFailure(Throwable e) {
+        mView.failure(e.getMessage().toString());
+    }*/
 }

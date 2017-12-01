@@ -9,7 +9,7 @@ import com.example.zsd.base.BaseView;
  * 类的用途：
  */
 
-public class Follow implements BaseView {
+public class Follow  {
 
     /**
      * msg : 此用户已关注
@@ -18,4 +18,5 @@ public class Follow implements BaseView {
 
     public String msg;
     public String code;
+
 }

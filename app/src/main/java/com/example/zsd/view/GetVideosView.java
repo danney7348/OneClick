@@ -10,7 +10,5 @@ import com.example.zsd.entity.GetVideos;
  * 类的用途：
  */
 
-public interface GetVideosView extends BaseView {
-    void getVideosSuccess(GetVideos value);
-    void getVideosFailure(String e);
+public interface GetVideosView extends BaseView<GetVideos> {
 }
