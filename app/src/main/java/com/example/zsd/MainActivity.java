@@ -130,7 +130,7 @@ public class MainActivity extends BaseActivity {
         mainImgShiping.setImageResource(R.drawable.shiping1);
         mainTvShipin.setTextColor(Color.parseColor("#C5C5C5"));
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new TuijianFragment()).commit();
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fl, new LeftFragment()).commit();
         mainDl.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
@@ -140,7 +140,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
                 drawerView.setClickable(true);
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_fl, new LeftFragment()).commit();
+
             }
 
             @Override

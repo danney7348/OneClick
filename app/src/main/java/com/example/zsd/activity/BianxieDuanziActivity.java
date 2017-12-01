@@ -76,13 +76,7 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
                 break;
             case R.id.bianxie_tv_fabiao:
                 System.out.println(getSharedPreferences("TOKEN", MODE_PRIVATE).getString("uid", null) + "++++++++++++");
-
-                String string = getSharedPreferences("TOKEN", Context.MODE_PRIVATE).getString("token", "A0C48974F2BBBA4EC3053CDE21328D70");
-                if(string.equals("2")){
-                    startActivity(MobileLoginActivity.class);
-                }else {
-                    t.getPublishJokeData("170", ed_fabiao.getText().toString(),path);
-                }
+                t.getPublishJokeData("170", ed_fabiao.getText().toString(),path);
                 showToast("我走了");
                 break;
             case R.id.pop_finish:
@@ -208,7 +202,7 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
 
     @Override
     public void failure(String msg) {
-
+        startActivity(MobileLoginActivity.class);
         showToast(msg + "++++++++++++++");
     }
 
