@@ -12,6 +12,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         manifestPlaceholders = [
                 GETUI_APP_ID    : "9cMue4fpN39bgpaag3yH26",
                 GETUI_APP_KEY   : "DM1m6EEtuY5daGsfPTKDE2",
@@ -76,4 +77,10 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     implementation 'de.greenrobot:eventbus:3.0.0-beta1'
     compile 'com.yancy.imageselector:imageselector:1.3.3'
+    //3D地图so及jar
+    compile 'com.amap.api:3dmap:latest.integration'
+    //定位功能
+    compile 'com.amap.api:location:latest.integration'
+    //搜索功能
+    compile 'com.amap.api:search:latest.integration'
 }

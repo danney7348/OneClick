@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.zsd.activity.ChuangzuoActivity;
+import com.example.zsd.activity.GaodeActivity;
 import com.example.zsd.base.BaseActivity;
 import com.example.zsd.base.BasePresenter;
 import com.example.zsd.fragment.DuanziFragment;
@@ -83,7 +84,7 @@ public class MainActivity extends BaseActivity {
                 mainDl.openDrawer(Gravity.LEFT);
                 break;
             case R.id.img_biji:
-                startActivity(ChuangzuoActivity.class);
+                startActivity(GaodeActivity.class);
                 break;
             case R.id.main_ll_tuijian:
                 mainTvTitle.setText("推荐");
