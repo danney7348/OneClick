@@ -228,7 +228,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
 
         textView2.setText(value.data.nickname);
         Toast.makeText(getActivity(), value.data.nickname, Toast.LENGTH_SHORT).show();
-        Glide.with(getActivity()).load(value.data.icon).bitmapTransform(new GlideCircleTransform(getActivity(), 360)).into(left_icon);
+        Glide.with(getActivity()).load(value.data.icon).into(left_icon);
     }
 
     @Override

@@ -86,7 +86,7 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
                 holder.recycler.setAdapter(adapter);
             }
         }
-        Glide.with(context).load(data.get(position).user.icon).bitmapTransform(new GlideCircleTransform(context,360)).into(holder.touxiang);
+        Glide.with(context).load(data.get(position).user.icon).into(holder.touxiang);
         holder.touxiang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

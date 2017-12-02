@@ -33,7 +33,7 @@ public class ChuangzuoActivity extends BaseActivity {
     public void setListener() {
 
     }
-    @OnClick({R.id.chuangzuo_tv_quxiao,R.id.chuangzuo_iv_duanzi})
+    @OnClick({R.id.chuangzuo_tv_quxiao,R.id.chuangzuo_iv_duanzi,R.id.rl_shipin})
     @Override
     public void Click(View view) {
         switch (view.getId()){
@@ -43,8 +43,8 @@ public class ChuangzuoActivity extends BaseActivity {
             case R.id.chuangzuo_iv_duanzi:
                 startActivity(BianxieDuanziActivity.class);
                 break;
-            case R.id.chuangzuo_iv_shipin:
-                startActivity(BianxieDuanziActivity.class);
+            case R.id.rl_shipin:
+                startActivity(FabuShipinActivity.class);
                 break;
         }
     }

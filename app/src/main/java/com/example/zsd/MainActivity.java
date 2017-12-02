@@ -84,7 +84,7 @@ public class MainActivity extends BaseActivity {
                 mainDl.openDrawer(Gravity.LEFT);
                 break;
             case R.id.img_biji:
-                startActivity(MainActivity.class);
+                startActivity(ChuangzuoActivity.class);
                 break;
             case R.id.main_ll_tuijian:
                 mainTvTitle.setText("推荐");

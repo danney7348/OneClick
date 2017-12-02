@@ -55,8 +55,8 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
         holder.name.setText(list.get(position).user.nickname);
         holder.content.setText(list.get(position).workDesc);
         holder.time.setText(list.get(position).createTime);
-        Glide.with(context).load(list.get(position).user.icon).bitmapTransform(new GlideCircleTransform(context,360)).into(holder.touxiang);
-        Glide.with(context).load(list.get(position).cover).bitmapTransform(new GlideCircleTransform(context,360)).into(holder.iv);
+        Glide.with(context).load(list.get(position).user.icon).into(holder.touxiang);
+        Glide.with(context).load(list.get(position).cover).into(holder.iv);
         holder.touxiang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

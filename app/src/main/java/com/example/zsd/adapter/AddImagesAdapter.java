@@ -1,5 +1,6 @@
 package com.example.zsd.adapter;
 
+import com.bumptech.glide.request.RequestOptions;
 import com.example.zsd.R;
 import com.example.zsd.activity.BianxieDuanziActivity;
 
@@ -49,10 +50,14 @@ public class AddImagesAdapter extends RecyclerView.Adapter<AddImagesAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Glide.with(context)
+
+        RequestOptions options = new RequestOptions();
+        options.placeholder(R.drawable.ic_launcher_foreground);
+        Glide.with(context).load(result.get(position)).apply(options).into(holder.image);
+        /*Glide.with(context)
                 .load(result.get(position))
                 .centerCrop()
-                .into(holder.image);
+                .into(holder.image);*/
         holder.image.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
