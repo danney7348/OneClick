@@ -5,10 +5,11 @@
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/image"
+        android:scaleType="fitCenter"
         android:layout_marginLeft="@dimen/x10"
         android:layout_marginRight="@dimen/x10"
         android:layout_marginTop="@dimen/x10"
-        android:layout_width="@dimen/x300"
-        android:layout_height="@dimen/y300"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:contentDescription="@null" />
 </LinearLayout>
