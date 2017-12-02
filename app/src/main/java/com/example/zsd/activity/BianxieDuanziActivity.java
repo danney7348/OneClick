@@ -76,7 +76,7 @@ public class BianxieDuanziActivity extends BaseActivity<GetPublishJokePresenter>
                 rl.setBackgroundDrawable(dw);
                 break;
             case R.id.bianxie_tv_fabiao:
-                t.getPublishJokeData((String) ShareprefrensUtils.get(this,"uid",null), ed_fabiao.getText().toString(),path);
+                t.getPublishJokeData((String) ShareprefrensUtils.get(this,"uid",""), ed_fabiao.getText().toString(),path);
                 showToast("我走了");
                 break;
             case R.id.pop_finish:

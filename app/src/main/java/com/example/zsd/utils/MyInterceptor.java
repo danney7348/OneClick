@@ -25,7 +25,8 @@ public class MyInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        String  token = MyApp.context.getSharedPreferences("TOKEN",Context.MODE_PRIVATE).getString("token","A0C48974F2BBBA4EC3053CDE21328D70");
+        //String  token = MyApp.context.getSharedPreferences("TOKEN",Context.MODE_PRIVATE).getString("token","A0C48974F2BBBA4EC3053CDE21328D70");
+        String token = (String) ShareprefrensUtils.get(MyApp.context, "token", "");
         String method=request.method();
         if("POST".equals(method)){
             Log.d(TAG,"----------Start----------------");

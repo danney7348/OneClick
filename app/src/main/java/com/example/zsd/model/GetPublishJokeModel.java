@@ -32,7 +32,7 @@ public class GetPublishJokeModel {
         System.out.println("build = " + build.toString());
         ApiService myQusetUtils = build.getMyQusetUtils();
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        builder.addFormDataPart("uid",uid);
+        builder.addFormDataPart("uid",uid+"");
         builder.addFormDataPart("content",content);
         for (int i = 0; i < jokeFiles.size(); i++) {
             File file = new File(jokeFiles.get(i));

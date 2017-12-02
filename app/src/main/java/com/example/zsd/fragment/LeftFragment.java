@@ -40,6 +40,7 @@ import com.example.zsd.presenter.UpdateNickNamePresenter;
 import com.example.zsd.presenter.UploadPresenter;
 import com.example.zsd.service.ApiService;
 import com.example.zsd.utils.GlideCircleTransform;
+import com.example.zsd.utils.ShareprefrensUtils;
 import com.example.zsd.utils.Utils;
 import com.example.zsd.view.GetUserInfoView;
 import com.example.zsd.view.UpdateNickNameView;
@@ -127,7 +128,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
             }
         });
         GetUserInfoPresenter getUserInfoPresenter = new GetUserInfoPresenter(this);
-        getUserInfoPresenter.getUserInfoData("170", "");
+        getUserInfoPresenter.getUserInfoData((String) ShareprefrensUtils.get(getActivity(),"uid",null), "");
         updateNickNamePresenter = new UpdateNickNamePresenter(this);
         textView2.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -138,7 +139,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
                         .setNegativeButton("取消", null);
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        updateNickNamePresenter.updateNickNameData("170",inputServer.getText().toString());
+                        updateNickNamePresenter.updateNickNameData((String) ShareprefrensUtils.get(getActivity(),"uid",""),inputServer.getText().toString());
                     }
                 });
                 builder.show();
@@ -226,6 +227,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
     public void getUserInfoSuccess(GetUserInfo value) {
 
         textView2.setText(value.data.nickname);
+        Toast.makeText(getActivity(), value.data.nickname, Toast.LENGTH_SHORT).show();
         Glide.with(getActivity()).load(value.data.icon).bitmapTransform(new GlideCircleTransform(getActivity(), 360)).into(left_icon);
     }
 

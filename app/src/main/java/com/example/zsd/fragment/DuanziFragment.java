@@ -104,7 +104,7 @@ public class DuanziFragment extends Fragment implements GetJokesView {
 
     @Override
     public void getJokesFailure(String e) {
-        Toast.makeText(getContext(), e, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), e, Toast.LENGTH_SHORT).show();
 
     }
 

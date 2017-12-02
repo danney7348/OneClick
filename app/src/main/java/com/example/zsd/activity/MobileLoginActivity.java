@@ -12,6 +12,7 @@ import com.example.zsd.base.BaseActivity;
 import com.example.zsd.base.BasePresenter;
 import com.example.zsd.entity.LoginBean;
 import com.example.zsd.presenter.UserLoginPresenter;
+import com.example.zsd.utils.ShareprefrensUtils;
 import com.example.zsd.view.UserLoginView;
 
 import java.util.ArrayList;
@@ -96,8 +97,12 @@ public class MobileLoginActivity extends BaseActivity<UserLoginPresenter> implem
 
         showToast(loginBean.msg);
         showToast(loginBean.msg);
-        getSharedPreferences("TOKEN",MODE_PRIVATE).edit().putString("token",loginBean.data.token).commit();
-        System.out.println("getSharedPreferences"+getSharedPreferences("TOKEN",MODE_PRIVATE).getString("token",null));
+        System.out.println("loginBean = " + loginBean.data.token);
+        System.out.println("loginBean = " + loginBean.data.uid);
+        ShareprefrensUtils.put(this,"token",loginBean.data.token);
+        ShareprefrensUtils.put(this,"uid",loginBean.data.uid+"");
+        System.out.println("ShareprefrensUtils.get(this,\"token\",null) = " + (String) ShareprefrensUtils.get(this,"token",""));
+        System.out.println("ShareprefrensUtils.get(this,\"token\",null) = " + (String) ShareprefrensUtils.get(this,"uid",""));
         startActivity(MainActivity.class);
 
     }
