@@ -37,10 +37,12 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
 
     private View view;
     private List<String> imgesUrl;
-    private XBanner mBanner;
+    //private XBanner mBanner;
     private XRecyclerView lv;
     private GetAdPresenter getAdPresenter;
     private List<GetVideos.DataBean> list;
+    private View view1;
+    private XBanner banner;
 
     @Nullable
     @Override
@@ -59,17 +61,15 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
     private void initData() {
         getAdPresenter.getAdData();
        getAdPresenter.getVideos("170","1","1");
-
-
     }
 
     private void initView() {
+        view1 = View.inflate(getActivity(), R.layout.xbanner_item, null);
+        banner = view1.findViewById(R.id.banner);
         list = new ArrayList<>();
-        mBanner = view.findViewById(R.id.banner);
-        lv = view.findViewById(R.id.remen_xrv);
+        lv = this.view.findViewById(R.id.remen_xrv);
+        lv.addHeaderView(view1);
         getAdPresenter = new GetAdPresenter(this);
-
-
 
     }
 
@@ -80,11 +80,11 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
     @Override
     public void onResume() {
         super.onResume();
-        mBanner.startAutoPlay();
+        banner.startAutoPlay();
     }
     @Override public void onStop() {
         super.onStop();
-        mBanner.stopAutoPlay();
+        banner.stopAutoPlay();
     }
 
     @Override
@@ -104,9 +104,9 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
             imgesUrl.add(ad.data.get(i).icon);
             System.out.println("getAd.data.get(i).url = " + ad.data.get(i).icon);
         }
-        mBanner.setData(imgesUrl,null);
-        mBanner.setPoinstPosition(XBanner.RIGHT);
-        mBanner.setmAdapter(this);
+        banner.setData(imgesUrl,null);
+        banner.setPoinstPosition(XBanner.RIGHT);
+        banner.setmAdapter(this);
     }
 
     @Override
