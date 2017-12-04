@@ -1,20 +1,33 @@
 package com.example.zsd.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.LocationSource;
+import com.amap.api.maps.MapView;
 import com.example.zsd.R;
 import com.example.zsd.adapter.GridImageAdapter;
+import com.example.zsd.base.BaseActivity;
+import com.example.zsd.base.BasePresenter;
+import com.example.zsd.entity.PublishVideo;
+import com.example.zsd.presenter.PublishVideoPresenter;
 import com.example.zsd.utils.FullyGridLayoutManager;
+import com.example.zsd.utils.ShareprefrensUtils;
+import com.example.zsd.view.PublishVideoView;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Environment;
 import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,27 +39,28 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.luck.picture.lib.PictureSelector;
-import com.luck.picture.lib.config.PictureConfig;
-import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.luck.picture.lib.tools.PictureFileUtils;
 
 import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-public class FabuShipinActivity extends AppCompatActivity implements View.OnClickListener,
-        RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener  {
+public class FabuShipinActivity extends BaseActivity<PublishVideoPresenter> implements View.OnClickListener,
+        RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener, PublishVideoView, LocationSource, AMapLocationListener {
     private final static String TAG = FabuShipinActivity.class.getSimpleName();
     private List<LocalMedia> selectList = new ArrayList<>();
     private RecyclerView recyclerView;
     private GridImageAdapter adapter;
     private int maxSelectNum = 9;
     private TextView tv_select_num;
+    private TextView fabu_tv_title;
     private ImageView left_back, minus, plus;
     private RadioGroup rgb_crop, rgb_style, rgb_photo_mode;
     private int aspect_ratio_x, aspect_ratio_y;
@@ -56,15 +70,39 @@ public class FabuShipinActivity extends AppCompatActivity implements View.OnClic
             cb_showCropFrame, cb_preview_audio;
     private int themeId;
     private int chooseMode = PictureMimeType.ofAll();
+    private MapView mMapView;  //初始化地图控制器对象
+    AMap aMap;
+
+
+    //定位需要的数据
+    LocationSource.OnLocationChangedListener mListener;
+    AMapLocationClient mlocationClient;
+    AMapLocationClientOption mLocationOption;
+    private int jingdu;
+    private int weidu;
+    @Override
+    public int bindLayout() {
+        return R.layout.activity_fabu_shipin;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fabu_shipin);
+    public void setListener() {
+
+    }
+
+    @Override
+    public void Click(View view) {
+
+    }
+
+    @Override
+    public void initView() {
+        initMap();
         themeId = R.style.picture_default_style;
         minus = (ImageView) findViewById(R.id.minus);
         plus = (ImageView) findViewById(R.id.plus);
         tv_select_num = (TextView) findViewById(R.id.tv_select_num);
+        fabu_tv_title = (TextView) findViewById(R.id.fabu_tv_title);
         rgb_crop = (RadioGroup) findViewById(R.id.rgb_crop);
         rgb_style = (RadioGroup) findViewById(R.id.rgb_style);
         rgb_photo_mode = (RadioGroup) findViewById(R.id.rgb_photo_mode);
@@ -105,6 +143,7 @@ public class FabuShipinActivity extends AppCompatActivity implements View.OnClic
             public void onItemClick(int position, View v) {
                 if (selectList.size() > 0) {
                     LocalMedia media = selectList.get(position);
+                    String path = media.getPath();
                     String pictureType = media.getPictureType();
                     int mediaType = PictureMimeType.pictureToVideo(pictureType);
                     switch (mediaType) {
@@ -151,9 +190,80 @@ public class FabuShipinActivity extends AppCompatActivity implements View.OnClic
             public void onComplete() {
             }
         });
+        String uid = (String) ShareprefrensUtils.get(this, "uid", "");
 
     }
 
+    private void initMap() {
+        mMapView = new MapView(this);
+        if (aMap == null) {
+            aMap = mMapView.getMap();
+
+        }
+        aMap.moveCamera(CameraUpdateFactory.zoomTo(12));
+        // 设置定位监听
+        aMap.setLocationSource(this);
+        // 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
+        aMap.setMyLocationEnabled(true);
+        // 设置定位的类型为定位模式，有定位、跟随或地图根据面向方向旋转几种
+        aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
+
+        aMap.setOnMyLocationChangeListener(new AMap.OnMyLocationChangeListener() {
+
+
+
+            @Override
+            public void onMyLocationChange(Location location) {
+                //从location对象中获取经纬度信息，地址描述信息，建议拿到位置之后调用逆地理编码接口获取
+                double latitude = location.getLatitude();
+                weidu = (int) latitude;
+                double longitude = location.getLongitude();
+                jingdu = (int) longitude;
+                System.out.println("经度======= " + jingdu +"纬度============"+ weidu);
+                initShujv();
+            }
+        });
+
+    }
+
+    private void initShujv() {
+        System.out.println("longitude ========================== " + weidu);
+        System.out.println("longitude ========================== " + jingdu);
+        fabu_tv_title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showToast("我被点击了++++++++++++++++++++++");
+                String path = selectList.get(0).getPath();
+                File file = new File(path);
+                String uid = (String) ShareprefrensUtils.get(FabuShipinActivity.this, "uid", "");
+                File file1 = new File("mnt/sdcard/1.jpg");
+                System.out.println("uid =++++++++++++++ " + uid);
+                System.out.println("uid =+++++++++++++= " + weidu);
+                System.out.println("uid =++++++++++++++++ " + jingdu);
+                System.out.println("uid =++++++++++++++++ " + file1);
+                System.out.println("uid =++++++++++++++++ " + file);
+                t.getPublishVideosData(uid,file,file1,"try",weidu+"",jingdu+"");
+
+                showToast("我走完了++++++++++++++++++++++++++");
+            }
+        });
+    }
+
+    @Override
+    public void initData() {
+
+
+    }
+
+    @Override
+    public List<BasePresenter> initPresenter() {
+        return null;
+    }
+
+    @Override
+    public PublishVideoPresenter binView() {
+        return new PublishVideoPresenter(this);
+    }
     private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
         @Override
         public void onAddPicClick() {
@@ -417,5 +527,115 @@ public class FabuShipinActivity extends AppCompatActivity implements View.OnClic
             return path;
         }
         return path;
+    }
+
+    @Override
+    public void success(PublishVideo publishVideo) {
+
+        showToast(publishVideo.msg+"++++++++++++++");
+        System.out.println("publishVideo ++++++++++++++++++ " + publishVideo.msg);
+    }
+
+    @Override
+    public void error(String msg) {
+        showToast(msg+"++++++++++++++");
+        System.out.println("msg+++++++++++++++++" + msg);
+    }
+
+    @Override
+    public void failure(String msg) {
+
+        showToast(msg+"++++++++++++++++++++++");
+        System.out.println("msg ++++++++++++++++++ " + msg);
+    }
+
+
+
+    //定位回调  在回调方法中调用“mListener.onLocationChanged(amapLocation);”可以在地图上显示系统小蓝点
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+        if (mListener != null && aMapLocation != null) {
+            if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
+                mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
+
+
+            } else {
+                String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
+                Log.e("定位AmapErr", errText);
+            }
+        }
+    }
+
+    /**
+     * 激活定位
+     */
+    @Override
+    public void activate(OnLocationChangedListener onLocationChangedListener) {
+        mListener = onLocationChangedListener;
+        if (mlocationClient == null) {
+            //初始化定位
+            mlocationClient = new AMapLocationClient(this);
+            //初始化定位参数
+            mLocationOption = new AMapLocationClientOption();
+            //设置定位回调监听
+            mlocationClient.setLocationListener(this);
+
+            //设置为高精度定位模式
+            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+            //设置定位参数
+            mlocationClient.setLocationOption(mLocationOption);
+            // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
+            // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
+            // 在定位结束后，在合适的生命周期调用onDestroy()方法
+            // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
+            mlocationClient.startLocation();//启动定位
+        }
+    }
+
+    /**
+     * 停止定位
+     */
+
+    @Override
+    public void deactivate() {
+        mListener = null;
+        if (mlocationClient != null) {
+            mlocationClient.stopLocation();
+            mlocationClient.onDestroy();
+        }
+        mlocationClient = null;
+
+    }
+
+    public static String getSHA1(Context context) {
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(
+                    context.getPackageName(), PackageManager.GET_SIGNATURES);
+
+            byte[] cert = info.signatures[0].toByteArray();
+
+            MessageDigest md = MessageDigest.getInstance("SHA1");
+            byte[] publicKey = md.digest(cert);
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < publicKey.length; i++) {
+                String appendString = Integer.toHexString(0XFF & publicKey[i])
+                        .toUpperCase(Locale.US);
+                if (appendString.length() == 1)
+                    hexString.append("0");
+                hexString.append(appendString);
+                hexString.append(":");
+            }
+            return hexString.toString();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

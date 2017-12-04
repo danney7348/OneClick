@@ -10,6 +10,7 @@ import com.example.zsd.entity.GetVersion;
 import com.example.zsd.entity.GetVideos;
 import com.example.zsd.entity.LoginBean;
 import com.example.zsd.entity.PublishJoke;
+import com.example.zsd.entity.PublishVideo;
 import com.example.zsd.entity.UpdateNickName;
 import com.example.zsd.entity.Upload;
 
@@ -65,6 +66,10 @@ public interface ApiService {
     @POST("quarter/publishJoke")
     @Multipart
     Observable<PublishJoke> getPublishJoke(@Part() List<MultipartBody.Part> jokeFiles);
+
+    @POST("quarter/publishVideo")
+    @Multipart
+    Observable<PublishVideo> getPublishVideo(@Part() List<MultipartBody.Part> videoFile);
 
     @POST("file/upload")
     @Multipart

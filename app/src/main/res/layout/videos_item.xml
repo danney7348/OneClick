@@ -146,14 +146,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="sssssssssssss"/>
-    <ImageView
-        android:id="@+id/imgurlsRecycler1"
-        android:src="@mipmap/ic_launcher"
-        android:scaleType="centerCrop"
+    <RelativeLayout
+        android:id="@+id/video_rl_player"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y300"
-        android:layout_below="@+id/duanzi_tv_content1">
-    </ImageView>
+        android:layout_height="@dimen/y400"
+        android:layout_below="@+id/duanzi_tv_content1"
+        />
 
 
 </RelativeLayout>

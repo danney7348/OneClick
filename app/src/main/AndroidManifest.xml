@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.zsd"> <!-- 友盟统计 -->
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk android:minSdkVersion="14"  android:targetSdkVersion="26"  />
 
     <!-- 允许程序打开网络套接字 -->
     <uses-permission android:name="android.permission.INTERNET" />

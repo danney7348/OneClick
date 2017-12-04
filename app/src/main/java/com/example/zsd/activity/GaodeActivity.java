@@ -1,6 +1,7 @@
 package com.example.zsd.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -19,6 +20,7 @@ import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.example.zsd.R;
+import com.example.zsd.utils.ShareprefrensUtils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -85,6 +87,12 @@ public class GaodeActivity extends AppCompatActivity implements LocationSource, 
                 double longitude = location.getLongitude();
 
                 int jingdu = (int) longitude;
+                Intent intent = new Intent(GaodeActivity.this,FabuShipinActivity.class);
+                intent.putExtra("latitude",weidu);
+                intent.putExtra("longitude",jingdu);
+                startActivity(intent);
+                ShareprefrensUtils.put(GaodeActivity.this,"latitude",""+weidu);
+                ShareprefrensUtils.put(GaodeActivity.this,"longitude",""+jingdu);
 
                 System.out.println("经度======= " + jingdu+"纬度============"+weidu);
 

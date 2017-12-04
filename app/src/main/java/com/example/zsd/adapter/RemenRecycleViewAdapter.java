@@ -2,18 +2,23 @@ package com.example.zsd.adapter;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.dou361.ijkplayer.widget.PlayStateParams;
+import com.dou361.ijkplayer.widget.PlayerView;
 import com.example.zsd.R;
 import com.example.zsd.activity.UserInfoActivity;
 import com.example.zsd.entity.GetVideos;
@@ -37,9 +42,9 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
     private ObjectAnimator fanimator2;
     private ObjectAnimator animator3;
     private ObjectAnimator fanimator3;
-    private Context context;
+    private Activity context;
     private List<GetVideos.DataBean> list;
-    public RemenRecycleViewAdapter(Context context, List<GetVideos.DataBean> list) {
+    public RemenRecycleViewAdapter(Activity context, List<GetVideos.DataBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -55,8 +60,16 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
         holder.name.setText(list.get(position).user.nickname);
         holder.content.setText(list.get(position).workDesc);
         holder.time.setText(list.get(position).createTime);
+        String s = list.get(position).videoUrl.replaceAll("https://www.zhaoapi.cn", "http://120.27.23.105");
+        View player = View.inflate(context, R.layout.simple_player_view_player, holder.player);
+        PlayerView playerView = new PlayerView(context,player)
+                .setTitle(list.get(position).workDesc)
+                .setScaleType(PlayStateParams.fitparent)
+                .hideMenu(true)
+                .forbidTouch(false)
+                .setPlaySource(s)
+                .startPlay();
         Glide.with(context).load(list.get(position).user.icon).into(holder.touxiang);
-        Glide.with(context).load(list.get(position).cover).into(holder.iv);
         holder.touxiang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,7 +145,6 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
         private final TextView content;
         private final TextView name;
         private final ImageView touxiang;
-        private final ImageView iv;
         private final ImageView iv_animation;
         private final ImageView iv_shutdown;
         private final LinearLayout iv_animation1;
@@ -141,9 +153,10 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
         private final TextView tv1;
         private final  TextView tv2;
         private final  TextView tv3;
+        private final RelativeLayout player;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            iv = itemView.findViewById(R.id.imgurlsRecycler1);
             time = itemView.findViewById(R.id.duanzi_item_tv_time1);
             content = itemView.findViewById(R.id.duanzi_tv_content1);
             name = itemView.findViewById(R.id.duanziz_item_tv_name1);
@@ -156,6 +169,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
             tv1 = itemView.findViewById(R.id.tv11);
             tv2 = itemView.findViewById(R.id.tv21);
             tv3 = itemView.findViewById(R.id.tv31);
+            player = itemView.findViewById(R.id.video_rl_player);
         }
     }
 }
