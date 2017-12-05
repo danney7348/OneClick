@@ -15,6 +15,7 @@ import com.example.zsd.R;
 import com.example.zsd.adapter.DuanziRecycleViewAdapter;
 import com.example.zsd.entity.GetJokes;
 import com.example.zsd.presenter.GetJokesPresenter;
+import com.example.zsd.utils.SpacesItemDecoration;
 import com.example.zsd.view.GetJokesView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -71,6 +72,8 @@ public class DuanziFragment extends Fragment implements GetJokesView {
         list.addAll(value.data);
         if(adapter == null){
             adapter = new DuanziRecycleViewAdapter(getActivity(),list);
+            SpacesItemDecoration decoration=new SpacesItemDecoration(16);
+            duanzi_fragment_rv.addItemDecoration(decoration);
             duanzi_fragment_rv.setAdapter(adapter);
         }else {
             /*if(type == 0){

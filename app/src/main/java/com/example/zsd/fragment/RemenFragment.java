@@ -37,12 +37,13 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
 
     private View view;
     private List<String> imgesUrl;
-    //private XBanner mBanner;
     private XRecyclerView lv;
     private GetAdPresenter getAdPresenter;
     private List<GetVideos.DataBean> list;
     private View view1;
     private XBanner banner;
+    private RemenRecycleViewAdapter adapter;
+    private int page = 1;
 
     @Nullable
     @Override
@@ -116,8 +117,29 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
         lv.setLayoutManager(linearLayoutManager);
         List<GetVideos.DataBean> data = videos.data;
         list.addAll(data);
-        RemenRecycleViewAdapter adapter = new RemenRecycleViewAdapter(getActivity(),list);
-        lv.setAdapter(adapter);
+        if(adapter == null){
+            adapter = new RemenRecycleViewAdapter(getActivity(),list);
+            lv.setAdapter(adapter);
+        }else{
+            adapter.notifyDataSetChanged();
+        }
+        lv.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
+                list.clear();
+                getAdPresenter.getVideos("170","1","1");
+                lv.refreshComplete();
+            }
+
+            @Override
+            public void onLoadMore() {
+                Toast.makeText(getActivity(), "下拉加载", Toast.LENGTH_SHORT).show();
+                page++;
+                getAdPresenter.getVideos("170","1",page+"");
+                lv.loadMoreComplete();
+            }
+        });
     }
 
     @Override
