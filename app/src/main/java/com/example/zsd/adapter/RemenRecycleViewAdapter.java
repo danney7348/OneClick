@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.request.RequestOptions;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
 import com.example.zsd.R;
@@ -69,7 +71,13 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
                 .forbidTouch(false)
                 .setPlaySource(s)
                 .startPlay();
-        Glide.with(context).load(list.get(position).user.icon).into(holder.touxiang);
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
+                .priority(Priority.HIGH)
+                .transform(new GlideCircleTransform());
+        Glide.with(context).load(list.get(position).user.icon).apply(options).into(holder.touxiang);
         holder.touxiang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

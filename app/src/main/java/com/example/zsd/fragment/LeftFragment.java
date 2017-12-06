@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.zsd.R;
 import com.example.zsd.activity.FindFriendsActivity;
 import com.example.zsd.activity.MessageTongzhiActivity;
@@ -231,7 +233,14 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
 
         textView2.setText(value.data.nickname);
         Toast.makeText(getActivity(), value.data.nickname, Toast.LENGTH_SHORT).show();
-        Glide.with(getActivity()).load(value.data.icon).into(left_icon);
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
+                .priority(Priority.HIGH)
+                .transform(new GlideCircleTransform());
+//调用glide显示图片：
+        Glide.with(getActivity()).load(value.data.icon).apply(options).into(left_icon);
     }
 
     @Override

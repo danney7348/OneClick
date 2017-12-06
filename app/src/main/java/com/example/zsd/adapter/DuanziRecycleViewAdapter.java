@@ -16,10 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.zsd.R;
 import com.example.zsd.activity.UserInfoActivity;
 import com.example.zsd.entity.GetJokes;
 import com.example.zsd.utils.GlideCircleTransform;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +89,13 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
                 holder.recycler.setAdapter(adapter);
             }
         }
-        Glide.with(context).load(data.get(position).user.icon).into(holder.touxiang);
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
+                .priority(Priority.HIGH)
+                .transform(new GlideCircleTransform());
+        Glide.with(context).load(data.get(position).user.icon).apply(options).into(holder.touxiang);
         holder.touxiang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
