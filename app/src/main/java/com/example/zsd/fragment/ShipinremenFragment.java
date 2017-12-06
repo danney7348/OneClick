@@ -55,17 +55,17 @@ public class ShipinremenFragment extends Fragment implements GetHotVideosView {
         lv = view.findViewById(R.id.shipin_remen_xlv);
         getHotVideosPresenter = new GetHotVideosPresenter(this);
         getHotVideosPresenter.getHotVideosData("1");
-
+        lv.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        SpacesItemDecoration decoration=new SpacesItemDecoration(16);
+        lv.addItemDecoration(decoration);
+        lv.setRefreshProgressStyle(15);
+        lv.setLoadingMoreProgressStyle(10);
     }
 
     @Override
     public void success(GetHotVideos getHotVideos) {
         Toast.makeText(getActivity(), "+++++++++++++success++++++++++++++++", Toast.LENGTH_SHORT).show();
-        List<GetHotVideos.DataBean> data = getHotVideos.data;
-        list.addAll(data);
-        lv.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-        SpacesItemDecoration decoration=new SpacesItemDecoration(16);
-        lv.addItemDecoration(decoration);
+        list.addAll(getHotVideos.data);
         if(adapter == null){
             adapter = new MyShipinRemenAdapter(getActivity(),list);
             lv.setAdapter(adapter);
@@ -77,17 +77,19 @@ public class ShipinremenFragment extends Fragment implements GetHotVideosView {
             public void onRefresh() {
                 Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
                 list.clear();
-                page = 1;
-                getHotVideosPresenter.getHotVideosData(page+"");
+                getHotVideosPresenter.getHotVideosData(1+"");
                 lv.refreshComplete();
+
+
             }
 
             @Override
             public void onLoadMore() {
-                Toast.makeText(getActivity(), "下拉加载", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "上拉加载", Toast.LENGTH_SHORT).show();
                 page++;
                 getHotVideosPresenter.getHotVideosData(page+"");
                 lv.loadMoreComplete();
+
             }
         });
 

@@ -52,7 +52,7 @@ public class AddImagesAdapter extends RecyclerView.Adapter<AddImagesAdapter.View
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         RequestOptions options = new RequestOptions();
-        options.placeholder(R.drawable.ic_launcher_foreground);
+        options.placeholder(R.drawable.add);
         Glide.with(context).load(result.get(position)).apply(options).into(holder.image);
         /*Glide.with(context)
                 .load(result.get(position))

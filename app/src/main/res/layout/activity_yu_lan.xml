@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A2defa">
+
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y400"
+        android:background="#000"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y60"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x10"
+            android:drawableLeft="@drawable/fh"
+            android:gravity="center"
+            android:padding="@dimen/x3"
+            android:text="返回"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="预览"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x10"
+            android:padding="@dimen/x3"
+            android:text="存到本地"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="15sp"/>
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/bt_xiayibu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="下一步"
+        android:textColor="#fff"
+        android:layout_alignParentBottom="true"
+        android:background="#29B6F6"/>
+
+
+</RelativeLayout>

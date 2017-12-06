@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A2defa"
+    tools:context=".activity.FabuShipin2Activity">
+
+
+    <ImageView
+        android:id="@+id/iv_shipin_gif"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y600"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y50"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x10"
+            android:drawableLeft="@drawable/fh"
+            android:gravity="center"
+            android:padding="@dimen/x3"
+            android:text="返回"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:text="拍照"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x10"
+            android:padding="@dimen/x3"
+            android:src="@drawable/xiangji" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_luzhi"
+        android:layout_width="@dimen/x160"
+        android:layout_height="@dimen/x160"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/y200"
+        android:src="@drawable/pzan" />
+
+</RelativeLayout>
+

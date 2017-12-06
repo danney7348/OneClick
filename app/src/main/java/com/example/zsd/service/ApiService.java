@@ -50,7 +50,7 @@ public interface ApiService {
 
     @Multipart
     @POST("file/upload")
-    Call<ResponseBody> upload(@Query("uid") int uid, @Part MultipartBody.Part img);
+    Call<ResponseBody> upload(@Query("uid") String uid, @Part MultipartBody.Part img);
 
     @POST("user/getUserInfo")
     @FormUrlEncoded

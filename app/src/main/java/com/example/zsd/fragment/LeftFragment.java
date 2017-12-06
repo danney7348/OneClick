@@ -127,9 +127,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
                 return false;
             }
         });
-        GetUserInfoPresenter getUserInfoPresenter = new GetUserInfoPresenter(this);
-        getUserInfoPresenter.getUserInfoData((String) ShareprefrensUtils.get(getActivity(),"uid",null), "");
-        updateNickNamePresenter = new UpdateNickNamePresenter(this);
+
         textView2.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -140,6 +138,8 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         updateNickNamePresenter.updateNickNameData((String) ShareprefrensUtils.get(getActivity(),"uid",""),inputServer.getText().toString());
+
+                        Toast.makeText(getActivity(), "修改昵称成功了~", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.show();
@@ -181,7 +181,10 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
         left_switch = view.findViewById(R.id.left_switch);
         moon = view.findViewById(R.id.imageView7);
         left_icon = view.findViewById(R.id.left_icon);
-
+        GetUserInfoPresenter getUserInfoPresenter = new GetUserInfoPresenter(this);
+        String uid = (String) ShareprefrensUtils.get(getActivity(), "uid", "");
+        getUserInfoPresenter.getUserInfoData(uid,"");
+        updateNickNamePresenter = new UpdateNickNamePresenter(this);
         left_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -400,7 +403,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
 
         MultipartBody.Part multipartBody=MultipartBody.Part.createFormData("file",img.getName(),requestBody);
         //Call<UpLoad> upload = interfaceApi.upload(195, multipartBody);\
-        Call<ResponseBody> upload = interfaceApi.upload(170, multipartBody);
+        Call<ResponseBody> upload = interfaceApi.upload((String) ShareprefrensUtils.get(getActivity(),"uid",""), multipartBody);
         upload.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, final retrofit2.Response<ResponseBody> response) {

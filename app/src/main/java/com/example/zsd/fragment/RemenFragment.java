@@ -112,11 +112,11 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
 
     @Override
     public void getVideosseccuss(GetVideos videos) {
+        List<GetVideos.DataBean> data = videos.data;
+        list.addAll(data);
         System.out.println(videos.msg+"++++++++++++++++++++++++++++++++++++++++++++++");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         lv.setLayoutManager(linearLayoutManager);
-        List<GetVideos.DataBean> data = videos.data;
-        list.addAll(data);
         if(adapter == null){
             adapter = new RemenRecycleViewAdapter(getActivity(),list);
             lv.setAdapter(adapter);
@@ -134,7 +134,7 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
 
             @Override
             public void onLoadMore() {
-                Toast.makeText(getActivity(), "下拉加载", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "上拉加载", Toast.LENGTH_SHORT).show();
                 page++;
                 getAdPresenter.getVideos("170","1",page+"");
                 lv.loadMoreComplete();

@@ -21,7 +21,7 @@ public class GlideLoader implements com.yancy.imageselector.ImageLoader {
     public void displayImage(Context context, String path, ImageView imageView) {
 
         RequestOptions options = new RequestOptions();
-        options.placeholder(R.drawable.ic_launcher_foreground);
+        options.placeholder(R.drawable.add);
         Glide.with(context).load(path).apply(options).into(imageView);
       /*  Glide.with(context)
                 .load(path)
