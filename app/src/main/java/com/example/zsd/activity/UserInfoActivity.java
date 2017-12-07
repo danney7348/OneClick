@@ -89,7 +89,7 @@ public class UserInfoActivity extends BaseActivity implements GetUserVideosView 
 
             @Override
             public void failure(String msg) {
-
+                showToast(msg);
             }
         });
         presenter = new GetUserInfoPresenter(new GetUserInfoView() {
@@ -133,6 +133,7 @@ public class UserInfoActivity extends BaseActivity implements GetUserVideosView 
             public void onClick(View view) {
                 guanzhu.setBackgroundColor(Color.parseColor("#29B6F6"));
                 guanzhu.setText("已关注");
+                guanzhu.setTextColor(Color.parseColor("#ffffff"));
                 String uid1 = (String) ShareprefrensUtils.get(UserInfoActivity.this, "uid", "");
                 followPresenter.getFollowData(uid1,uid);
             }

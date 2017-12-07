@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class GetVersionModel {
-    public void getVersionData(String uid,String page){
+    public void getVersionData(){
         new HttpUtils.Builder()
                 .addCallAdapterFactory()
                 .addConverterFactory()

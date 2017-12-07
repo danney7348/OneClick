@@ -22,6 +22,10 @@ public class GetFollowUsersPresenter extends BasePresenter<GetFollowUsersView> i
         getFollowUsersModel.setFollowUsersMessage(this);
     }
 
+    public void getFollowUsersData(String uid){
+        getFollowUsersModel.getFollowUsers(uid);
+    }
+
     @Override
     public void getFollowUsersSuccess(GetFollowUsers value) {
         mView.success(value);

@@ -22,6 +22,9 @@ public class GetVersionPresenter extends BasePresenter<GetVersionView> implement
         }
         getVersionModel.setGetVersionMessage(this);
     }
+    public void getVersionData(){
+        getVersionModel.getVersionData();
+    }
     @Override
     public void getVersionSuccess(GetVersion value) {
         mView.success(value);
