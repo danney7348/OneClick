@@ -47,7 +47,7 @@
         android:layout_height="@dimen/x10"/>
 
     <RelativeLayout
-
+        android:id="@+id/shezhi_rl_check_version"
         android:layout_marginTop="@dimen/x140"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -92,6 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/x2"/>
     <RelativeLayout
+        android:id="@+id/shezhi_rl_yijianfankui"
         android:layout_marginTop="@dimen/x260"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -125,6 +126,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/x20"/>
     <RelativeLayout
+        android:id="@+id/shezhi_rl_about_querter"
         android:layout_marginTop="@dimen/x360"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -150,6 +152,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/shezhi_rl_clear_huncun"
         android:layout_marginTop="@dimen/x460"
         android:orientation="horizontal"
         android:layout_width="match_parent"

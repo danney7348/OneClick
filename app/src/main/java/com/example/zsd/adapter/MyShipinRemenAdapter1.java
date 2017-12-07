@@ -1,8 +1,6 @@
 package com.example.zsd.adapter;
 
 import android.app.Activity;
-import android.content.Context;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,7 @@ import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
 import com.example.zsd.R;
 import com.example.zsd.entity.GetHotVideos;
+import com.example.zsd.entity.GetNearVideos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +26,14 @@ import java.util.Random;
  * 类的用途：
  */
 
-public class MyShipinRemenAdapter extends RecyclerView.Adapter<MyShipinRemenAdapter.ViewHolder>{
+public class MyShipinRemenAdapter1 extends RecyclerView.Adapter<MyShipinRemenAdapter1.ViewHolder>{
 
 
     private Activity context;
-    private List<GetHotVideos.DataBean> list;
+    private List<GetNearVideos.DataBean> list;
     private final List<Integer> heightList;
 
-    public MyShipinRemenAdapter(Activity context, List<GetHotVideos.DataBean> list) {
+    public MyShipinRemenAdapter1(Activity context, List<GetNearVideos.DataBean> list) {
         this.context = context;
         this.list = list;
         heightList = new ArrayList<>();

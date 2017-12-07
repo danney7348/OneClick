@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.request.RequestOptions;
+import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
 import com.example.zsd.R;
@@ -58,7 +59,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.name.setText(list.get(position).user.nickname);
         holder.content.setText(list.get(position).workDesc);
         holder.time.setText(list.get(position).createTime);
@@ -70,7 +71,13 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
                 .hideMenu(true)
                 .forbidTouch(false)
                 .setPlaySource(s)
-                .startPlay();
+                .startPlay()
+                .showThumbnail(new OnShowThumbnailListener() {
+            @Override
+            public void onShowThumbnail(ImageView ivThumbnail) {
+                Glide.with(context).load(list.get(position).cover).into(ivThumbnail);
+            }
+        });
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .placeholder(R.mipmap.ic_launcher)
@@ -82,6 +89,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, UserInfoActivity.class);
+                intent.putExtra("uid",list.get(position).uid+"");
                 context.startActivity(intent);
             }
         });

@@ -5,6 +5,7 @@ import com.example.zsd.entity.GetAd;
 import com.example.zsd.entity.GetFollowUsers;
 import com.example.zsd.entity.GetHotVideos;
 import com.example.zsd.entity.GetJokes;
+import com.example.zsd.entity.GetNearVideos;
 import com.example.zsd.entity.GetUserInfo;
 import com.example.zsd.entity.GetUserVideos;
 import com.example.zsd.entity.GetVersion;
@@ -101,4 +102,8 @@ public interface ApiService {
     @POST("quarter/getHotVideos")
     @FormUrlEncoded
     Observable<GetHotVideos> getHotVideos(@Field("page") String page);
+
+    @POST("quarter/getNearVideos")
+    @FormUrlEncoded
+    Observable<GetNearVideos> getNearVideos(@Field("page") String page,@Field("latitude") String latitude,@Field("longitude") String longitude);
 }

@@ -1,43 +1,40 @@
 package com.example.zsd.adapter;
 
-import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.request.RequestOptions;
+import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
+import com.dou361.ijkplayer.widget.PlayStateParams;
+import com.dou361.ijkplayer.widget.PlayerView;
 import com.example.zsd.R;
 import com.example.zsd.activity.UserInfoActivity;
-import com.example.zsd.entity.GetJokes;
+import com.example.zsd.entity.GetUserVideos;
 import com.example.zsd.utils.GlideCircleTransform;
-import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.zsd.R2.id.recycler;
 
 /**
  * 作者： 张少丹
- * 时间：  2017/11/26.
+ * 时间：  2017/12/7.
  * 邮箱：1455456581@qq.com
  * 类的用途：
  */
 
-public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycleViewAdapter.ViewHolder>{
-
+public class UserInfoRecycleAdapter extends RecyclerView.Adapter<UserInfoRecycleAdapter.ViewHolder>{
     private ObjectAnimator animator;
     private ObjectAnimator fanimator;
     private ObjectAnimator animator1;
@@ -46,64 +43,41 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
     private ObjectAnimator fanimator2;
     private ObjectAnimator animator3;
     private ObjectAnimator fanimator3;
-    private Context context;
-    private  List<GetJokes.DataBean> data;
-    public DuanziRecycleViewAdapter(Context context, List<GetJokes.DataBean> data) {
+    private Activity context;
+    private List<GetUserVideos.DataBean> list;
+    public UserInfoRecycleAdapter(Activity context, List<GetUserVideos.DataBean> list) {
         this.context = context;
-        this.data = data;
+        this.list = list;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.duanzi_item, null);
+        System.out.println(" ==============onCreateViewHolder================= " );
+        View view = View.inflate(context, R.layout.videos_item1, null);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.name.setText(data.get(position).user.nickname);
-        holder.content.setText(data.get(position).content);
-        holder.time.setText(data.get(position).createTime);
-        if(data.get(position).imgUrls != null){
-            String string = data.get(position).imgUrls.toString();
-            String[] split1 = string.split("\\|");
-            List<String> imgUrls = new ArrayList<>();
-            for (int i = 0; i < split1.length; i++) {
-                imgUrls.add(split1[i]);
-                System.out.println("i = " + split1[i]);
-            }
-            if(imgUrls.size()==4||imgUrls.size()==2){
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2);
-                MyImgUrlsAdapter adapter = new MyImgUrlsAdapter(context,imgUrls);
-                holder.recycler.setLayoutManager(gridLayoutManager);
-                holder.recycler.setAdapter(adapter);
-            }else if(imgUrls.size()==1){
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 1);
-                MyImgUrlsAdapter adapter = new MyImgUrlsAdapter(context,imgUrls);
-                holder.recycler.setLayoutManager(gridLayoutManager);
-                holder.recycler.setAdapter(adapter);
-            }else {
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
-                MyImgUrlsAdapter adapter = new MyImgUrlsAdapter(context, imgUrls);
-                holder.recycler.setLayoutManager(gridLayoutManager);
-                holder.recycler.setAdapter(adapter);
-            }
-        }
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
-                .priority(Priority.HIGH)
-                .transform(new GlideCircleTransform());
-        Glide.with(context).load(data.get(position).user.icon).apply(options).into(holder.touxiang);
-        holder.touxiang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, UserInfoActivity.class);
-                intent.putExtra("uid",data.get(position).uid+"");
-                context.startActivity(intent);
-            }
-        });
+        System.out.println(" ==============onBindViewHolder================= " );
+        holder.content.setText(list.get(position).workDesc);
+        holder.time.setText(list.get(position).createTime);
+        String s = list.get(position).videoUrl.replaceAll("https://www.zhaoapi.cn", "http://120.27.23.105");
+        View player = View.inflate(context, R.layout.simple_player_view_player, holder.player);
+        PlayerView playerView = new PlayerView(context,player)
+                .setTitle(list.get(position).workDesc)
+                .setScaleType(PlayStateParams.fitparent)
+                .hideMenu(true)
+                .forbidTouch(false)
+                .setPlaySource(s)
+                .startPlay()
+                .showThumbnail(new OnShowThumbnailListener() {
+                    @Override
+                    public void onShowThumbnail(ImageView ivThumbnail) {
+                        Glide.with(context).load(list.get(position).cover).into(ivThumbnail);
+                    }
+                });
         holder.iv_animation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,13 +132,11 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
                 Toast.makeText(context, "点击了", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -173,7 +145,6 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
         private final TextView content;
         private final TextView name;
         private final ImageView touxiang;
-        private final RecyclerView recycler;
         private final ImageView iv_animation;
         private final ImageView iv_shutdown;
         private final LinearLayout iv_animation1;
@@ -182,21 +153,23 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
         private final TextView tv1;
         private final  TextView tv2;
         private final  TextView tv3;
+        private final RelativeLayout player;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            recycler = itemView.findViewById(R.id.imgurlsRecycler);
-            time = itemView.findViewById(R.id.duanzi_item_tv_time);
-            content = itemView.findViewById(R.id.duanzi_tv_content);
-            name = itemView.findViewById(R.id.duanziz_item_tv_name);
-            touxiang = itemView.findViewById(R.id.iv_touxiang);
-            iv_animation = itemView.findViewById(R.id.iv_animation);
-            iv_animation1 = itemView.findViewById(R.id.iv_animation1);
-            iv_animation2 = itemView.findViewById(R.id.iv_animation2);
-            iv_animation3 = itemView.findViewById(R.id.iv_animation3);
-            iv_shutdown=itemView.findViewById(R.id.iv_shutdown);
-            tv1 = itemView.findViewById(R.id.tv1);
-            tv2 = itemView.findViewById(R.id.tv2);
-            tv3 = itemView.findViewById(R.id.tv3);
+            time = itemView.findViewById(R.id.duanzi_item_tv_time11);
+            content = itemView.findViewById(R.id.duanzi_tv_content11);
+            name = itemView.findViewById(R.id.duanziz_item_tv_name11);
+            touxiang = itemView.findViewById(R.id.iv_touxiang11);
+            iv_animation = itemView.findViewById(R.id.iv_animation11);
+            iv_animation1 = itemView.findViewById(R.id.iv_animation111);
+            iv_animation2 = itemView.findViewById(R.id.iv_animation211);
+            iv_animation3 = itemView.findViewById(R.id.iv_animation311);
+            iv_shutdown=itemView.findViewById(R.id.iv_shutdown11);
+            tv1 = itemView.findViewById(R.id.tv111);
+            tv2 = itemView.findViewById(R.id.tv211);
+            tv3 = itemView.findViewById(R.id.tv311);
+            player = itemView.findViewById(R.id.video_rl_player1);
         }
     }
 }

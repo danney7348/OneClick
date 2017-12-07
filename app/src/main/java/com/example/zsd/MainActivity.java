@@ -171,11 +171,4 @@ public class MainActivity extends BaseActivity {
     public BasePresenter binView() {
         return null;
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

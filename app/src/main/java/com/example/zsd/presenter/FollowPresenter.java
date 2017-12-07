@@ -22,6 +22,9 @@ public class FollowPresenter extends BasePresenter<FollowView> implements Follow
         followModel.setGetFollowMessage(this);
     }
 
+    public void getFollowData(String uid,String followId){
+        followModel.getFollow(uid,followId);
+    }
     @Override
     public void getFollowSuccess(Follow value) {
         mView.success(value);

@@ -18,6 +18,13 @@
     <color name="colorweixin">#4DBF4D</color>
     <color name="colorziti">#BBBBBB</color>
     <color name="white">#ffffff</color>
+    <color name="buttonBlue">#03A9F4</color>
+
+    李灿灿 2017/12/6 20:53:17
+    <color name="TextWhite">#fff</color>
+
+    李灿灿 2017/12/6 20:53:24
+    <color name="TextGrey">#9E9E9E</color>
     <!-- 白色 -->
     <color name="ivory">#fffff0</color>
     <!-- 象牙色 -->

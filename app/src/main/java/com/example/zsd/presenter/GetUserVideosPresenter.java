@@ -26,6 +26,9 @@ public class GetUserVideosPresenter extends BasePresenter<GetUserVideosView> imp
         getUserVideosModel.setGetUserVideosMessage(this);
     }
 
+    public void getUserVideosData(String uid,String page){
+        getUserVideosModel.getUsesrVideos(uid,page);
+    }
     @Override
     public void getUserVideosSuccess(GetUserVideos value) {
         mView.success(value);

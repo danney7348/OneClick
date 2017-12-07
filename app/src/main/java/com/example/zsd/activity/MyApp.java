@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.igexin.sdk.PushManager;
+import com.squareup.leakcanary.LeakCanary;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -20,6 +22,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        CrashReport.initCrashReport(getApplicationContext(), "04348d8b8c", false);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType. E_UM_NORMAL);
         MobclickAgent. startWithConfigure(new MobclickAgent.UMAnalyticsConfig(this, "5a0a80dea40fa3748200016d", "Channel ID"));
         PushManager.getInstance().initialize(this.getApplicationContext(),DemoPushService.class);
