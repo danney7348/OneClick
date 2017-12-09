@@ -45,7 +45,7 @@ public class MyShipinRemenAdapter1 extends RecyclerView.Adapter<MyShipinRemenAda
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.shipin_remen_item, null);
+        View view = View.inflate(context, R.layout.shipin_remen_item1, null);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -85,7 +85,7 @@ public class MyShipinRemenAdapter1 extends RecyclerView.Adapter<MyShipinRemenAda
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ivv = itemView.findViewById(R.id.shipin_ivv);
+            ivv = itemView.findViewById(R.id.shipin_ivv1);
         }
     }
 }

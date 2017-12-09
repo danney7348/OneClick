@@ -1,5 +1,7 @@
 package com.example.zsd.service;
 
+import com.example.zsd.entity.AddFavourite;
+import com.example.zsd.entity.CancelFavourite;
 import com.example.zsd.entity.Follow;
 import com.example.zsd.entity.GetAd;
 import com.example.zsd.entity.GetFollowUsers;
@@ -11,6 +13,7 @@ import com.example.zsd.entity.GetUserVideos;
 import com.example.zsd.entity.GetVersion;
 import com.example.zsd.entity.GetVideos;
 import com.example.zsd.entity.LoginBean;
+import com.example.zsd.entity.Praise;
 import com.example.zsd.entity.PublishJoke;
 import com.example.zsd.entity.PublishVideo;
 import com.example.zsd.entity.UpdateNickName;
@@ -106,4 +109,16 @@ public interface ApiService {
     @POST("quarter/getNearVideos")
     @FormUrlEncoded
     Observable<GetNearVideos> getNearVideos(@Field("page") String page,@Field("latitude") String latitude,@Field("longitude") String longitude);
+
+    @POST("quarter/praise")
+    @FormUrlEncoded
+    Observable<Praise> getPraise(@Field("uid") String uid,@Field("wid") String wid);
+
+    @POST("quarter/addFavorite")
+    @FormUrlEncoded
+    Observable<AddFavourite> getAddFavoourite(@Field("uid") String uid, @Field("wid") String wid);
+
+    @POST("quarter/cancelFavorite")
+    @FormUrlEncoded
+    Observable<CancelFavourite> getCancelFavoourite(@Field("uid") String uid, @Field("wid") String wid);
 }

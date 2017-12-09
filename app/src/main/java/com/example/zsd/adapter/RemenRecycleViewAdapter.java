@@ -24,8 +24,11 @@ import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
 import com.example.zsd.R;
 import com.example.zsd.activity.UserInfoActivity;
+import com.example.zsd.entity.GetUserVideos;
 import com.example.zsd.entity.GetVideos;
 import com.example.zsd.utils.GlideCircleTransform;
+
+import org.w3c.dom.NamedNodeMap;
 
 import java.util.List;
 
@@ -153,6 +156,20 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public void refreshData(List<GetVideos.DataBean> data) {
+        if(list != null){
+            list.clear();
+            list.addAll(data);
+            notifyDataSetChanged();
+        }
+    }
+    public void loadmoreData(List<GetVideos.DataBean> data) {
+        if(list != null){
+            list.addAll(data);
+            notifyDataSetChanged();
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -20,6 +20,7 @@ public class GetHotVideos {
     public String code;
     public List<DataBean> data;
 
+
     public static class DataBean {
         /**
          * commentNum : 0
@@ -52,8 +53,17 @@ public class GetHotVideos {
         public UserBean user;
         public String videoUrl;
         public int wid;
+        public int height;
         public String workDesc;
         public List<?> comments;
+
+        public int getHeight() {
+            return height;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
 
         public static class UserBean {
             /**

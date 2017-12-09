@@ -71,7 +71,20 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
         lv = this.view.findViewById(R.id.remen_xrv);
         lv.addHeaderView(view1);
         getAdPresenter = new GetAdPresenter(this);
+        lv.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
+                getAdPresenter.getVideos("170","1","1");
+            }
 
+            @Override
+            public void onLoadMore() {
+                Toast.makeText(getActivity(), "上拉加载", Toast.LENGTH_SHORT).show();
+                page++;
+                getAdPresenter.getVideos("170","1",page+"");
+            }
+        });
     }
 
     @Override
@@ -120,26 +133,15 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
         if(adapter == null){
             adapter = new RemenRecycleViewAdapter(getActivity(),list);
             lv.setAdapter(adapter);
-        }else{
-            adapter.notifyDataSetChanged();
         }
-        lv.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-                Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
-                list.clear();
-                getAdPresenter.getVideos("170","1","1");
-                lv.refreshComplete();
-            }
+        if(page == 1){
+            adapter.refreshData(data);
+            lv.refreshComplete();
+        }else {
+            adapter.loadmoreData(data);
+            lv.loadMoreComplete();
+        }
 
-            @Override
-            public void onLoadMore() {
-                Toast.makeText(getActivity(), "上拉加载", Toast.LENGTH_SHORT).show();
-                page++;
-                getAdPresenter.getVideos("170","1",page+"");
-                lv.loadMoreComplete();
-            }
-        });
     }
 
     @Override

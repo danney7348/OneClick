@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OneClick</string>
+    <string name="title_activity_shipin_xiangqing">ShipinXiangqingActivity</string>
 </resources>
