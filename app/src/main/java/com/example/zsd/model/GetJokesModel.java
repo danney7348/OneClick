@@ -22,7 +22,7 @@ public class GetJokesModel {
                 .addConverterFactory()
                 .build()
                 .getMyQusetUtils()
-                .getJokes(page)
+                .getGetJokes(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GetJokes>() {

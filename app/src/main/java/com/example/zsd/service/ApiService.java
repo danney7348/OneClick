@@ -64,6 +64,9 @@ public interface ApiService {
     @FormUrlEncoded
     Observable<GetJokes> getJokes(@Field("page") String page);
 
+    @GET("quarter/getJokes")
+    Observable<GetJokes> getGetJokes(@Query("page") String page);
+
     @POST("quarter/getVideos")
     @FormUrlEncoded
     Observable<GetVideos> getVideos(@Field("uid") String uid,@Field("type") String type,@Field("page") String page);

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -54,9 +55,19 @@ public class MyInterceptor implements Interceptor {
                 request =request.newBuilder().post(build.build()).build();
 
             }
+        }else  if (request.method().equals("GET")) {
+            //添加公共参数
+            HttpUrl httpUrl = request.url()
+                    .newBuilder()
+                    .addQueryParameter("source","android")
+                    .addQueryParameter("appVersion", "101")
+                    .addQueryParameter("token", token)
+                    .build();
+            request = request.newBuilder().url(httpUrl).build();
+
         }
 
-      /*   String content = proceed.body().string();
+         /*String content = proceed.body().string();
              long duration=endTime-startTime;
             Log.d(TAG, "| Response:" + content);
             Log.d(TAG,"----------End:"+duration+"毫秒----------");*/
