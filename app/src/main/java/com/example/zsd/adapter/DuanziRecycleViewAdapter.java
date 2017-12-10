@@ -53,6 +53,19 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
         this.data = data;
     }
 
+    public void refreshData(List<GetJokes.DataBean> list){
+        if(data != null){
+            data.clear();
+            data.addAll(list);
+            notifyDataSetChanged();
+        }
+    }
+    public void loadmoreData(List<GetJokes.DataBean> list){
+        if(data != null){
+            data.addAll(list);
+            notifyDataSetChanged();
+        }
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(context, R.layout.duanzi_item, null);

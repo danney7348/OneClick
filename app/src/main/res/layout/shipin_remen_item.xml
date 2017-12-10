@@ -5,7 +5,7 @@
 
     <ImageView
         android:id="@+id/shipin_renmen_iv"
-        android:layout_width="0sp"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
         android:layout_height="wrap_content" />
 </LinearLayout>

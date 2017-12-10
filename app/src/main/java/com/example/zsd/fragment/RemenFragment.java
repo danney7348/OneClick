@@ -18,6 +18,7 @@ import com.example.zsd.entity.GetVideos;
 import com.example.zsd.model.GetAdModel;
 import com.example.zsd.presenter.GetAdPresenter;
 import com.example.zsd.presenter.GetVideosPresenter;
+import com.example.zsd.utils.ShareprefrensUtils;
 import com.example.zsd.view.GetAdView;
 import com.example.zsd.view.GetVideosView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -39,11 +40,12 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
     private List<String> imgesUrl;
     private XRecyclerView lv;
     private GetAdPresenter getAdPresenter;
-    private List<GetVideos.DataBean> list;
     private View view1;
     private XBanner banner;
     private RemenRecycleViewAdapter adapter;
     private int page = 1;
+    private String uid;
+    private LinearLayoutManager linearLayoutManager;
 
     @Nullable
     @Override
@@ -61,28 +63,30 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
 
     private void initData() {
         getAdPresenter.getAdData();
-       getAdPresenter.getVideos("170","1","1");
+        getAdPresenter.getVideos(uid,"1","1");
     }
 
     private void initView() {
         view1 = View.inflate(getActivity(), R.layout.xbanner_item, null);
         banner = view1.findViewById(R.id.banner);
-        list = new ArrayList<>();
         lv = this.view.findViewById(R.id.remen_xrv);
         lv.addHeaderView(view1);
+        uid = (String) ShareprefrensUtils.get(getActivity(), "uid", "");
         getAdPresenter = new GetAdPresenter(this);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
         lv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
                 Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
-                getAdPresenter.getVideos("170","1","1");
+                page = 1;
+                getAdPresenter.getVideos(uid,"1",page+"");
             }
 
             @Override
             public void onLoadMore() {
                 Toast.makeText(getActivity(), "上拉加载", Toast.LENGTH_SHORT).show();
                 page++;
-                getAdPresenter.getVideos("170","1",page+"");
+                getAdPresenter.getVideos(uid,"1",page+"");
             }
         });
     }
@@ -125,20 +129,18 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
 
     @Override
     public void getVideosseccuss(GetVideos videos) {
-        List<GetVideos.DataBean> data = videos.data;
-        list.addAll(data);
         System.out.println(videos.msg+"++++++++++++++++++++++++++++++++++++++++++++++");
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         lv.setLayoutManager(linearLayoutManager);
         if(adapter == null){
-            adapter = new RemenRecycleViewAdapter(getActivity(),list);
+            adapter = new RemenRecycleViewAdapter(getActivity(),videos.data);
             lv.setAdapter(adapter);
+            return;
         }
         if(page == 1){
-            adapter.refreshData(data);
+            adapter.refreshData(videos.data);
             lv.refreshComplete();
         }else {
-            adapter.loadmoreData(data);
+            adapter.loadmoreData(videos.data);
             lv.loadMoreComplete();
         }
 

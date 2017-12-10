@@ -4,6 +4,8 @@
     <com.stx.xhb.xbanner.XBanner
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/banner"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         app:pointsPosition="CENTER"

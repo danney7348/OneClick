@@ -33,7 +33,6 @@ public class ShipinremenFragment extends Fragment implements GetHotVideosView {
 
     private View view;
     private XRecyclerView lv;
-    private List<GetHotVideos.DataBean> list;
     private MyShipinRemenAdapter adapter;
     private int page = 1;
     private GetHotVideosPresenter getHotVideosPresenter;
@@ -52,20 +51,20 @@ public class ShipinremenFragment extends Fragment implements GetHotVideosView {
     }
 
     private void initView() {
-        list = new ArrayList<>();
         lv = view.findViewById(R.id.shipin_remen_xlv);
         getHotVideosPresenter = new GetHotVideosPresenter(this);
         getHotVideosPresenter.getHotVideosData("1");
         lv.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-        SpacesItemDecoration decoration=new SpacesItemDecoration(16);
+        SpacesItemDecoration decoration=new SpacesItemDecoration(8);
         lv.addItemDecoration(decoration);
         lv.setRefreshProgressStyle(15);
         lv.setLoadingMoreProgressStyle(10);
         lv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+                page = 1;
                 Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
-                getHotVideosPresenter.getHotVideosData(1+"");
+                getHotVideosPresenter.getHotVideosData(page+"");
             }
 
             @Override
@@ -80,25 +79,23 @@ public class ShipinremenFragment extends Fragment implements GetHotVideosView {
     @Override
     public void success(GetHotVideos getHotVideos) {
         Toast.makeText(getActivity(), "+++++++++++++success++++++++++++++++", Toast.LENGTH_SHORT).show();
-        list.addAll(getHotVideos.data);
         for (int i = 0; i < getHotVideos.data.size(); i++) {
             int height = new Random().nextInt(400) + 250;
             getHotVideos.data.get(i).height = height;
         }
         if(adapter == null){
-            adapter = new MyShipinRemenAdapter(getActivity(),list);
+            adapter = new MyShipinRemenAdapter(getActivity(),getHotVideos.data);
             lv.setAdapter(adapter);
             return;
         }
         if(page == 1){
-            adapter.refreshData(list);
+            System.out.println("getHotVideos = " + getHotVideos);
+            adapter.refreshData(getHotVideos.data);
             lv.refreshComplete();
         }else {
-            adapter.loadmoreData(list);
+            adapter.loadmoreData(getHotVideos.data);
             lv.loadMoreComplete();
         }
-
-
 
     }
 

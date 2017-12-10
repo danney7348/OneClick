@@ -55,6 +55,7 @@ public class GetNearVideos {
         public int wid;
         public String workDesc;
         public List<?> comments;
+        public int height;
 
         public static class UserBean {
             /**

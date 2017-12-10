@@ -42,6 +42,7 @@ public class MyShipinRemenAdapter extends RecyclerView.Adapter<MyShipinRemenAdap
 
     public void refreshData(List<GetHotVideos.DataBean> data){
         if(list != null){
+            System.out.println("data ======================== " + data.size());
             list.clear();
             list.addAll(data);
             notifyDataSetChanged();
@@ -84,6 +85,8 @@ public class MyShipinRemenAdapter extends RecyclerView.Adapter<MyShipinRemenAdap
            public void onClick(View view) {
                Intent intent = new Intent(context, ShipinXiangqingActivity.class);
                intent.putExtra("videoUrl",s);
+               intent.putExtra("workDesc",list.get(position).workDesc);
+               intent.putExtra("icon",list.get(position).user.icon);
                context.startActivity(intent);
            }
        });

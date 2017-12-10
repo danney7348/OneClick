@@ -53,15 +53,31 @@ public class DuanziFragment extends Fragment implements GetJokesView {
     }
 
     private void initData() {
-
         getJokesPresenter = new GetJokesPresenter(this);
-        getJokesPresenter.getJokesData("1");
+        getJokesPresenter.getJokesData(page+"");
     }
 
     private void initView() {
         list = new ArrayList<>();
         duanzi_fragment_rv = view.findViewById(R.id.duanzi_fragment_rv);
         duanzi_fragment_rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        duanzi_fragment_rv.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(getContext(), "下拉刷新", Toast.LENGTH_SHORT).show();
+                page = 1;
+                getJokesPresenter.getJokesData(page+"");
+                duanzi_fragment_rv.refreshComplete();
+            }
+
+            @Override
+            public void onLoadMore() {
+                Toast.makeText(getContext(), "上拉加载", Toast.LENGTH_SHORT).show();
+                page++;
+                System.out.println("page ======================= " + page);
+                getJokesPresenter.getJokesData(page+"");
+            }
+        });
     }
 
 
@@ -75,33 +91,16 @@ public class DuanziFragment extends Fragment implements GetJokesView {
             SpacesItemDecoration decoration=new SpacesItemDecoration(16);
             duanzi_fragment_rv.addItemDecoration(decoration);
             duanzi_fragment_rv.setAdapter(adapter);
-        }else {
-            /*if(type == 0){
-                adapter.Refresh(list);
-            }else {
-                adapter.LoadMore(list);
-            }*/
-            adapter.notifyDataSetChanged();
+            return;
         }
-        duanzi_fragment_rv.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-                Toast.makeText(getContext(), "下拉刷新", Toast.LENGTH_SHORT).show();
-                list.clear();
-                page = 0;
-                getJokesPresenter.getJokesData(page+"");
-                duanzi_fragment_rv.refreshComplete();
-            }
+        if(page == 1){
+            adapter.refreshData(value.data);
+            duanzi_fragment_rv.refreshComplete();
+        }else {
+            adapter.loadmoreData(value.data);
+            duanzi_fragment_rv.loadMoreComplete();
+        }
 
-            @Override
-            public void onLoadMore() {
-                Toast.makeText(getContext(), "上拉加载", Toast.LENGTH_SHORT).show();
-                page++;
-                System.out.println("page ======================= " + page);
-                getJokesPresenter.getJokesData(page+"");
-                duanzi_fragment_rv.loadMoreComplete();
-            }
-        });
 
     }
 

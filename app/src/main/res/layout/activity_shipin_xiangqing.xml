@@ -1,13 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.zsd.activity.ShipinXiangqingActivity">
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.ShipinXiangqingActivity">
 
-    <com.dou361.ijkplayer.widget.IjkVideoView
-        android:id="@+id/shipin_ivv"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y480"></com.dou361.ijkplayer.widget.IjkVideoView>
-</LinearLayout>
+        android:layout_height="@dimen/y80"
+        android:background="#F0F0F0"
+        android:padding="@dimen/x10">
+        <ImageView
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:layout_marginLeft="@dimen/x20"
+            android:src="@drawable/raw_1500019926"
+            android:id="@+id/iv_fanhui"
+            />
+
+        <ImageView
+            android:id="@+id/iv_xihuan"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:src="@drawable/xihuan"
+            android:layout_toRightOf="@+id/iv_fanhui"
+            android:layout_marginLeft="@dimen/x20"/>
+
+        <ImageView
+            android:id="@+id/iv_buxihuan"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:src="@drawable/buxihuan"
+            android:layout_toRightOf="@+id/iv_xihuan"
+            android:layout_marginLeft="@dimen/x20"/>
+
+        <ImageView
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:src="@drawable/fenxiang1"
+            android:layout_toRightOf="@+id/iv_buxihuan"
+            android:layout_marginLeft="@dimen/x20"/>
+
+
+
+        <ImageView
+            android:id="@+id/xiangqing_iv_icon"
+            android:layout_alignParentRight="true"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            />
+
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/xiangqing_player"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y350"
+        android:layout_below="@+id/tv"
+        android:layout_marginTop="@dimen/y80"
+        />
+
+
+    <TextView
+        android:id="@+id/xiangqing_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/xiangqing_player"/>
+
+
+    <ImageView
+        android:id="@+id/iv2"
+        android:layout_width="@dimen/x180"
+        android:layout_height="@dimen/y180"
+        android:layout_below="@+id/xiangqing_tv_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:src="@drawable/deng" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="拿起手机速来抢个沙发吧!~"
+        android:layout_below="@+id/iv2"
+        android:layout_centerHorizontal="true"/>
+
+
+
+</RelativeLayout>
+

@@ -20,6 +20,7 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 作者： 张少丹
@@ -60,28 +61,16 @@ public class FujinFragment extends Fragment implements GetNearVideosView {
         list = new ArrayList();
         lv = view.findViewById(R.id.fragmet_near_xlv);
         lv.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-        SpacesItemDecoration decoration=new SpacesItemDecoration(16);
+        SpacesItemDecoration decoration=new SpacesItemDecoration(3);
         lv.addItemDecoration(decoration);
         lv.setRefreshProgressStyle(15);
         lv.setLoadingMoreProgressStyle(10);
-    }
-
-    @Override
-    public void success(GetNearVideos getNearVideos) {
-        list.addAll(getNearVideos.data);
-        if(adapter == null){
-            adapter = new MyShipinRemenAdapter1(getActivity(),list);
-            lv.setAdapter(adapter);
-        }else{
-            adapter.notifyDataSetChanged();
-        }
         lv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
                 Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
-                list.clear();
+                page = 1;
                 getNearVideosPresenter.getNearVideosData(page+"",40+"",116+"");
-                lv.refreshComplete();
             }
 
             @Override
@@ -89,9 +78,28 @@ public class FujinFragment extends Fragment implements GetNearVideosView {
                 Toast.makeText(getActivity(), "上拉加载", Toast.LENGTH_SHORT).show();
                 page++;
                 getNearVideosPresenter.getNearVideosData(page+"",40+"",116+"");
-                lv.loadMoreComplete();
             }
         });
+    }
+
+    @Override
+    public void success(GetNearVideos getNearVideos) {
+        for (int i = 0; i < getNearVideos.data.size(); i++) {
+            int height = new Random().nextInt(400) + 250;
+            getNearVideos.data.get(i).height = height;
+        }
+        if(adapter == null){
+            adapter = new MyShipinRemenAdapter1(getActivity(),list);
+            lv.setAdapter(adapter);
+        }
+        if(page == 1){
+            adapter.refreshData(getNearVideos.data);
+            lv.refreshComplete();
+        }else {
+            adapter.loadmoreData(getNearVideos.data);
+            lv.loadMoreComplete();
+        }
+       
 
 
     }

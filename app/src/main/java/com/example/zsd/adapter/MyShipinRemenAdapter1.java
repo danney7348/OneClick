@@ -1,6 +1,7 @@
 package com.example.zsd.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.dou361.ijkplayer.widget.IjkVideoView;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
 import com.example.zsd.R;
+import com.example.zsd.activity.ShipinXiangqingActivity;
 import com.example.zsd.entity.GetHotVideos;
 import com.example.zsd.entity.GetNearVideos;
 
@@ -31,18 +33,25 @@ public class MyShipinRemenAdapter1 extends RecyclerView.Adapter<MyShipinRemenAda
 
     private Activity context;
     private List<GetNearVideos.DataBean> list;
-    private final List<Integer> heightList;
 
     public MyShipinRemenAdapter1(Activity context, List<GetNearVideos.DataBean> list) {
         this.context = context;
         this.list = list;
-        heightList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            int height = new Random().nextInt(400) + 100;//[100,300)的随机数
-            heightList.add(height);
-        }
     }
 
+    public void refreshData(List<GetNearVideos.DataBean> data){
+        if(list != null){
+            list.clear();
+            list.addAll(data);
+            notifyDataSetChanged();
+        }
+    }
+    public void loadmoreData(List<GetNearVideos.DataBean> data){
+        if(list != null){
+            list.addAll(data);
+            notifyDataSetChanged();
+        }
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(context, R.layout.shipin_remen_item1, null);
@@ -52,8 +61,8 @@ public class MyShipinRemenAdapter1 extends RecyclerView.Adapter<MyShipinRemenAda
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        String s = list.get(position).videoUrl.replaceAll("https://www.zhaoapi.cn", "http://120.27.23.105");
-        View player = View.inflate(context, R.layout.simple_player_view_player, holder.ivv);
+        final String s = list.get(position).videoUrl.replaceAll("https://www.zhaoapi.cn", "http://120.27.23.105");
+        /*View player = View.inflate(context, R.layout.simple_player_view_player, holder.ivv);
         PlayerView playerView = new PlayerView(context,player)
                 .setTitle(list.get(position).workDesc)
                 .setScaleType(PlayStateParams.fitparent)
@@ -66,12 +75,22 @@ public class MyShipinRemenAdapter1 extends RecyclerView.Adapter<MyShipinRemenAda
             public void onShowThumbnail(ImageView ivThumbnail) {
                 Glide.with(context).load(list.get(position).cover).into(ivThumbnail);
             }
-        });
-        ViewGroup.LayoutParams params = holder.ivv.getLayoutParams();
-        params.height=heightList.get(position);
-        holder.ivv.setLayoutParams(params);
+        });*/
 
-       // Glide.with(context).load(list.get(position).cover).into(holder.cover);
+        ViewGroup.LayoutParams params = holder.img.getLayoutParams();
+        params.height=list.get(position).height;
+        holder.img.setLayoutParams(params);
+       Glide.with(context).load(list.get(position).cover).into(holder.img);
+       holder.img.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Intent intent = new Intent(context, ShipinXiangqingActivity.class);
+               intent.putExtra("videoUrl",s);
+               intent.putExtra("workDesc",list.get(position).workDesc);
+               intent.putExtra("icon",list.get(position).user.icon);
+               context.startActivity(intent);
+           }
+       });
     }
 
     @Override
@@ -81,11 +100,11 @@ public class MyShipinRemenAdapter1 extends RecyclerView.Adapter<MyShipinRemenAda
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private final IjkVideoView ivv;
+        private final ImageView img;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ivv = itemView.findViewById(R.id.shipin_ivv1);
+            img = itemView.findViewById(R.id.shipin_img1);
         }
     }
 }
