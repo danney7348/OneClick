@@ -12,10 +12,12 @@ import com.example.zsd.entity.GetUserInfo;
 import com.example.zsd.entity.GetUserVideos;
 import com.example.zsd.entity.GetVersion;
 import com.example.zsd.entity.GetVideos;
+import com.example.zsd.entity.JokePraise;
 import com.example.zsd.entity.LoginBean;
 import com.example.zsd.entity.Praise;
 import com.example.zsd.entity.PublishJoke;
 import com.example.zsd.entity.PublishVideo;
+import com.example.zsd.entity.RemoveWork;
 import com.example.zsd.entity.UpdateNickName;
 import com.example.zsd.entity.Upload;
 
@@ -116,6 +118,14 @@ public interface ApiService {
     @POST("quarter/praise")
     @FormUrlEncoded
     Observable<Praise> getPraise(@Field("uid") String uid,@Field("wid") String wid);
+
+    @POST("quarter/removeWork")
+    @FormUrlEncoded
+    Observable<RemoveWork> getRemoveWork(@Field("uid") String uid, @Field("wid") String wid);
+
+    @POST("quarter/jokePraise")
+    @FormUrlEncoded
+    Observable<JokePraise> getJokePraise(@Field("uid") String uid, @Field("jid") String jid);
 
     @POST("quarter/addFavorite")
     @FormUrlEncoded
