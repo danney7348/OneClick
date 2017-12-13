@@ -2,6 +2,8 @@ package com.example.zsd.service;
 
 import com.example.zsd.entity.AddFavourite;
 import com.example.zsd.entity.CancelFavourite;
+import com.example.zsd.entity.Comment;
+import com.example.zsd.entity.CommentJoke;
 import com.example.zsd.entity.Follow;
 import com.example.zsd.entity.GetAd;
 import com.example.zsd.entity.GetFollowUsers;
@@ -24,6 +26,7 @@ import com.example.zsd.entity.Upload;
 import java.util.List;
 import java.util.jar.Manifest;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -134,4 +137,12 @@ public interface ApiService {
     @POST("quarter/cancelFavorite")
     @FormUrlEncoded
     Observable<CancelFavourite> getCancelFavoourite(@Field("uid") String uid, @Field("wid") String wid);
+
+    @POST("quarter/comment")
+    @FormUrlEncoded
+    Flowable<Comment> getComment(@Field("uid") String uid, @Field("wid") String wid, @Field("content") String content);
+
+    @POST("quarter/commentJoke")
+    @FormUrlEncoded
+    Flowable<CommentJoke> getCommentJoke(@Field("uid") String uid, @Field("wid") String wid, @Field("content") String content);
 }

@@ -40,7 +40,7 @@ import java.util.List;
  */
 
 public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleViewAdapter.ViewHolder>{
-    private ObjectAnimator animator;
+
     private ObjectAnimator fanimator;
     private ObjectAnimator animator1;
     private ObjectAnimator fanimator1;
@@ -50,13 +50,17 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
     private ObjectAnimator fanimator3;
     private Activity context;
     private List<GetVideos.DataBean> list;
+    private View view;
+
+    private OnLongItemClickListener onLongItemClickListener;
+
     public RemenRecycleViewAdapter(Activity context, List<GetVideos.DataBean> list) {
         this.context = context;
         this.list = list;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.videos_item, null);
+        view = View.inflate(context, R.layout.videos_item, null);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -67,7 +71,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
         holder.content.setText(list.get(position).workDesc);
         holder.time.setText(list.get(position).createTime);
         String s = list.get(position).videoUrl.replaceAll("https://www.zhaoapi.cn", "http://120.27.23.105");
-        View player = View.inflate(context, R.layout.simple_player_view_player, holder.player);
+        final View player = View.inflate(context, R.layout.simple_player_view_player, holder.player);
         PlayerView playerView = new PlayerView(context,player)
                 .setTitle(list.get(position).workDesc)
                 .setScaleType(PlayStateParams.fitparent)
@@ -143,14 +147,14 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
             }
         });
 
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "点击了", Toast.LENGTH_SHORT).show();
+            public boolean onLongClick(View view) {
+                System.out.println("======================="+position);
+                onLongItemClickListener.setOnLongItemClickListener(position);
+                return true;
             }
         });
-
     }
 
     @Override
@@ -204,5 +208,14 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
             tv3 = itemView.findViewById(R.id.tv31);
             player = itemView.findViewById(R.id.video_rl_player);
         }
+    }
+
+
+    public void setOnLongItemClickListener(OnLongItemClickListener onLongItemClickListener) {
+        this.onLongItemClickListener = onLongItemClickListener;
+    }
+
+    public interface OnLongItemClickListener{
+        void setOnLongItemClickListener(int position);
     }
 }

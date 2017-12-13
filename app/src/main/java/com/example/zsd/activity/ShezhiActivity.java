@@ -48,6 +48,7 @@ public class ShezhiActivity extends BaseActivity {
     public void Click(View view) {
         switch (view.getId()) {
             case R.id.shezhi_rl_check_version:
+                startActivity(VersionCodeActivity.class);
                 break;
             case R.id.shezhi_rl_yijianfankui:
                 break;

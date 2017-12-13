@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/x20"
+    tools:context="com.example.zsd.activity.CheckVersionActivity">
+    <TextView
+        android:id="@+id/textview_id"
+        android:text="hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/button_id"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/y80"
+        android:layout_below="@id/textview_id"
+        android:textColor="#FFF"
+        android:text="检查更新"
+        android:background="@drawable/but_logo"
+        />
+    <ProgressBar
+        android:id="@+id/progressBar_id"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y80"
+        android:layout_below="@id/button_id"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"/>
+</RelativeLayout>

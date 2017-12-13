@@ -1,6 +1,7 @@
 package com.example.zsd.base;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,7 +28,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     private boolean isFullScreen = false;//是否支持全屏
     public abstract int bindLayout();//绑定布局，绑定子类的根布局
     public abstract void setListener();//设置监听事件
-    public abstract void Click(View view);//点击事件的回调方法
+    public abstract void Click(View view) throws PackageManager.NameNotFoundException;//点击事件的回调方法
     public abstract void initView();//初始化views
     public abstract void initData();//初始化数据
     public abstract List<BasePresenter> initPresenter();//初始化数据
@@ -106,8 +107,11 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     public void onClick(View view) {
 
-        Click(view);
-
+        try {
+            Click(view);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

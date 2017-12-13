@@ -14,6 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.zsd.activity.ChuangzuoActivity;
 import com.example.zsd.activity.GaodeActivity;
 import com.example.zsd.base.BaseActivity;
@@ -22,6 +25,8 @@ import com.example.zsd.fragment.DuanziFragment;
 import com.example.zsd.fragment.LeftFragment;
 import com.example.zsd.fragment.ShipinFragment;
 import com.example.zsd.fragment.TuijianFragment;
+import com.example.zsd.utils.GlideCircleTransform;
+import com.example.zsd.utils.ShareprefrensUtils;
 
 import java.util.List;
 
@@ -82,6 +87,15 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.img_icon:
                 mainDl.openDrawer(Gravity.LEFT);
+                String icon = (String) ShareprefrensUtils.get(this, "icon", null);
+                RequestOptions options = new RequestOptions()
+                        .centerCrop()
+                        .placeholder(R.mipmap.ic_launcher)
+                        .error(R.mipmap.ic_launcher)
+                        .priority(Priority.HIGH)
+                        .transform(new GlideCircleTransform());
+                //调用glide显示图片：
+                Glide.with(this).load(icon).apply(options).into(imgIcon);
                 break;
             case R.id.img_biji:
                 startActivity(ChuangzuoActivity.class);
@@ -170,5 +184,10 @@ public class MainActivity extends BaseActivity {
     @Override
     public BasePresenter binView() {
         return null;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

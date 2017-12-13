@@ -233,6 +233,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
 
         textView2.setText(value.data.nickname);
         Toast.makeText(getActivity(), value.data.nickname, Toast.LENGTH_SHORT).show();
+        ShareprefrensUtils.put(getActivity(),"icon",value.data.icon+"");
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .placeholder(R.mipmap.ic_launcher)

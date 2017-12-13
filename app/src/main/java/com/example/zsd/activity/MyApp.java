@@ -9,6 +9,8 @@ import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.analytics.MobclickAgent;
 
+import org.xutils.x;
+
 /**
  * 作者： 张少丹
  * 时间：  2017/11/14.
@@ -22,6 +24,12 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        x.Ext.setDebug(true);
+        x.Ext.init(this);
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
         CrashReport.initCrashReport(getApplicationContext(), "04348d8b8c", false);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType. E_UM_NORMAL);
         MobclickAgent. startWithConfigure(new MobclickAgent.UMAnalyticsConfig(this, "5a0a80dea40fa3748200016d", "Channel ID"));

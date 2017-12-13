@@ -1,5 +1,7 @@
 package com.example.zsd.utils;
 
+import android.util.Log;
+
 import com.example.zsd.activity.MyApp;
 import com.example.zsd.base.BaseApi;
 import com.example.zsd.service.ApiService;
@@ -9,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -37,7 +40,16 @@ public class HttpUtils {
         //缓存路径
         String cacheFile = MyApp.context.getCacheDir()+"/http";
         Cache cache = new Cache(new File(cacheFile), SIZE_OF_CACHE);
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                Log.i("xxx", message);
+            }
+        }).setLevel(HttpLoggingInterceptor.Level.BODY);
+        //加日志级别
+
         OkHttpClient okHttpClient=new OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
                 .addInterceptor(new MyInterceptor())
                 .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS)

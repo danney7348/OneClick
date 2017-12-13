@@ -168,7 +168,7 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "点击了", Toast.LENGTH_SHORT).show();
+                onLongItemClickListener.setOnLongItemClickListener(view,position);
             }
         });
 
@@ -211,5 +211,14 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
             tv2 = itemView.findViewById(R.id.tv2);
             tv3 = itemView.findViewById(R.id.tv3);
         }
+    }
+    private OnLongItemClickListener onLongItemClickListener;
+
+    public void setOnLongItemClickListener(OnLongItemClickListener onLongItemClickListener) {
+        this.onLongItemClickListener = onLongItemClickListener;
+    }
+
+    public interface OnLongItemClickListener{
+        void setOnLongItemClickListener(View view,int position);
     }
 }

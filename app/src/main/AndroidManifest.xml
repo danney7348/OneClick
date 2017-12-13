@@ -108,7 +108,9 @@
         <activity
             android:name=".activity.ShipinXiangqingActivity"
             android:label="@string/title_activity_shipin_xiangqing"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.CheckVersionActivity" />
+        <activity android:name=".activity.VersionCodeActivity"></activity>
     </application>
 
 </manifest>
