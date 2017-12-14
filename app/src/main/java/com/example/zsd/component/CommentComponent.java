@@ -1,6 +1,7 @@
 package com.example.zsd.component;
 
 import com.example.zsd.MainActivity;
+import com.example.zsd.adapter.RemenRecycleViewAdapter;
 import com.example.zsd.entity.Comment;
 import com.example.zsd.fragment.DuanziFragment;
 import com.example.zsd.fragment.RemenFragment;
@@ -19,4 +20,5 @@ import dagger.Component;
 @Component(modules = CommentMudule.class)
 public interface CommentComponent {
     void inject(RemenFragment remenFragment);
+    //void inject1(RemenRecycleViewAdapter adapter);
 }

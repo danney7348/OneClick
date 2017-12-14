@@ -96,7 +96,6 @@ public class UserInfoActivity extends BaseActivity implements GetUserVideosView 
             @Override
             public void getUserInfoSuccess(GetUserInfo value) {
                 showToast(value.data.uid+"");
-                ShareprefrensUtils.put(UserInfoActivity.this,"token",value.data.token+"");
                 nickname.setText(value.data.nickname);
                 Glide.with(UserInfoActivity.this).load(value.data.icon).into(touxiang);
                 getUserVideosPresenter.getUserVideosData(uid,page+"");

@@ -3,10 +3,13 @@ package com.example.zsd.adapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -31,6 +34,7 @@ import com.example.zsd.presenter.CancelFavouritePresenter;
 import com.example.zsd.presenter.CommentPresenter;
 import com.example.zsd.presenter.PraisePresenter;
 import com.example.zsd.utils.GlideCircleTransform;
+import com.example.zsd.utils.ShareprefrensUtils;
 import com.example.zsd.view.AddFavouriteView;
 import com.example.zsd.view.CancelFavouriteView;
 import com.example.zsd.view.CommentView;
@@ -65,9 +69,8 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
     private AddFavouritePresenter addFavouritePresenter;
     private CancelFavouritePresenter cancelFavouritePresenter;
     private PraisePresenter praisePresenter;
-    private int uid;
-    private int wid;
     private CommentPresenter commentPresenter;
+    private String uid;
 
     public RemenRecycleViewAdapter(Activity context, List<GetVideos.DataBean> list) {
         this.context = context;
@@ -82,6 +85,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
         cancelFavouritePresenter = new CancelFavouritePresenter(this);
         praisePresenter = new PraisePresenter(this);
         commentPresenter = new CommentPresenter(this);
+        uid = (String) ShareprefrensUtils.get(context, "uid", "");
         return holder;
     }
 
@@ -179,7 +183,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
         holder.xihuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                praisePresenter.getPraiseData(list.get(position).uid+"",list.get(position).wid+"");
+                praisePresenter.getPraiseData(uid,list.get(position).wid+"");
                 holder.xihuan.setImageResource(R.drawable.raw_1499933215);
             }
         });
@@ -188,7 +192,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
             public void onClick(View view) {
                 holder.shoucang1.setVisibility(View.VISIBLE);
                 holder.shoucang.setVisibility(View.GONE);
-                addFavouritePresenter.getAddFavouriteData(list.get(position).uid+"",list.get(position).wid+"");
+                addFavouritePresenter.getAddFavouriteData(uid,list.get(position).wid+"");
             }
         });
         holder.shoucang1.setOnClickListener(new View.OnClickListener() {
@@ -196,7 +200,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
             public void onClick(View view) {
                 holder.shoucang1.setVisibility(View.GONE);
                 holder.shoucang.setVisibility(View.VISIBLE);
-                cancelFavouritePresenter.getAddFavouriteData(list.get(position).uid+"",list.get(position).wid+"");
+                cancelFavouritePresenter.getAddFavouriteData(uid,list.get(position).wid+"");
             }
         });
         holder.fenxiang.setOnClickListener(new View.OnClickListener() {
@@ -208,7 +212,25 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
         holder.xiaoxi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Toast.makeText(context, "position:"+position, Toast.LENGTH_SHORT).show();
+                final EditText et = new EditText(context);
+                new AlertDialog.Builder(context).setTitle("评论")
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .setView(et)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                String input = et.getText().toString();
+                                if (input.equals("")) {
+                                    Toast.makeText(context, "评论内容不能为空！" + input, Toast.LENGTH_LONG).show();
+                                }
+                                else {
+                                    commentPresenter.getCommentData(uid,list.get(position).wid+"",et.getText().toString());
+                                    notifyDataSetChanged();
+                                }
+                            }
+                        })
+                        .setNegativeButton("取消", null)
+                        .show();
             }
         });
     }

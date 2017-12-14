@@ -179,7 +179,7 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
                                         Toast.makeText(getActivity(), "评论内容不能为空！" + input, Toast.LENGTH_LONG).show();
                                     }
                                     else {
-                                        commentPresenter.getCommentData("170",videos.data.get(position).wid+"",et.getText().toString());
+                                       // commentPresenter.getCommentData("170",videos.data.get(position).wid+"",et.getText().toString());
                                         adapter.notifyDataSetChanged();
                                     }
                                 }

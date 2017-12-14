@@ -24,6 +24,9 @@ public class CommentPresenter extends BasePresenter<CommentView> {
         super(mView);
     }
     public void getCommentData(String uid, String wid,String content){
+        if (commentModel == null){
+            commentModel = new CommentModel();
+        }
         commentModel.getCommentData(uid, wid, content, new CommentCallBack() {
             @Override
             public void getCommentSuccess(Comment comment) {
