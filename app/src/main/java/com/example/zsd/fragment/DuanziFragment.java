@@ -188,9 +188,9 @@ public class DuanziFragment extends Fragment implements GetJokesView, CommentJok
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
+   /* @Override
     public void onDestroy() {
         super.onDestroy();
         commentJokePresenter.onDestry();
-    }
+    }*/
 }

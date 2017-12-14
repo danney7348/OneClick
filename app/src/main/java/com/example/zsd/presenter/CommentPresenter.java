@@ -36,7 +36,7 @@ public class CommentPresenter extends BasePresenter<CommentView> {
             }
         });
     }
-    public void ondestry(){
+    /*public void ondestry(){
         commentModel.onDestroy();
-    }
+    }*/
 }

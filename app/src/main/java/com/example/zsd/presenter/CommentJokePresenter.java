@@ -36,7 +36,7 @@ public class CommentJokePresenter extends BasePresenter<CommentJokeView>{
             }
         });
     }
-    public void onDestry(){
+   /* public void onDestry(){
         commentJokeModel.onDestry();
-    }
+    }*/
 }

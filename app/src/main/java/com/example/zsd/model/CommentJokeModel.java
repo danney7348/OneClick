@@ -56,8 +56,8 @@ public class CommentJokeModel implements ICommentJokeModel {
                 });
     }
     public void onDestry(){
-        if(!disposableSubscriber.isDisposed()){
+      /*  if(!disposableSubscriber.isDisposed()){
             disposableSubscriber.dispose();
-        }
+        }*/
     }
 }

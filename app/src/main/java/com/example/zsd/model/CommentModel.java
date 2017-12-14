@@ -59,9 +59,9 @@ public class CommentModel implements ICommentModel {
 
     }
 
-    public void onDestroy(){
-        if(!disposableSubscriber.isDisposed()){
+    /*public void onDestroy(){
+        if(disposableSubscriber.isDisposed()){
             disposableSubscriber.dispose();
         }
-    }
+    }*/
 }

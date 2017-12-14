@@ -200,7 +200,6 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
             adapter.loadmoreData(videos.data);
             lv.loadMoreComplete();
         }
-
     }
 
     @Override
@@ -220,11 +219,11 @@ public class RemenFragment extends Fragment implements XBanner.XBannerAdapter,Ge
     }*/
 
 
-    @Override
+   /* @Override
     public void onDestroy() {
         super.onDestroy();
         commentPresenter.ondestry();
-    }
+    }*/
 
     @Override
     public void getCommentSuccess(Comment comment) {
