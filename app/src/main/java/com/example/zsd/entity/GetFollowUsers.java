@@ -10,10 +10,11 @@ import java.util.List;
  */
 
 public class GetFollowUsers {
+
     /**
      * msg : 获取关注用户列表成功
      * code : 0
-     * data : [{"age":null,"appkey":null,"appsecret":null,"createtime":"2017-11-15T17:01:10","email":null,"fans":null,"follow":null,"gender":0,"icon":"https://www.zhaoapi.cn/images/72.jpg","latitude":null,"longitude":null,"mobile":"13832312132","money":0,"nickname":"QQ","password":"111111","praiseNum":null,"token":"AB6478E2D4AB73A92F31243EA4CD9F50","uid":72,"userId":null,"username":"13832312132"},{"age":null,"appkey":null,"appsecret":null,"createtime":"2017-12-01T10:14:23","email":null,"fans":null,"follow":null,"gender":0,"icon":"https://www.zhaoapi.cn/images/73.jpg","latitude":null,"longitude":null,"mobile":"15910489658","money":0,"nickname":"蒋顺聪","password":"111111","praiseNum":null,"token":"2062A865CF010E126AFC0F1442BC7D49","uid":73,"userId":null,"username":"15910489658"},{"age":null,"appkey":null,"appsecret":null,"createtime":"2017-09-29T09:50:10","email":null,"fans":null,"follow":null,"gender":0,"icon":null,"latitude":null,"longitude":null,"mobile":"123456789","money":0,"nickname":null,"password":"123456","praiseNum":null,"token":null,"uid":74,"userId":null,"username":"123456789"}]
+     * data : [{"age":null,"appkey":null,"appsecret":null,"createtime":"2017-12-14T16:06:13","email":null,"fans":null,"follow":null,"gender":0,"icon":"https://www.zhaoapi.cn/images/1512470827115mo.jpg","latitude":null,"longitude":null,"mobile":"18410261121","money":0,"nickname":"nnnnnn","password":"111111","praiseNum":null,"token":"C5F1896E305FA85630AA9BB54A621BC3","uid":195,"userId":null,"username":"18410261121"},{"age":null,"appkey":null,"appsecret":null,"createtime":"2017-12-14T16:06:26","email":null,"fans":null,"follow":null,"gender":0,"icon":"https://www.zhaoapi.cn/images/154.jpg","latitude":null,"longitude":null,"mobile":"13773359134","money":0,"nickname":"笑出腹肌的男人","password":"654321","praiseNum":null,"token":"B77920CD2D38574F335E2C137F821D61","uid":154,"userId":null,"username":"13773359134"}]
      */
 
     public String msg;
@@ -25,23 +26,23 @@ public class GetFollowUsers {
          * age : null
          * appkey : null
          * appsecret : null
-         * createtime : 2017-11-15T17:01:10
+         * createtime : 2017-12-14T16:06:13
          * email : null
          * fans : null
          * follow : null
          * gender : 0
-         * icon : https://www.zhaoapi.cn/images/72.jpg
+         * icon : https://www.zhaoapi.cn/images/1512470827115mo.jpg
          * latitude : null
          * longitude : null
-         * mobile : 13832312132
+         * mobile : 18410261121
          * money : 0
-         * nickname : QQ
+         * nickname : nnnnnn
          * password : 111111
          * praiseNum : null
-         * token : AB6478E2D4AB73A92F31243EA4CD9F50
-         * uid : 72
+         * token : C5F1896E305FA85630AA9BB54A621BC3
+         * uid : 195
          * userId : null
-         * username : 13832312132
+         * username : 18410261121
          */
 
         public Object age;

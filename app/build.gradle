@@ -37,12 +37,19 @@ android {
         }
     }
     signingConfigs {
-        debug {}
+        debug {
+            keyAlias 'onetime'
+            keyPassword 'onetime1507c'
+            storeFile file('E:/onetime.jks')
+            storePassword 'onetime1507c'
+        }
         release {
             storeFile file("one.jks")
             storePassword "111111"
             keyAlias "one"
             keyPassword "111111"
+        }
+        config {
         }
     }
     productFlavors {
@@ -92,38 +99,28 @@ dependencies {
     compile 'com.amap.api:location:latest.integration'
     //搜索功能
     compile 'com.amap.api:search:latest.integration'
-
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
-
     compile 'com.dou361.ijkplayer:jjdxm-ijkplayer:1.0.6'
-//对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'
+    //对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'
     compile 'com.dou361.ijkplayer-armv7a:jjdxm-ijkplayer-armv7a:1.0.0'
-//对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.6.0'
+    //对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.6.0'
     compile 'com.dou361.ijkplayer-armv5:jjdxm-ijkplayer-armv5:1.0.0'
-//对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.6.0'
+    //对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.6.0'
     compile 'com.dou361.ijkplayer-arm64:jjdxm-ijkplayer-arm64:1.0.0'
-//对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.0'
+    //对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.0'
     compile 'com.dou361.ijkplayer-x86:jjdxm-ijkplayer-x86:1.0.0'
-//对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.6.0'
+    //对应 ijkplayer 的  compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.6.0'
     compile 'com.dou361.ijkplayer-x86_64:jjdxm-ijkplayer-x86_64:1.0.0'
-
-
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-
     compile 'com.tencent.bugly:crashreport:latest.release'
-
     compile 'com.tencent.bugly:crashreport:latest.release'
     //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
-
     compile 'org.xutils:xutils:3.5.0'
-
-
     compile 'com.google.dagger:dagger:2.9'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.9'
-
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
 }
