@@ -33,9 +33,9 @@ import com.example.zsd.activity.MessageTongzhiActivity;
 import com.example.zsd.activity.MyGuanzhuActivity;
 import com.example.zsd.activity.MyShoucangActivity;
 import com.example.zsd.activity.ShezhiActivity;
+import com.example.zsd.activity.WodeZuopinActivity;
 import com.example.zsd.base.BaseApi;
 import com.example.zsd.entity.GetUserInfo;
-import com.example.zsd.entity.UpdateNickName;
 import com.example.zsd.entity.Upload;
 import com.example.zsd.presenter.GetUserInfoPresenter;
 import com.example.zsd.presenter.UpdateNickNamePresenter;
@@ -50,11 +50,8 @@ import com.example.zsd.view.UploadView;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,10 +60,10 @@ import butterknife.Unbinder;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import static android.app.Activity.RESULT_OK;
@@ -97,6 +94,8 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
     TextView textView2;
     @BindView(R.id.left_ll_shezhi)
     LinearLayout leftLlShezhi;
+    @BindView(R.id.ll_wodezuopin)
+    LinearLayout llWodezuopin;
     private View view;
     private Switch left_switch;
     private ImageView moon;
@@ -139,7 +138,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
                         .setNegativeButton("取消", null);
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        updateNickNamePresenter.updateNickNameData((String) ShareprefrensUtils.get(getActivity(),"uid",""),inputServer.getText().toString());
+                        updateNickNamePresenter.updateNickNameData((String) ShareprefrensUtils.get(getActivity(), "uid", ""), inputServer.getText().toString());
 
                         Toast.makeText(getActivity(), "修改昵称成功了~", Toast.LENGTH_SHORT).show();
                     }
@@ -179,13 +178,14 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
             }
         });
     }
+
     private void initView() {
         left_switch = view.findViewById(R.id.left_switch);
         moon = view.findViewById(R.id.imageView7);
         left_icon = view.findViewById(R.id.left_icon);
         GetUserInfoPresenter getUserInfoPresenter = new GetUserInfoPresenter(this);
         String uid = (String) ShareprefrensUtils.get(getActivity(), "uid", "");
-        getUserInfoPresenter.getUserInfoData(uid,"");
+        getUserInfoPresenter.getUserInfoData(uid, "");
         updateNickNamePresenter = new UpdateNickNamePresenter(this);
         left_icon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,7 +201,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
         unbinder.unbind();
     }
 
-    @OnClick({R.id.relativeLayout5, R.id.relativeLayout6, R.id.relativeLayout7, R.id.relativeLayout8,R.id.left_ll_shezhi})
+    @OnClick({R.id.relativeLayout5, R.id.relativeLayout6, R.id.relativeLayout7, R.id.relativeLayout8, R.id.left_ll_shezhi,R.id.ll_wodezuopin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.relativeLayout5:
@@ -224,6 +224,10 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
                 Intent intent4 = new Intent(getContext(), ShezhiActivity.class);
                 getActivity().startActivity(intent4);
                 break;
+            case R.id.ll_wodezuopin:
+                Intent intent5 = new Intent(getContext(), WodeZuopinActivity.class);
+                getActivity().startActivity(intent5);
+                break;
         }
     }
 
@@ -233,7 +237,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
 
         textView2.setText(value.data.nickname);
         Toast.makeText(getActivity(), value.data.nickname, Toast.LENGTH_SHORT).show();
-        ShareprefrensUtils.put(getActivity(),"icon",value.data.icon+"");
+        ShareprefrensUtils.put(getActivity(), "icon", value.data.icon + "");
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .placeholder(R.mipmap.ic_launcher)
@@ -337,6 +341,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
             }
         }
     }
+
     /**
      * 裁剪图片方法实现
      *
@@ -370,7 +375,7 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
         Bundle extras = data.getExtras();
         if (extras != null) {
             Bitmap photo = extras.getParcelable("data");
-            Utils utils=new Utils();
+            Utils utils = new Utils();
             photo = utils.toRoundBitmap(photo); // 这个时候的图片已经被处理成圆形的了
             left_icon.setImageBitmap(photo);
             setFile(photo);
@@ -380,14 +385,13 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
 
 
     /**
-     *
      * @param photo
      */
     private void setFile(Bitmap photo) {
-        File file=new File("mnt/sdcard/1.jpg");
+        File file = new File("mnt/sdcard/1.jpg");
         try {
-            BufferedOutputStream bout=new BufferedOutputStream(new FileOutputStream(file));
-            photo.compress(Bitmap.CompressFormat.JPEG,100,bout);
+            BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(file));
+            photo.compress(Bitmap.CompressFormat.JPEG, 100, bout);
             bout.flush();
             bout.close();
         } catch (Exception e) {
@@ -397,39 +401,41 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
 
     /**
      * 上传头像
+     *
      * @param
      */
-    private void  uploadPic() {
+    private void uploadPic() {
 
-        File img=new File("mnt/sdcard/1.jpg");///data/data/z.jpg
+        File img = new File("mnt/sdcard/1.jpg");///data/data/z.jpg
         System.out.println(img.getName() + img.toString() + "===========================");
 
-        Retrofit retrofit= new Retrofit.Builder().baseUrl(BaseApi.BASE_API)
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(BaseApi.BASE_API)
                 //.addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService interfaceApi = retrofit.create(ApiService.class);
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), img);
 
-        MultipartBody.Part multipartBody=MultipartBody.Part.createFormData("file",img.getName(),requestBody);
+        MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("file", img.getName(), requestBody);
         //Call<UpLoad> upload = interfaceApi.upload(195, multipartBody);\
-        Call<ResponseBody> upload = interfaceApi.upload((String) ShareprefrensUtils.get(getActivity(),"uid",""), multipartBody);
+        Call<ResponseBody> upload = interfaceApi.upload((String) ShareprefrensUtils.get(getActivity(), "uid", ""), multipartBody);
         upload.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, final retrofit2.Response<ResponseBody> response) {
+            public void onResponse(Call<ResponseBody> call, final Response<ResponseBody> response) {
 
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         try {
                             String string = response.body().string();
-                            Toast.makeText(getContext(),string, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), string, Toast.LENGTH_SHORT).show();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
                 });
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 

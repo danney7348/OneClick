@@ -1,9 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.zsd.activity.FindFriendsActivity">
+    <RelativeLayout
+        android:id="@+id/sousuo_r1"
+        android:background="#33ccff"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/shezhi_back"
+            android:src="@drawable/raw_1500023215"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y40" />
+
+        <TextView
+            android:layout_toRightOf="@+id/shezhi_back"
+            android:textColor="#ffffff"
+            android:text="返回"
+            android:textSize="@dimen/y34"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y120" />
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/y35"
+            android:text="搜索好友"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/find_rl"
+        android:layout_below="@+id/sousuo_r1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y80">
+        <ImageView
+            android:id="@+id/find_iv_sousuo"
+            android:src="@drawable/sousuo"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y60" />
+        <EditText
+            android:layout_toRightOf="@+id/find_iv_sousuo"
+            android:id="@+id/find_et_keywords"
+            android:hint="输入ID或昵称"
+            android:paddingLeft="@dimen/x100"
+            android:layout_toLeftOf="@+id/sousuo_tv_quxiao"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y80" />
+        <TextView
+            android:id="@+id/sousuo_tv_quxiao"
+            android:text="取消"
+            android:textSize="@dimen/y30"
+            android:layout_marginRight="@dimen/x10"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:layout_below="@+id/find_rl"
+        android:id="@+id/find_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+</RelativeLayout>

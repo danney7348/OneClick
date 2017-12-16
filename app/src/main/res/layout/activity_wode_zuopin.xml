@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.zsd.activity.WodeZuopinActivity">
+    <RelativeLayout
+        android:id="@+id/rl_rl_wodezhipin"
+        android:background="#03A9F4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+        <ImageView
+            android:id="@+id/guanzhu_iv_back"
+            android:layout_marginTop="@dimen/y25"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/x10"
+            android:src="@mipmap/imageselector_back"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y40" />
+        <TextView
+            android:id="@+id/wodezuopin_fanhui"
+            android:layout_toRightOf="@+id/guanzhu_iv_back"
+            android:text="返回"
+            android:layout_marginTop="@dimen/x25"
+            android:textColor="#fff"
+            android:textSize="@dimen/x40"
+            android:layout_marginRight="@dimen/x50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#fff"
+            android:text="我的作品"
+            android:textSize="@dimen/y40"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/wodezuopin_tablayout"
+        android:layout_below="@+id/rl_rl_wodezhipin"
+        android:layout_width="match_parent"
+        app:tabIndicatorHeight="@dimen/x15"
+        app:tabIndicatorColor="#39AEFB"
+        app:tabSelectedTextColor="#39AEFB"
+        android:layout_height="wrap_content">
+    </android.support.design.widget.TabLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/wodezuopin_vp"
+        android:layout_below="@+id/wodezuopin_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+</RelativeLayout>

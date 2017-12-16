@@ -16,22 +16,21 @@ import android.widget.Toast;
 
 import com.example.zsd.R;
 import com.example.zsd.adapter.DuanziRecycleViewAdapter;
-import com.example.zsd.component.CommentComponent;
-import com.example.zsd.component.DaggerCommentComponent;
+
 import com.example.zsd.component.DaggerCommentJokeComponent;
 import com.example.zsd.entity.CommentJoke;
 import com.example.zsd.entity.GetJokes;
 import com.example.zsd.module.CommentJokeMudule;
 import com.example.zsd.presenter.CommentJokePresenter;
-import com.example.zsd.presenter.CommentPresenter;
+
 import com.example.zsd.presenter.GetJokesPresenter;
 import com.example.zsd.utils.ShareprefrensUtils;
 import com.example.zsd.utils.SpacesItemDecoration;
 import com.example.zsd.view.CommentJokeView;
 import com.example.zsd.view.GetJokesView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.inject.Inject;

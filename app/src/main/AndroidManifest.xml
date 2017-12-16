@@ -110,7 +110,8 @@
             android:label="@string/title_activity_shipin_xiangqing"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.CheckVersionActivity" />
-        <activity android:name=".activity.VersionCodeActivity"></activity>
+        <activity android:name=".activity.VersionCodeActivity" />
+        <activity android:name=".activity.WodeZuopinActivity"></activity>
     </application>
 
 </manifest>

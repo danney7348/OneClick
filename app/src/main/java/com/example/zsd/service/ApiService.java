@@ -14,12 +14,14 @@ import com.example.zsd.entity.GetUserInfo;
 import com.example.zsd.entity.GetUserVideos;
 import com.example.zsd.entity.GetVersion;
 import com.example.zsd.entity.GetVideos;
+import com.example.zsd.entity.GetWorkInfo;
 import com.example.zsd.entity.JokePraise;
 import com.example.zsd.entity.LoginBean;
 import com.example.zsd.entity.Praise;
 import com.example.zsd.entity.PublishJoke;
 import com.example.zsd.entity.PublishVideo;
 import com.example.zsd.entity.RemoveWork;
+import com.example.zsd.entity.SearchFriends;
 import com.example.zsd.entity.UpdateNickName;
 import com.example.zsd.entity.Upload;
 
@@ -145,4 +147,12 @@ public interface ApiService {
     @POST("quarter/commentJoke")
     @FormUrlEncoded
     Flowable<CommentJoke> getCommentJoke(@Field("uid") String uid, @Field("wid") String wid, @Field("content") String content);
+
+    @POST("quarter/getWorkInfo")
+    @FormUrlEncoded
+    Flowable<GetWorkInfo> getWorkInfo(@Field("uid") String uid);
+
+    @POST("quarter/searchFriends")
+    @FormUrlEncoded
+    Flowable<SearchFriends> getSearchFriends(@Field("keywords") String keywords,@Field("page") String page);
 }

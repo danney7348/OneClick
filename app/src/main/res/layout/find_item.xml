@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="@dimen/x10"
+    android:layout_height="@dimen/y120">
+    <ImageView
+        android:layout_marginLeft="@dimen/x10"
+        android:id="@+id/find_iv_icon"
+        android:src="@drawable/raw_1499917357"
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y100" />
+    <LinearLayout
+        android:id="@+id/ll_ll"
+        android:layout_marginLeft="@dimen/x10"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/find_iv_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y100">
+        <TextView
+            android:padding="@dimen/x5"
+            android:id="@+id/find_tv_nickname"
+            android:textColor="#333333"
+            android:text="你好吗"
+            android:textSize="@dimen/y30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:padding="@dimen/x5"
+            android:id="@+id/find_tv_des"
+            android:textColor="#666666"
+            android:text="你好吗"
+            android:textSize="@dimen/y30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/find_tv_guanzhu"
+        android:text="+关注"
+        android:textColor="#03A9F4"
+        android:textSize="@dimen/y30"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+</RelativeLayout>
