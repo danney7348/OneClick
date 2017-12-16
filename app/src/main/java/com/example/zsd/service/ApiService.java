@@ -20,7 +20,10 @@ import com.example.zsd.entity.LoginBean;
 import com.example.zsd.entity.Praise;
 import com.example.zsd.entity.PublishJoke;
 import com.example.zsd.entity.PublishVideo;
+import com.example.zsd.entity.RandomFriends;
+import com.example.zsd.entity.RemoveFavourite;
 import com.example.zsd.entity.RemoveWork;
+import com.example.zsd.entity.ResetPass;
 import com.example.zsd.entity.SearchFriends;
 import com.example.zsd.entity.UpdateNickName;
 import com.example.zsd.entity.Upload;
@@ -155,4 +158,15 @@ public interface ApiService {
     @POST("quarter/searchFriends")
     @FormUrlEncoded
     Flowable<SearchFriends> getSearchFriends(@Field("keywords") String keywords,@Field("page") String page);
+
+    @POST("quarter/removeFavorite")
+    @FormUrlEncoded
+    Flowable<RemoveFavourite> getRemoveFavorite(@Field("uid") String uid, @Field("fid") String fid);
+
+    @GET("quarter/randomFriends")
+    Flowable<RandomFriends> getRandomFriends();
+
+    @POST("quarter/resetPass")
+    @FormUrlEncoded
+    Flowable<ResetPass> getResetPass(@Field("uid") String uid,@Field("oldPassword") String oldPassword,@Field("newPassword") String newPassword);
 }

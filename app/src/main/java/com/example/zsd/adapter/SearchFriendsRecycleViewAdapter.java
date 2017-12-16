@@ -6,11 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.zsd.R;
 import com.example.zsd.activity.FindFriendsActivity;
+import com.example.zsd.entity.Follow;
 import com.example.zsd.entity.SearchFriends;
+import com.example.zsd.presenter.FollowPresenter;
+import com.example.zsd.utils.ShareprefrensUtils;
+import com.example.zsd.view.FollowView;
 
 import java.util.List;
 
@@ -23,9 +28,11 @@ import static com.example.zsd.R.id.find_tv_guanzhu;
  * 类的用途：
  */
 
-public class SearchFriendsRecycleViewAdapter extends RecyclerView.Adapter<SearchFriendsRecycleViewAdapter.ViewHolder>{
+public class SearchFriendsRecycleViewAdapter extends RecyclerView.Adapter<SearchFriendsRecycleViewAdapter.ViewHolder> implements FollowView {
     private Context context;
     private List<SearchFriends.DataBean> data;
+    private FollowPresenter presenter;
+    private String uid;
 
     public SearchFriendsRecycleViewAdapter(Context context, List<SearchFriends.DataBean> data) {
         this.context = context;
@@ -49,20 +56,45 @@ public class SearchFriendsRecycleViewAdapter extends RecyclerView.Adapter<Search
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(context, R.layout.find_item, null);
         ViewHolder holder = new ViewHolder(view);
+        presenter = new FollowPresenter(this);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
+        uid = (String) ShareprefrensUtils.get(context, "uid", "");
         Glide.with(context).load(data.get(position).icon).into(holder.icon);
         holder.des.setText(data.get(position).mobile);
         holder.nickname.setText(data.get(position).nickname);
+        holder.guanzhu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.guanzhu.setText("已关注");
+                presenter.getFollowData(uid,data.get(position).uid+"");
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    @Override
+    public void success(Follow follow) {
+
+        Toast.makeText(context, follow.msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void error(String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void failure(String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

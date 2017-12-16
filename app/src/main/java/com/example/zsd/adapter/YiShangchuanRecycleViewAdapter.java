@@ -29,6 +29,12 @@ public class YiShangchuanRecycleViewAdapter extends RecyclerView.Adapter<YiShang
         this.worksEntities = worksEntities;
     }
 
+    public void removeData(int position) {
+        worksEntities.remove(position);
+        //删除动画
+        notifyItemRemoved(position);
+        notifyDataSetChanged();
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(context, R.layout.yishangchuan_item, null);
@@ -37,9 +43,17 @@ public class YiShangchuanRecycleViewAdapter extends RecyclerView.Adapter<YiShang
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
         Glide.with(context).load(worksEntities.get(position).cover).into(holder.img);
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                onLongClickListener.setOnLongClickListener(view,position);
+                return false;
+
+            }
+        });
     }
 
     @Override
@@ -55,5 +69,14 @@ public class YiShangchuanRecycleViewAdapter extends RecyclerView.Adapter<YiShang
             super(itemView);
             img = itemView.findViewById(R.id.yishangchuan_iv_img);
         }
+    }
+    private OnLongClickListener onLongClickListener;
+
+    public void setOnLongClickListener(OnLongClickListener onLongClickListener) {
+        this.onLongClickListener = onLongClickListener;
+    }
+
+    public interface OnLongClickListener{
+        void setOnLongClickListener(View view,int position);
     }
 }

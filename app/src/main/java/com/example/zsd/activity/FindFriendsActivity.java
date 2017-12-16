@@ -81,6 +81,7 @@ public class FindFriendsActivity extends BaseActivity implements SearchFriendsVi
             @Override
             public void onClick(View view) {
                 keywordsContent = keywords.getText().toString();
+
                 searchFriendsPresenter.getSearchFriendsData(keywordsContent,page+"");
             }
         });
