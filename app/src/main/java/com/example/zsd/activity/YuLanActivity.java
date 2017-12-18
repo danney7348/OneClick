@@ -37,6 +37,7 @@ public class YuLanActivity extends BaseActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("videourl",videourl);
                 startActivity(SelectCoverActivity.class,bundle);
+                finish();
                 break;
         }
     }

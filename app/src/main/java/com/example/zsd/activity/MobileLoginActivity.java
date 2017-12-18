@@ -14,6 +14,7 @@ import com.example.zsd.entity.LoginBean;
 import com.example.zsd.presenter.UserLoginPresenter;
 import com.example.zsd.utils.ShareprefrensUtils;
 import com.example.zsd.view.UserLoginView;
+import com.squareup.haha.perflib.Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +33,11 @@ public class MobileLoginActivity extends BaseActivity<UserLoginPresenter> implem
     EditText loginEtMima;
     private UserLoginPresenter userLoginPresenter;
 
+    private boolean isFirst = false;
+
     @Override
     public int bindLayout() {
+
         return R.layout.activity_mobilelogin;
     }
 
@@ -42,14 +46,21 @@ public class MobileLoginActivity extends BaseActivity<UserLoginPresenter> implem
 
     }
 
-    @OnClick({R.id.tv_zhucezhanghao, R.id.login_btn_login})
+    @OnClick({R.id.tv_zhucezhanghao, R.id.login_btn_login,R.id.login_tv_youkelogin})
     @Override
     public void Click(View view) {
         switch (view.getId()) {
             case R.id.tv_zhucezhanghao:
                 startActivity(MobileZhuceActivity.class);
+                finish();
+                break;
+            case R.id.login_tv_youkelogin:
+                startActivity(MainActivity.class);
+                finish();
                 break;
             case R.id.login_btn_login:
+
+
                 String pass = loginEtZhanghao.getText().toString();
                 String user = loginEtMima.getText().toString();
                 if(TextUtils.isEmpty(user)||TextUtils.isEmpty(pass)){
@@ -64,6 +75,12 @@ public class MobileLoginActivity extends BaseActivity<UserLoginPresenter> implem
     @Override
     public void initView() {
         ButterKnife.bind(this);
+        Boolean first = (Boolean) ShareprefrensUtils.get(this, "isFirst", this.isFirst);
+        System.out.println("first ============== " + first);
+        if(first){
+            startActivity(MainActivity.class);
+            finish();
+        }
         userLoginPresenter = new UserLoginPresenter(this);
     }
 
@@ -83,26 +100,14 @@ public class MobileLoginActivity extends BaseActivity<UserLoginPresenter> implem
     public UserLoginPresenter binView() {
         return new UserLoginPresenter(this);
     }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
     @Override
     public void success(LoginBean loginBean) {
+        isFirst = true;
+        ShareprefrensUtils.put(this,"isFirst",isFirst);
 
         showToast(loginBean.msg);
-        showToast(loginBean.msg);
-        System.out.println("loginBean = " + loginBean.data.token);
-        System.out.println("loginBean = " + loginBean.data.uid);
         ShareprefrensUtils.put(this,"token",loginBean.data.token);
         ShareprefrensUtils.put(this,"uid",loginBean.data.uid+"");
-        System.out.println("ShareprefrensUtils.get(this,\"token\",null) = " + (String) ShareprefrensUtils.get(this,"token",""));
-        System.out.println("ShareprefrensUtils.get(this,\"token\",null) = " + (String) ShareprefrensUtils.get(this,"uid",""));
         startActivity(MainActivity.class);
 
     }

@@ -125,7 +125,8 @@ public class UserInfoRecycleAdapter extends RecyclerView.Adapter<UserInfoRecycle
             }
         });
 
-
+        holder.name.setText(list.get(position).workDesc);
+        Glide.with(context).load(list.get(position).cover).into(holder.touxiang);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -42,9 +42,11 @@ public class ChuangzuoActivity extends BaseActivity {
                 break;
             case R.id.chuangzuo_iv_duanzi:
                 startActivity(BianxieDuanziActivity.class);
+                finish();
                 break;
             case R.id.rl_shipin:
                 startActivity(FabuShipin2Activity.class);
+                finish();
                 break;
         }
     }

@@ -122,6 +122,7 @@ public class FabuShipin2Activity extends BaseActivity implements LocationSource,
                     in.putExtra("latitude", latitude+"");
                     in.putExtra("longitude", longitude+"");
                     startActivity(in);
+                    finish();
                 }
             }
         }

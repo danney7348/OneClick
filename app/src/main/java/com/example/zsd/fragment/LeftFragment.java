@@ -207,14 +207,17 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
             case R.id.relativeLayout5:
                 Intent intent = new Intent(getContext(), MyGuanzhuActivity.class);
                 getActivity().startActivity(intent);
+                getActivity().finish();
                 break;
             case R.id.relativeLayout6:
                 Intent intent1 = new Intent(getContext(), MyShoucangActivity.class);
                 getActivity().startActivity(intent1);
+                getActivity().finish();
                 break;
             case R.id.relativeLayout7:
                 Intent intent2 = new Intent(getContext(), FindFriendsActivity.class);
                 getActivity().startActivity(intent2);
+                getActivity().finish();
                 break;
             case R.id.relativeLayout8:
                 Intent intent3 = new Intent(getContext(), MessageTongzhiActivity.class);
@@ -223,10 +226,13 @@ public class LeftFragment extends Fragment implements GetUserInfoView, UpdateNic
             case R.id.left_ll_shezhi:
                 Intent intent4 = new Intent(getContext(), ShezhiActivity.class);
                 getActivity().startActivity(intent4);
+                getActivity().finish();
                 break;
             case R.id.ll_wodezuopin:
                 Intent intent5 = new Intent(getContext(), WodeZuopinActivity.class);
                 getActivity().startActivity(intent5);
+                getActivity().finish();
+
                 break;
         }
     }

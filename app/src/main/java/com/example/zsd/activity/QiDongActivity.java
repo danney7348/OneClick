@@ -8,11 +8,14 @@ import com.example.zsd.MainActivity;
 import com.example.zsd.R;
 import com.example.zsd.base.BaseActivity;
 import com.example.zsd.base.BasePresenter;
+import com.example.zsd.utils.ShareprefrensUtils;
+import com.squareup.haha.perflib.Main;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.TreeMap;
 
 public class QiDongActivity extends BaseActivity {
     int i = 3;
@@ -38,7 +41,6 @@ public class QiDongActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
     }
 
     @Override

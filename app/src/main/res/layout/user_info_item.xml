@@ -60,10 +60,10 @@
             android:id="@+id/user_info_tv_fensi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="676767粉丝"
+            android:text="676767  粉丝"
             android:textColor="@color/TextGrey"/>
         <TextView
-            android:id="@+id/gang"
+            android:id="@+id/user_info_fensi"
             android:layout_toRightOf="@+id/user_info_tv_fensi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,10 +72,10 @@
             android:textColor="@color/TextGrey"/>
         <TextView
             android:id="@+id/user_info_guanzhu"
-            android:layout_toRightOf="@+id/gang"
+            android:layout_toRightOf="@+id/user_info_fensi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="43关注"
+            android:text="43  关注"
             android:layout_marginLeft="@dimen/x100"
             android:textColor="@color/TextGrey"/>
         <Button
@@ -88,18 +88,9 @@
             android:textColor="@color/buttonBlue"
             android:background="@drawable/button_1"
             />
-        <Button
-            android:visibility="gone"
-            android:id="@+id/already_guanzhu"
-            android:layout_marginTop="@dimen/y10"
-            android:layout_below="@+id/user_info_tv_fensi"
-            android:layout_width="@dimen/x450"
-            android:layout_height="@dimen/y60"
-            android:text="已关注"
-            android:textColor="@color/TextWhite"
-            android:background="@drawable/button_2"
-            />
+
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/user_info_dianzan"
         android:layout_toRightOf="@+id/guanzhu_layout"
@@ -121,5 +112,28 @@
             android:textColor="@color/TextWhite"
             android:layout_centerHorizontal="true"
             android:text="455"/>
+
     </RelativeLayout>
+    <TextView
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_below="@+id/guanzhu_layout"
+        android:id="@+id/user_info_tv_zuopin_num"
+        android:textSize="@dimen/y34"
+        android:text="作品(4)"
+        android:textColor="@color/buttonBlue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:id="@+id/view_view"
+        android:background="@color/buttonBlue"
+        android:layout_below="@+id/user_info_tv_zuopin_num"
+        android:layout_width="@dimen/x150"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_height="@dimen/y8"/>
+    <View
+        android:background="#DEDEDE"
+        android:layout_below="@+id/view_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y20"/>
+
 </RelativeLayout>

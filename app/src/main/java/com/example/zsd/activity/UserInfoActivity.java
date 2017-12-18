@@ -44,6 +44,10 @@ public class UserInfoActivity extends BaseActivity implements GetUserVideosView 
     private TextView nickname;
     private Button guanzhu;
     private FollowPresenter followPresenter;
+    private TextView fensi;
+    private TextView guanzhuTv;
+    private TextView zuopin_num;
+    private List<GetUserVideos.DataBean> data;
 
     @Override
     public int bindLayout() {
@@ -66,7 +70,9 @@ public class UserInfoActivity extends BaseActivity implements GetUserVideosView 
         view.findViewById(R.id.user_info_dianzan);
         guanzhu = view.findViewById(R.id.user_info_button_guanzhu);
         touxiang = view.findViewById(R.id.user_info_touxaing);
-        view.findViewById(R.id.user_info_tv_fensi);
+        fensi = view.findViewById(R.id.user_info_tv_fensi);
+        zuopin_num = view.findViewById(R.id.user_info_tv_zuopin_num);
+        guanzhuTv = view.findViewById(R.id.user_info_guanzhu);
         nickname = view.findViewById(R.id.user_info_tv_name);
         lv = findViewById(R.id.user_info_xlv);
         Intent intent = getIntent();
@@ -97,7 +103,12 @@ public class UserInfoActivity extends BaseActivity implements GetUserVideosView 
             public void getUserInfoSuccess(GetUserInfo value) {
                 showToast(value.data.uid+"");
                 nickname.setText(value.data.nickname);
+                System.out.println("valuegetUserInfoSuccess = " + value.data.nickname);
+                fensi.setText(value.data.fans+"  粉丝");
+                guanzhuTv.setText(value.data.follow+"   关注");
+
                 Glide.with(UserInfoActivity.this).load(value.data.icon).into(touxiang);
+                System.out.println("UserInfoActivitygetUserInfoSuccess = " + value.data.icon);
                 getUserVideosPresenter.getUserVideosData(uid,page+"");
             }
 
@@ -151,7 +162,8 @@ public class UserInfoActivity extends BaseActivity implements GetUserVideosView 
 
     @Override
     public void success(GetUserVideos getUserVideos) {
-        List<GetUserVideos.DataBean> data = getUserVideos.data;
+        data = getUserVideos.data;
+        zuopin_num.setText("作品("+data.size()+")");
         list.addAll(data);
         if(adapter == null){
             lv.setLayoutManager(new LinearLayoutManager(this));

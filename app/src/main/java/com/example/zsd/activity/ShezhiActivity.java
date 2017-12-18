@@ -81,6 +81,8 @@ public class ShezhiActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         ShareprefrensUtils.clear(ShezhiActivity.this);
+                        startActivity(MobileLoginActivity.class);
+                        finish();
                     }
                 });
                 ad1.show();

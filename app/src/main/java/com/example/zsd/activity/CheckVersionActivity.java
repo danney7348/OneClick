@@ -121,6 +121,7 @@ public class CheckVersionActivity extends BaseActivity<GetVersionPresenter> impl
                 intent.setDataAndType(Uri.fromFile(new File(path)),
                         "application/vnd.android.package-archive");
                 startActivity(intent);
+                finish();
             }
             proBar.setVisibility(View.VISIBLE);
         }

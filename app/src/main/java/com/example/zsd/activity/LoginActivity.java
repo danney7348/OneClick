@@ -7,9 +7,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.zsd.MainActivity;
 import com.example.zsd.R;
 import com.example.zsd.base.BaseActivity;
 import com.example.zsd.base.BasePresenter;
+import com.example.zsd.utils.ShareprefrensUtils;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,6 +30,7 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.login_tv)
     TextView loginTv;
 
+    private boolean isFirst = false;
     @Override
     public int bindLayout() {
         return R.layout.activity_login;
@@ -51,7 +55,11 @@ public class LoginActivity extends BaseActivity {
                 showToast("扣扣登陆");
                 break;
             case R.id.login_tv:
+
+                isFirst = true;
+                ShareprefrensUtils.put(this,"isFirst1",isFirst);
                 startActivity(MobileLoginActivity.class);
+                finish();
                 break;
         }
     }
@@ -61,6 +69,11 @@ public class LoginActivity extends BaseActivity {
         ButterKnife.bind(this);
         setFullScreen(true);
         setStatus(true);
+        Boolean isFirst1 = (Boolean) ShareprefrensUtils.get(this, "isFirst1", isFirst);
+        if(isFirst1){
+            startActivity(MainActivity.class);
+            finish();
+        }
     }
 
     @Override
