@@ -24,12 +24,11 @@ import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
 import com.example.zsd.R;
-import com.example.zsd.activity.ShipinXiangqingActivity;
-import com.example.zsd.activity.ShipinXiangqingActivity1;
 import com.example.zsd.activity.UserInfoActivity;
 import com.example.zsd.entity.AddFavourite;
 import com.example.zsd.entity.CancelFavourite;
 import com.example.zsd.entity.Comment;
+import com.example.zsd.entity.GetFavorites;
 import com.example.zsd.entity.GetVideos;
 import com.example.zsd.entity.Praise;
 import com.example.zsd.presenter.AddFavouritePresenter;
@@ -45,9 +44,6 @@ import com.example.zsd.view.PraiseView;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * 作者： 张少丹
  * 时间：  2017/12/1.
@@ -55,7 +51,7 @@ import butterknife.OnClick;
  * 类的用途：
  */
 
-public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleViewAdapter.ViewHolder> implements AddFavouriteView, CancelFavouriteView, PraiseView, CommentView {
+public class SoucangRecycleViewAdapter extends RecyclerView.Adapter<SoucangRecycleViewAdapter.ViewHolder> implements AddFavouriteView, CancelFavouriteView, PraiseView, CommentView {
 
     private ObjectAnimator fanimator;
     private ObjectAnimator animator1;
@@ -65,7 +61,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
     private ObjectAnimator animator3;
     private ObjectAnimator fanimator3;
     private Activity context;
-    private List<GetVideos.DataBean> list;
+   private List<GetFavorites.DataBean> data;
     private View view;
 
     private OnLongItemClickListener onLongItemClickListener;
@@ -75,9 +71,9 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
     private CommentPresenter commentPresenter;
     private String uid;
 
-    public RemenRecycleViewAdapter(Activity context, List<GetVideos.DataBean> list) {
+    public SoucangRecycleViewAdapter(Activity context, List<GetFavorites.DataBean> data) {
         this.context = context;
-        this.list = list;
+        this.data = data;
     }
 
     @Override
@@ -95,16 +91,16 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        CommentsRecycleViewAdapter adapterComments = new CommentsRecycleViewAdapter(context,list.get(position).comments);
+        SouCangCommentsRecycleViewAdapter adapterComments = new SouCangCommentsRecycleViewAdapter(context,data.get(position).comments);
         holder.comments.setLayoutManager(new LinearLayoutManager(context));
         holder.comments.setAdapter(adapterComments);
-        holder.name.setText(list.get(position).user.nickname);
-        holder.content.setText(list.get(position).workDesc);
-        holder.time.setText(list.get(position).createTime);
-        String s = list.get(position).videoUrl.replaceAll("https://www.zhaoapi.cn", "http://120.27.23.105");
+        holder.name.setText(data.get(position).user.nickname);
+        holder.content.setText(data.get(position).workDesc);
+        holder.time.setText(data.get(position).createTime);
+        String s = data.get(position).videoUrl.replaceAll("https://www.zhaoapi.cn", "http://120.27.23.105");
         final View player = View.inflate(context, R.layout.simple_player_view_player, holder.player);
         PlayerView playerView = new PlayerView(context, player)
-                .setTitle(list.get(position).workDesc)
+                .setTitle(data.get(position).workDesc)
                 .setScaleType(PlayStateParams.fitparent)
                 .hideMenu(true)
                 .forbidTouch(false)
@@ -113,7 +109,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
                 .showThumbnail(new OnShowThumbnailListener() {
                     @Override
                     public void onShowThumbnail(ImageView ivThumbnail) {
-                        Glide.with(context).load(list.get(position).cover).into(ivThumbnail);
+                        Glide.with(context).load(data.get(position).cover).into(ivThumbnail);
                     }
                 });
         RequestOptions options = new RequestOptions()
@@ -122,12 +118,12 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
                 .error(R.mipmap.ic_launcher)
                 .priority(Priority.HIGH)
                 .transform(new GlideCircleTransform());
-        Glide.with(context).load(list.get(position).user.icon).apply(options).into(holder.touxiang);
+        Glide.with(context).load(data.get(position).user.icon).apply(options).into(holder.touxiang);
         holder.touxiang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, UserInfoActivity.class);
-                intent.putExtra("uid", list.get(position).uid + "");
+                intent.putExtra("uid", data.get(position).uid + "");
                 context.startActivity(intent);
             }
         });
@@ -186,18 +182,10 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
                 return true;
             }
         });
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ShipinXiangqingActivity1.class);
-                intent.putExtra("wid",list.get(position).wid+"");
-                context.startActivity(intent);
-            }
-        });
         holder.xihuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                praisePresenter.getPraiseData(uid,list.get(position).wid+"");
+                praisePresenter.getPraiseData(uid,data.get(position).wid+"");
                 holder.xihuan.setImageResource(R.drawable.raw_1499933215);
             }
         });
@@ -206,7 +194,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
             public void onClick(View view) {
                 holder.shoucang1.setVisibility(View.VISIBLE);
                 holder.shoucang.setVisibility(View.GONE);
-                addFavouritePresenter.getAddFavouriteData(uid,list.get(position).wid+"");
+                addFavouritePresenter.getAddFavouriteData(uid,data.get(position).wid+"");
             }
         });
         holder.shoucang1.setOnClickListener(new View.OnClickListener() {
@@ -214,7 +202,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
             public void onClick(View view) {
                 holder.shoucang1.setVisibility(View.GONE);
                 holder.shoucang.setVisibility(View.VISIBLE);
-                cancelFavouritePresenter.getAddFavouriteData(uid,list.get(position).wid+"");
+                cancelFavouritePresenter.getAddFavouriteData(uid,data.get(position).wid+"");
             }
         });
         holder.fenxiang.setOnClickListener(new View.OnClickListener() {
@@ -238,7 +226,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
                                     Toast.makeText(context, "评论内容不能为空！" + input, Toast.LENGTH_LONG).show();
                                 }
                                 else {
-                                    commentPresenter.getCommentData(uid,list.get(position).wid+"",et.getText().toString());
+                                    commentPresenter.getCommentData(uid,data.get(position).wid+"",et.getText().toString());
                                     notifyDataSetChanged();
                                 }
                             }
@@ -251,23 +239,9 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return data.size();
     }
 
-    public void refreshData(List<GetVideos.DataBean> data) {
-        if (list != null) {
-            list.clear();
-            list.addAll(data);
-            notifyDataSetChanged();
-        }
-    }
-
-    public void loadmoreData(List<GetVideos.DataBean> data) {
-        if (list != null) {
-            list.addAll(data);
-            notifyDataSetChanged();
-        }
-    }
 
 
     @Override

@@ -6,6 +6,7 @@ import com.example.zsd.entity.Comment;
 import com.example.zsd.entity.CommentJoke;
 import com.example.zsd.entity.Follow;
 import com.example.zsd.entity.GetAd;
+import com.example.zsd.entity.GetFavorites;
 import com.example.zsd.entity.GetFollowUsers;
 import com.example.zsd.entity.GetHotVideos;
 import com.example.zsd.entity.GetJokes;
@@ -14,6 +15,7 @@ import com.example.zsd.entity.GetUserInfo;
 import com.example.zsd.entity.GetUserVideos;
 import com.example.zsd.entity.GetVersion;
 import com.example.zsd.entity.GetVideos;
+import com.example.zsd.entity.GetVideosDetail;
 import com.example.zsd.entity.GetWorkInfo;
 import com.example.zsd.entity.JokePraise;
 import com.example.zsd.entity.LoginBean;
@@ -162,6 +164,14 @@ public interface ApiService {
     @POST("quarter/removeFavorite")
     @FormUrlEncoded
     Flowable<RemoveFavourite> getRemoveFavorite(@Field("uid") String uid, @Field("fid") String fid);
+
+    @POST("quarter/getFavorites")
+    @FormUrlEncoded
+    Flowable<GetFavorites> getFavorites(@Field("uid") String uid);
+
+    @POST("quarter/getVideoDetail")
+    @FormUrlEncoded
+    Flowable<GetVideosDetail> getVideosDetail(@Field("wid") String wid);
 
     @GET("quarter/randomFriends")
     Flowable<RandomFriends> getRandomFriends();

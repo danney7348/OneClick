@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.zsd.R;
 import com.example.zsd.adapter.MyGuanzhuRecycleViewAdapter;
@@ -24,6 +25,7 @@ public class MyGuanzhuActivity extends BaseActivity<GetFollowUsersPresenter> imp
     private String uid;
     private XRecyclerView rv;
     private MyGuanzhuRecycleViewAdapter adapter;
+    private TextView back;
 
     @Override
     public int bindLayout() {
@@ -45,12 +47,19 @@ public class MyGuanzhuActivity extends BaseActivity<GetFollowUsersPresenter> imp
         uid = (String) ShareprefrensUtils.get(this, "uid", "");
         t.getFollowUsersData(uid);
         rv = findViewById(R.id.guanzhu_follow_rv);
+        back = findViewById(R.id.guanzhu_tv_back);
         rv.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
     public void initData() {
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     @Override

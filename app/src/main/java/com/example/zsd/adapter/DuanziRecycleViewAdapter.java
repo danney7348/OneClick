@@ -21,7 +21,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.zsd.R;
 import com.example.zsd.activity.UserInfoActivity;
 import com.example.zsd.entity.GetJokes;
+import com.example.zsd.entity.GetUserInfo;
+import com.example.zsd.presenter.GetUserInfoPresenter;
 import com.example.zsd.utils.GlideCircleTransform;
+import com.example.zsd.view.GetUserInfoView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -36,7 +39,7 @@ import static com.example.zsd.R2.id.recycler;
  * 类的用途：
  */
 
-public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycleViewAdapter.ViewHolder>{
+public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycleViewAdapter.ViewHolder> {
 
     private ObjectAnimator animator;
     private ObjectAnimator fanimator;
@@ -48,6 +51,7 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
     private ObjectAnimator fanimator3;
     private Context context;
     private  List<GetJokes.DataBean> data;
+
     public DuanziRecycleViewAdapter(Context context, List<GetJokes.DataBean> data) {
         this.context = context;
         this.data = data;
@@ -74,6 +78,7 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
     }
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.contentPinglun.setText(data.get(position).uid+":"+data.get(position).content);
         holder.name.setText(data.get(position).user.nickname);
         holder.content.setText(data.get(position).content);
         holder.time.setText(data.get(position).createTime);
@@ -180,6 +185,7 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
         return data.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         private int a=0;
         private final TextView time;
@@ -195,6 +201,9 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
         private final TextView tv1;
         private final  TextView tv2;
         private final  TextView tv3;
+        private final TextView contentPinglun;
+
+
         public ViewHolder(View itemView) {
             super(itemView);
             recycler = itemView.findViewById(R.id.imgurlsRecycler);
@@ -210,6 +219,7 @@ public class DuanziRecycleViewAdapter extends RecyclerView.Adapter<DuanziRecycle
             tv1 = itemView.findViewById(R.id.tv1);
             tv2 = itemView.findViewById(R.id.tv2);
             tv3 = itemView.findViewById(R.id.tv3);
+            contentPinglun = itemView.findViewById(R.id.duanzi_adapter_tv_content);
         }
     }
     private OnLongItemClickListener onLongItemClickListener;

@@ -133,7 +133,6 @@ public class DuanziFragment extends Fragment implements GetJokesView, CommentJok
                                     }
                                     else {
                                         commentJokePresenter.getCommentJokeData(uid,value.data.get(position).jid+"",et.getText().toString());
-
                                         adapter.notifyDataSetChanged();
                                     }
                                 }

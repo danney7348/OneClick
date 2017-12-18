@@ -22,6 +22,7 @@
             android:layout_height="@dimen/y40" />
 
         <TextView
+            android:id="@+id/sousuo_tv_back"
             android:layout_toRightOf="@+id/shezhi_back"
             android:textColor="#ffffff"
             android:text="返回"

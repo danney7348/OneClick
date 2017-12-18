@@ -20,7 +20,7 @@
             android:layout_height="@dimen/y350"
             android:background="@drawable/drawerlayout_background" />
 
-        <ImageView
+        <com.example.zsd.RoView
             android:id="@+id/left_icon"
             android:layout_width="@dimen/x120"
             android:layout_height="@dimen/y120"

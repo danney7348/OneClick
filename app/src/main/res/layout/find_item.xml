@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:padding="@dimen/x10"
     android:layout_height="@dimen/y120">
-    <ImageView
+    <com.example.zsd.RoView
         android:layout_marginLeft="@dimen/x10"
         android:id="@+id/find_iv_icon"
         android:src="@drawable/raw_1499917357"

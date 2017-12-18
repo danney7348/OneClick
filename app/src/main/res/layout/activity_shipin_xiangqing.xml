@@ -10,12 +10,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y80"
+        android:layout_height="@dimen/y100"
         android:background="#F0F0F0"
         android:padding="@dimen/x10">
         <ImageView
             android:layout_width="@dimen/x50"
-            android:layout_height="@dimen/x50"
+            android:layout_height="@dimen/y50"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x20"
             android:src="@drawable/raw_1500019926"
             android:id="@+id/iv_fanhui"
@@ -24,7 +25,8 @@
         <ImageView
             android:id="@+id/iv_xihuan"
             android:layout_width="@dimen/x50"
-            android:layout_height="@dimen/x50"
+            android:layout_height="@dimen/y50"
+            android:layout_centerVertical="true"
             android:src="@drawable/xihuan"
             android:layout_toRightOf="@+id/iv_fanhui"
             android:layout_marginLeft="@dimen/x20"/>
@@ -32,25 +34,28 @@
         <ImageView
             android:id="@+id/iv_buxihuan"
             android:layout_width="@dimen/x50"
-            android:layout_height="@dimen/x50"
+            android:layout_height="@dimen/y50"
+            android:layout_centerVertical="true"
             android:src="@drawable/buxihuan"
             android:layout_toRightOf="@+id/iv_xihuan"
             android:layout_marginLeft="@dimen/x20"/>
 
         <ImageView
             android:layout_width="@dimen/x50"
-            android:layout_height="@dimen/x50"
+            android:layout_height="@dimen/y50"
+            android:layout_centerVertical="true"
             android:src="@drawable/fenxiang1"
             android:layout_toRightOf="@+id/iv_buxihuan"
             android:layout_marginLeft="@dimen/x20"/>
 
 
 
-        <ImageView
+        <com.example.zsd.RoView
+            android:layout_centerVertical="true"
             android:id="@+id/xiangqing_iv_icon"
             android:layout_alignParentRight="true"
             android:layout_width="@dimen/x50"
-            android:layout_height="@dimen/x50"
+            android:layout_height="@dimen/y50"
             />
 
 
@@ -62,7 +67,7 @@
     <RelativeLayout
         android:id="@+id/xiangqing_player"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y350"
+        android:layout_height="@dimen/y450"
         android:layout_below="@+id/tv"
         android:layout_marginTop="@dimen/y80"
         />
@@ -77,11 +82,11 @@
 
     <ImageView
         android:id="@+id/iv2"
-        android:layout_width="@dimen/x180"
-        android:layout_height="@dimen/y180"
+        android:layout_width="@dimen/x280"
+        android:layout_height="@dimen/y280"
         android:layout_below="@+id/xiangqing_tv_title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="@dimen/y100"
         android:src="@drawable/deng" />
 
     <TextView

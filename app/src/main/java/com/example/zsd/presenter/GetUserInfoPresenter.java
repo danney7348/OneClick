@@ -27,7 +27,7 @@ public class GetUserInfoPresenter extends BasePresenter {
             @Override
             public void getUserInfoSuccess(GetUserInfo value) {
                 String code = value.code;
-                if(code.equals("0")){
+                if(value.data!=null) if(code.equals("0")){
                     getUserInfoView.getUserInfoSuccess(value);
                 }else {
                     getUserInfoView.getUserInfoFaile(value.msg);

@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/y110">
 
-    <ImageView
+    <com.example.zsd.RoView
         android:id="@+id/iv_touxiang"
         android:layout_width="@dimen/x75"
         android:layout_height="@dimen/y75"
@@ -141,9 +141,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/duanzi_tv_content">
     </android.support.v7.widget.RecyclerView>
+    <TextView
+        android:layout_below="@+id/imgurlsRecycler"
+        android:text="sssssssssssss"
+        android:id="@+id/duanzi_adapter_tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <View
         android:background="#999999"
-        android:layout_below="@+id/imgurlsRecycler"
+        android:layout_below="@+id/duanzi_adapter_tv_content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x3"/>
 </RelativeLayout>

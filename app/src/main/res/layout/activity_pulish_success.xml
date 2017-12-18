@@ -31,7 +31,7 @@
         android:id="@+id/iv_wancheng"
         android:layout_width="@dimen/x140"
         android:layout_height="@dimen/y140"
-        android:src="@drawable/raw_1500977101"
+        android:src="@drawable/raw_1500021052"
         android:layout_marginTop="@dimen/y80"
         android:layout_centerHorizontal="true"/>
 

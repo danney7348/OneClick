@@ -19,6 +19,7 @@
             android:layout_width="@dimen/x40"
             android:layout_height="@dimen/y40" />
         <TextView
+            android:id="@+id/guanzhu_tv_back"
             android:layout_toRightOf="@+id/guanzhu_iv_back"
             android:text="返回"
             android:layout_marginTop="@dimen/x25"

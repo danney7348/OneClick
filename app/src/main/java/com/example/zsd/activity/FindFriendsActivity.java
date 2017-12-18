@@ -31,6 +31,7 @@ public class FindFriendsActivity extends BaseActivity implements SearchFriendsVi
     private String keywordsContent;
     private ImageView sousuo;
     private TextView quxiao;
+    private TextView back;
 
     @Override
     public int bindLayout() {
@@ -53,7 +54,7 @@ public class FindFriendsActivity extends BaseActivity implements SearchFriendsVi
         sousuo = findViewById(R.id.find_iv_sousuo);
         quxiao = findViewById(R.id.sousuo_tv_quxiao);
         keywords = findViewById(R.id.find_et_keywords);
-
+        back = findViewById(R.id.sousuo_tv_back);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -86,6 +87,12 @@ public class FindFriendsActivity extends BaseActivity implements SearchFriendsVi
             }
         });
         quxiao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();

@@ -43,7 +43,7 @@
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
     </RelativeLayout>
-    <ImageView
+    <com.example.zsd.RoView
         android:id="@+id/user_info_touxaing"
         android:layout_width="@dimen/x160"
         android:layout_height="@dimen/x160"

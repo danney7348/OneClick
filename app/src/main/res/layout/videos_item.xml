@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/y110">
 
-        <ImageView
+        <com.example.zsd.RoView
             android:id="@+id/iv_touxiang1"
             android:layout_width="@dimen/x75"
             android:layout_height="@dimen/y75"
@@ -293,6 +293,11 @@
 
     </LinearLayout>
         />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/videos_rv_comments"
+        android:layout_below="@+id/video_rl_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
 
 </RelativeLayout>

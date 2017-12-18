@@ -87,7 +87,8 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.img_icon:
                 mainDl.openDrawer(Gravity.LEFT);
-                String icon = (String) ShareprefrensUtils.get(this, "icon", null);
+                String icon = (String) ShareprefrensUtils.get(this, "icon", "");
+                System.out.println("icon ================= " + icon);
                 RequestOptions options = new RequestOptions()
                         .centerCrop()
                         .placeholder(R.mipmap.ic_launcher)
