@@ -194,7 +194,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/x90"
-                android:layout_alignBottom="@+id/imageView5"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x30"
                 android:layout_marginStart="@dimen/x30"
                 android:layout_toEndOf="@+id/imageView5"

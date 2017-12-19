@@ -50,7 +50,7 @@ public class CommentsRecycleViewAdapter extends RecyclerView.Adapter<CommentsRec
 
     @Override
     public int getItemCount() {
-        return 2;
+        return comments.size() > 2 ? 2 : comments.size();
     }
 
 

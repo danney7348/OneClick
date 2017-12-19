@@ -76,6 +76,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
     private PraisePresenter praisePresenter;
     private CommentPresenter commentPresenter;
     private String uid;
+    private CommentsRecycleViewAdapter adapterComments;
 
     public RemenRecycleViewAdapter(Activity context, List<GetVideos.DataBean> list) {
         this.context = context;
@@ -97,7 +98,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        CommentsRecycleViewAdapter adapterComments = new CommentsRecycleViewAdapter(context,list.get(position).comments);
+        adapterComments = new CommentsRecycleViewAdapter(context,list.get(position).comments);
         holder.comments.setLayoutManager(new LinearLayoutManager(context));
         holder.comments.setAdapter(adapterComments);
         holder.name.setText(list.get(position).user.nickname);
@@ -321,6 +322,7 @@ public class RemenRecycleViewAdapter extends RecyclerView.Adapter<RemenRecycleVi
     @Override
     public void getCommentSuccess(Comment comment) {
         Toast.makeText(context, comment.msg, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

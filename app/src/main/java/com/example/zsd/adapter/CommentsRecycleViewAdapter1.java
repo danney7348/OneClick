@@ -27,6 +27,13 @@ public class CommentsRecycleViewAdapter1 extends RecyclerView.Adapter<CommentsRe
         this.comments = comments;
     }
 
+    public void refresh(List<GetVideosDetail.DataBean.CommentsBean> comment){
+        if(comments != null){
+            comments.clear();
+            comments.addAll(comment);
+            notifyDataSetChanged();
+        }
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(context, R.layout.comments_item,null);
@@ -38,7 +45,7 @@ public class CommentsRecycleViewAdapter1 extends RecyclerView.Adapter<CommentsRe
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         holder.content.setText(comments.get(position).content);
-        holder.name.setText(comments.get(position).uid+"");
+        holder.name.setText(comments.get(position).nickname+"");
     }
 
     @Override

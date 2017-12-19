@@ -24,8 +24,8 @@ public class ShipinXiangqingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipin_xiangqing);
         RelativeLayout ivv = findViewById(R.id.xiangqing_player);
-       TextView desc = findViewById(R.id.xiangqing_tv_title);
-      ImageView icon = findViewById(R.id.xiangqing_iv_icon);
+        TextView desc = findViewById(R.id.xiangqing_tv_title);
+        ImageView icon = findViewById(R.id.xiangqing_iv_icon);
         Intent intent = getIntent();
         String videoUrl = intent.getStringExtra("videoUrl");
         String workDesc = intent.getStringExtra("workDesc");

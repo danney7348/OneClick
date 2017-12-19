@@ -27,7 +27,7 @@ import scut.carson_ho.searchview.bCallBack;
 
 public class FindFriendsActivity extends BaseActivity implements SearchFriendsView {
 
-    private XRecyclerView rv;
+    private RecyclerView rv;
     private SearchFriendsPresenter searchFriendsPresenter;
     private int page;
     private SearchFriendsRecycleViewAdapter adapter;
@@ -63,26 +63,10 @@ public class FindFriendsActivity extends BaseActivity implements SearchFriendsVi
         search = findViewById(R.id.search_view);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-                page = 1;
-                keywordsContent = keywords.getText().toString();
-                searchFriendsPresenter.getSearchFriendsData(keywordsContent,page+"");
-            }
 
-            @Override
-            public void onLoadMore() {
-
-                page++;
-                keywordsContent = keywords.getText().toString();
-                searchFriendsPresenter.getSearchFriendsData(keywordsContent,page+"");
-            }
-        });
         search.setOnClickSearch(new ICallBack() {
             @Override
             public void SearchAciton(String string) {
-                keywordsContent = keywords.getText().toString();
                 searchFriendsPresenter.getSearchFriendsData(string+"",page+"");
             }
         });
@@ -154,14 +138,7 @@ public class FindFriendsActivity extends BaseActivity implements SearchFriendsVi
             adapter = new SearchFriendsRecycleViewAdapter(this,searchFriends.data);
             rv.setAdapter(adapter);
         }else {
-            adapter.notifyDataSetChanged();
-        }
-        if(page == 1){
             adapter.refreshData(searchFriends.data);
-            rv.refreshComplete();
-        }else {
-            adapter.loadmoreData(searchFriends.data);
-            rv.loadMoreComplete();
         }
     }
 

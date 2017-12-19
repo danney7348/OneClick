@@ -18,7 +18,6 @@ import javax.inject.Inject;
 public class CommentPresenter extends BasePresenter<CommentView> {
     @Inject
     CommentModel commentModel;
-    CommentPresenter commentPresenter;
     @Inject
     public CommentPresenter(CommentView mView) {
         super(mView);
