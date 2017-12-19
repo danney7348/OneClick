@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -43,6 +44,7 @@ import com.example.zsd.view.CancelFavouriteView;
 import com.example.zsd.view.CommentView;
 import com.example.zsd.view.PraiseView;
 
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;

@@ -1,20 +1,13 @@
 package com.example.zsd.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zsd.R;
-import com.example.zsd.entity.GetFavorites;
-import com.example.zsd.entity.GetUserInfo;
-import com.example.zsd.entity.GetVideos;
-import com.example.zsd.presenter.GetUserInfoPresenter;
-import com.example.zsd.utils.ShareprefrensUtils;
-import com.example.zsd.view.GetUserInfoView;
+import com.example.zsd.entity.GetVideosDetail;
 
 import java.util.List;
 
@@ -25,11 +18,11 @@ import java.util.List;
  * 类的用途：
  */
 
-public class CommentsRecycleViewAdapter extends RecyclerView.Adapter<CommentsRecycleViewAdapter.ViewHolder>{
+public class CommentsRecycleViewAdapter1 extends RecyclerView.Adapter<CommentsRecycleViewAdapter1.ViewHolder>{
     private Context context;
-    private List<GetVideos.DataBean.CommentsBean> comments;
+    private List<GetVideosDetail.DataBean.CommentsBean> comments;
 
-    public CommentsRecycleViewAdapter(Context context, List<GetVideos.DataBean.CommentsBean> comments) {
+    public CommentsRecycleViewAdapter1(Context context, List<GetVideosDetail.DataBean.CommentsBean> comments) {
         this.context = context;
         this.comments = comments;
     }
@@ -50,7 +43,7 @@ public class CommentsRecycleViewAdapter extends RecyclerView.Adapter<CommentsRec
 
     @Override
     public int getItemCount() {
-        return 2;
+        return comments.size();
     }
 
 

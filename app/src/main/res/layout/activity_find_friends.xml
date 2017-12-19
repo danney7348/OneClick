@@ -45,8 +45,19 @@
         android:id="@+id/find_rl"
         android:layout_below="@+id/sousuo_r1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y80">
+        android:layout_height="wrap_content">
+        <scut.carson_ho.searchview.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:textSizeSearch="@dimen/x20"
+            app:textColorSearch="#3F51B5"
+            app:textHintSearch="输入查询关键字"
+            app:searchBlockHeight="150"
+            app:searchBlockColor="#ffffff"
+            />
         <ImageView
+            android:visibility="gone"
             android:id="@+id/find_iv_sousuo"
             android:src="@drawable/sousuo"
             android:layout_centerVertical="true"
@@ -55,6 +66,7 @@
             android:layout_width="@dimen/x80"
             android:layout_height="@dimen/y60" />
         <EditText
+            android:visibility="gone"
             android:layout_toRightOf="@+id/find_iv_sousuo"
             android:id="@+id/find_et_keywords"
             android:hint="输入ID或昵称"
@@ -63,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y80" />
         <TextView
+            android:visibility="gone"
             android:id="@+id/sousuo_tv_quxiao"
             android:text="取消"
             android:textSize="@dimen/y30"

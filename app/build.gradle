@@ -9,7 +9,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.zsd"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 101
         versionName "1.0"
@@ -124,4 +124,7 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.9'
     compile 'org.glassfish:javax.annotation:10.0-b28'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+
+    //searchView
+    compile 'com.carson_ho:SearchLayout:1.0.1'
 }

@@ -78,10 +78,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/xiangqing_player"/>
-
+<com.jcodecraeer.xrecyclerview.XRecyclerView
+    android:visibility="gone"
+    android:layout_below="@+id/xiangqing_tv_title"
+    android:id="@+id/xiangqing_rv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
 
     <ImageView
-        android:id="@+id/iv2"
+        android:id="@+id/xiangqing_iv_img"
+        android:visibility="visible"
         android:layout_width="@dimen/x280"
         android:layout_height="@dimen/y280"
         android:layout_below="@+id/xiangqing_tv_title"
@@ -90,10 +96,12 @@
         android:src="@drawable/deng" />
 
     <TextView
+        android:id="@+id/xiangqing_tv_des"
+        android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="拿起手机速来抢个沙发吧!~"
-        android:layout_below="@+id/iv2"
+        android:layout_below="@+id/xiangqing_iv_img"
         android:layout_centerHorizontal="true"/>
 
 
