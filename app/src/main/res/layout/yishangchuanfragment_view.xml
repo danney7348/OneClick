@@ -5,5 +5,43 @@
 <android.support.v7.widget.RecyclerView
     android:id="@+id/yishangchuan_rv"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    android:layout_height="wrap_content">
+</android.support.v7.widget.RecyclerView>
+    <FrameLayout
+        android:layout_below="@+id/yishangchuan_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.zsd.RoView
+            android:id="@+id/donghua_img_zhaoxiang"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/y100"
+            android:padding="20dp"
+            android:src="@drawable/zhaoxiang"/>
+
+        <com.example.zsd.RoView
+            android:id="@+id/donghua_img_shanchu"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/y100"
+            android:padding="20dp"
+            android:src="@drawable/shanchu"/>
+        <com.example.zsd.RoView
+            android:id="@+id/donghua_img_lanxing"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/y100"
+            android:padding="20dp"
+            android:src="@drawable/lanxing"/>
+        <com.example.zsd.RoView
+            android:id="@+id/donghua_img_fxx"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/y100"
+            android:padding="20dp"
+            android:src="@drawable/fxx"/>
+        <com.example.zsd.RoView
+            android:id="@+id/donghua_img_hongxing"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/y100"
+            android:padding="20dp"
+            android:src="@drawable/hongxing"/>
+    </FrameLayout>
 </RelativeLayout>

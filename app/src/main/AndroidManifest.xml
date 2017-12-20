@@ -112,7 +112,8 @@
         <activity android:name=".activity.CheckVersionActivity" />
         <activity android:name=".activity.VersionCodeActivity" />
         <activity android:name=".activity.ShipinXiangqingActivity1" />
-        <activity android:name=".activity.WodeZuopinActivity"></activity>
+        <activity android:name=".activity.WodeZuopinActivity" />
+        <activity android:name=".activity.DonghuaActivity"></activity>
     </application>
 
 </manifest>
