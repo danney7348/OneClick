@@ -63,7 +63,7 @@
             <LinearLayout
                 android:background="#FFFFFF"
                 android:id="@+id/linearlaout"
-                android:weightSum="3"
+                android:weightSum="4"
                 android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y110">
@@ -125,6 +125,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="视频"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/main_ll_faxian"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/main_img_faxian"
+                        android:layout_width="@dimen/x60"
+                        android:layout_height="@dimen/y60"
+                        android:src="@drawable/find" />
+                    <TextView
+                        android:id="@+id/main_tv_faxian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="发现"
                         />
                 </LinearLayout>
             </LinearLayout>

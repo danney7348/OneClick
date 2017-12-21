@@ -45,7 +45,7 @@ public class CommentsRecycleViewAdapter extends RecyclerView.Adapter<CommentsRec
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         holder.content.setText(comments.get(position).content);
-        holder.name.setText(comments.get(position).uid+"");
+        holder.name.setText(comments.get(position).uid+"  :   ");
     }
 
     @Override

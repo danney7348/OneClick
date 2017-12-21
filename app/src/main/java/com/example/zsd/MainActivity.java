@@ -18,10 +18,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.zsd.activity.ChuangzuoActivity;
-import com.example.zsd.activity.GaodeActivity;
 import com.example.zsd.base.BaseActivity;
 import com.example.zsd.base.BasePresenter;
 import com.example.zsd.fragment.DuanziFragment;
+import com.example.zsd.fragment.FaxianFragment;
 import com.example.zsd.fragment.LeftFragment;
 import com.example.zsd.fragment.ShipinFragment;
 import com.example.zsd.fragment.TuijianFragment;
@@ -70,6 +70,12 @@ public class MainActivity extends BaseActivity {
     DrawerLayout mainDl;
     @BindView(R.id.main_tv_title)
     TextView mainTvTitle;
+    @BindView(R.id.main_img_faxian)
+    ImageView mainImgFaxian;
+    @BindView(R.id.main_tv_faxian)
+    TextView mainTvFaxian;
+    @BindView(R.id.main_ll_faxian)
+    LinearLayout mainLlFaxian;
 
     @Override
     public int bindLayout() {
@@ -81,7 +87,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.img_icon, R.id.img_biji, R.id.main_ll_tuijian, R.id.main_ll_duanzi, R.id.main_ll_shipin})
+    @OnClick({R.id.img_icon, R.id.img_biji, R.id.main_ll_tuijian, R.id.main_ll_duanzi, R.id.main_ll_shipin,R.id.main_ll_faxian})
     @Override
     public void Click(View view) {
         switch (view.getId()) {
@@ -109,6 +115,8 @@ public class MainActivity extends BaseActivity {
                 mainTvDianzi.setTextColor(Color.parseColor("#C5C5C5"));
                 mainImgShiping.setImageResource(R.drawable.shiping1);
                 mainTvShipin.setTextColor(Color.parseColor("#C5C5C5"));
+                mainImgFaxian.setImageResource(R.drawable.find);
+                mainTvFaxian.setTextColor(Color.parseColor("#C5C5C5"));
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new TuijianFragment()).commit();
                 break;
             case R.id.main_ll_duanzi:
@@ -119,6 +127,8 @@ public class MainActivity extends BaseActivity {
                 mainTvDianzi.setTextColor(Color.parseColor("#1296DB"));
                 mainImgShiping.setImageResource(R.drawable.shiping1);
                 mainTvShipin.setTextColor(Color.parseColor("#C5C5C5"));
+                mainImgFaxian.setImageResource(R.drawable.find);
+                mainTvFaxian.setTextColor(Color.parseColor("#C5C5C5"));
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new DuanziFragment()).commit();
                 break;
             case R.id.main_ll_shipin:
@@ -129,7 +139,21 @@ public class MainActivity extends BaseActivity {
                 mainTvDianzi.setTextColor(Color.parseColor("#C5C5C5"));
                 mainImgShiping.setImageResource(R.drawable.shiping2);
                 mainTvShipin.setTextColor(Color.parseColor("#1296DB"));
+                mainImgFaxian.setImageResource(R.drawable.find);
+                mainTvFaxian.setTextColor(Color.parseColor("#C5C5C5"));
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new ShipinFragment()).commit();
+                break;
+            case R.id.main_ll_faxian:
+                mainTvTitle.setText("发现");
+                mainImgTuijian.setImageResource(R.drawable.tuijian1);
+                mainTvTuijain.setTextColor(Color.parseColor("#C5C5C5"));
+                mainImgDuanzi.setImageResource(R.drawable.duanzi1);
+                mainTvDianzi.setTextColor(Color.parseColor("#C5C5C5"));
+                mainImgShiping.setImageResource(R.drawable.shiping1);
+                mainTvShipin.setTextColor(Color.parseColor("#C5C5C5"));
+                mainImgFaxian.setImageResource(R.drawable.find2);
+                mainTvFaxian.setTextColor(Color.parseColor("#1296DB"));
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new FaxianFragment()).commit();
                 break;
         }
     }
@@ -190,5 +214,12 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
