@@ -28,10 +28,16 @@
 
     <!--展示消息内容-->
     <TextView
+        android:visibility="gone"
         android:id="@+id/ec_text_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/ec_layout_input"
         android:maxLines="15"
         android:scrollbars="vertical"/>
+    <ListView
+        android:id="@+id/lv_text_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ec_layout_input"></ListView>
 </RelativeLayout>

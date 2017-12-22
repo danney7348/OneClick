@@ -27,8 +27,8 @@ public class UserRegPresenter extends BasePresenter {
             userRegModel = new UserRegModel();
         }
     }
-    public void getUserRegData(final String mobile, String password, String token){
-        userRegModel.getUserRegData(mobile, password, token, new UserRegModel.UserRegMessage() {
+    public void getUserRegData(String regType,final String mobile, String password, String token){
+        userRegModel.getUserRegData(regType,mobile, password, token, new UserRegModel.UserRegMessage() {
             @Override
             public void userregSuccess(ResponseBody value) {
                 String json = null;

@@ -1,6 +1,7 @@
 package com.example.zsd.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.zsd.R;
+import com.example.zsd.activity.ChatActivity;
 import com.example.zsd.activity.MyGuanzhuActivity;
 import com.example.zsd.entity.GetFollowUsers;
 
@@ -37,12 +39,21 @@ public class MyGuanzhuRecycleViewAdapter extends RecyclerView.Adapter<MyGuanzhuR
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
         holder.nickname.setText(data.get(position).nickname);
         holder.des.setText(data.get(position).username);
         holder.time.setText(data.get(position).createtime);
         Glide.with(context).load(data.get(position).icon).into(holder.icon);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context,ChatActivity.class);
+                intent.putExtra("user_mobile",data.get(position).mobile);
+                intent.putExtra("user_icon",data.get(position).icon);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

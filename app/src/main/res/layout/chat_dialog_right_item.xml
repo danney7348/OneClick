@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/chat_tv_time_right"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_chat_me_message_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toLeftOf="@+id/iv_chat_imagr_right"
+        android:background="@drawable/app_lvjian_chat_right"
+        android:padding="8dp"
+        android:text="把那些贩毒的关到小黑屋，枪毙五十次，快去" />
+
+    <com.example.zsd.RoView
+        android:id="@+id/iv_chat_imagr_right"
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/y80"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="top"/>
+
+</RelativeLayout>

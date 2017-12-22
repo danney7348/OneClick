@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.zsd.MainActivity;
 import com.example.zsd.R;
@@ -12,6 +13,8 @@ import com.example.zsd.base.BaseActivity;
 import com.example.zsd.base.BasePresenter;
 import com.example.zsd.presenter.UserRegPresenter;
 import com.example.zsd.view.UserRegView;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +53,28 @@ public class MobileZhuceActivity extends BaseActivity implements UserRegView {
                     showToast("用户名或密码为空");
                     return;
                 }
-                userRegPresenter.getUserRegData(zhuceMobile.getText().toString(),zhuceMima.getText().toString(),null);
+                userRegPresenter.getUserRegData(0+"",zhuceMobile.getText().toString(),zhuceMima.getText().toString(),null);
+                signup();
                 showToast("走完了");
                 break;
         }
+    }
+
+    private void signup() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    EMClient.getInstance().createAccount(zhuceMobile.getText().toString().trim(),zhuceMima.getText().toString().trim());
+                    System.out.println("注册成功");
+                    showToast("注册成功");
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                    showToast("注册失败");
+                }
+
+            }
+        }).start();
     }
 
     @Override

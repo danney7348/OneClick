@@ -60,9 +60,9 @@ public interface ApiService {
     @FormUrlEncoded
     Observable<LoginBean> getUserLogin(@Field("mobile") String mobile, @Field("password") String password);
 
-    @POST("user/reg")
+    @POST("user/register")
     @FormUrlEncoded
-    Observable<ResponseBody> getUserReg(@Field("mobile") String mobile,@Field("password") String password,@Field("token") String token);
+    Observable<ResponseBody> getUserReg(@Field("regType") String regType,@Field("mobile") String mobile,@Field("password") String password,@Field("token") String token);
 
     @Multipart
     @POST("file/upload")

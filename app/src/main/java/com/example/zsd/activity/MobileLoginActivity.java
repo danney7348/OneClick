@@ -1,10 +1,12 @@
 package com.example.zsd.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zsd.MainActivity;
 import com.example.zsd.R;
@@ -14,6 +16,8 @@ import com.example.zsd.entity.LoginBean;
 import com.example.zsd.presenter.UserLoginPresenter;
 import com.example.zsd.utils.ShareprefrensUtils;
 import com.example.zsd.view.UserLoginView;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.squareup.haha.perflib.Main;
 
 import java.util.ArrayList;
@@ -68,8 +72,39 @@ public class MobileLoginActivity extends BaseActivity<UserLoginPresenter> implem
                     return;
                 }
                 t.getUserLoginData(loginEtZhanghao.getText().toString(), loginEtMima.getText().toString());
+
                 break;
         }
+    }
+
+    private void singin() {
+
+        EMClient.getInstance().login(loginEtZhanghao.getText().toString().trim(), loginEtMima.getText().toString().trim(), new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                startActivity(new Intent(MobileLoginActivity.this,MainActivity.class));
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MobileLoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                finish();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                System.out.println("登录失败"+s);
+
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
     }
 
     @Override
@@ -105,11 +140,13 @@ public class MobileLoginActivity extends BaseActivity<UserLoginPresenter> implem
         isFirst = true;
         ShareprefrensUtils.put(this,"isFirst",isFirst);
 
+        ShareprefrensUtils.put(this,"icon",loginBean.data.icon);
         showToast(loginBean.msg);
         ShareprefrensUtils.put(this,"token",loginBean.data.token);
         ShareprefrensUtils.put(this,"uid",loginBean.data.uid+"");
         startActivity(MainActivity.class);
 
+        singin();
     }
 
     @Override

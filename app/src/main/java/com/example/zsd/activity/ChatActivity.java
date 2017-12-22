@@ -11,11 +11,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.zsd.R;
+import com.example.zsd.adapter.ListViewAdapter;
 import com.example.zsd.base.BaseActivity;
 import com.example.zsd.base.BasePresenter;
+import com.example.zsd.entity.ChatContent;
+import com.example.zsd.utils.ShareprefrensUtils;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
@@ -24,7 +29,12 @@ import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static com.igexin.push.core.a.l;
 
 public class ChatActivity extends BaseActivity  implements EMMessageListener{
     // 聊天信息输入框
@@ -41,6 +51,11 @@ public class ChatActivity extends BaseActivity  implements EMMessageListener{
     private String mChatId;
     // 当前会话对象
     private EMConversation mConversation;
+    private List<ChatContent> list;
+    private ListView lv;
+    private String user_icon;
+    private String icon;
+
     @Override
     public int bindLayout() {
         return R.layout.activity_chat;
@@ -58,12 +73,15 @@ public class ChatActivity extends BaseActivity  implements EMMessageListener{
 
     @Override
     public void initView() {
-        mChatId = getIntent().getStringExtra("ec_chat_id");
+        mChatId = getIntent().getStringExtra("user_mobile");
+        user_icon = getIntent().getStringExtra("user_icon");
+        icon = (String) ShareprefrensUtils.get(this, "icon", "");
         mMessageListener = this;
-
+        lv = findViewById(R.id.lv_text_content);
         mInputEdit = (EditText) findViewById(R.id.ec_edit_message_input);
         mSendBtn = (Button) findViewById(R.id.ec_btn_send);
         mContentText = (TextView) findViewById(R.id.ec_text_content);
+        list = new ArrayList<>();
         // 设置textview可滚动，需配合xml布局设置
         mContentText.setMovementMethod(new ScrollingMovementMethod());
 
@@ -77,7 +95,11 @@ public class ChatActivity extends BaseActivity  implements EMMessageListener{
                     // 创建一条新消息，第一个参数为消息内容，第二个为接受者username
                     EMMessage message = EMMessage.createTxtSendMessage(content, mChatId);
                     // 将新的消息内容和时间加入到下边
-                    mContentText.setText(mContentText.getText() + "\n发送：" + content + " - time: " + message.getMsgTime());
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Long l = Long.valueOf(message.getMsgTime());
+                    String timeString = sdf.format(new Date(l));
+                    list.add(new ChatContent(0,content,timeString,user_icon,icon));
+                    mContentText.setText(mContentText.getText() + "\n发送：" + content + " - time: " +timeString);
                     // 调用发送消息的方法
                     message.setChatType(EMMessage.ChatType.Chat);
                     EMClient.getInstance().chatManager().sendMessage(message);
@@ -126,8 +148,11 @@ public class ChatActivity extends BaseActivity  implements EMMessageListener{
         if (mConversation.getAllMessages().size() > 0) {
             EMMessage messge = mConversation.getLastMessage();
             EMTextMessageBody body = (EMTextMessageBody) messge.getBody();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Long l = Long.valueOf(mConversation.getLastMessage().getMsgTime());
+            String timeString = sdf.format(new Date(l));
             // 将消息内容和时间显示出来
-            mContentText.setText("聊天记录：" + body.getMessage() + " - time: " + mConversation.getLastMessage().getMsgTime());
+            mContentText.setText("聊天记录：" + body.getMessage() + " - time: " + timeString);
         }
 
 
@@ -135,7 +160,8 @@ public class ChatActivity extends BaseActivity  implements EMMessageListener{
 
     @Override
     public void initData() {
-
+        ListViewAdapter adapter = new ListViewAdapter(this,list);
+        lv.setAdapter(adapter);
     }
 
     @Override
@@ -156,8 +182,12 @@ public class ChatActivity extends BaseActivity  implements EMMessageListener{
                     EMMessage message = (EMMessage) msg.obj;
                     // 这里只是简单的demo，也只是测试文字消息的收发，所以直接将body转为EMTextMessageBody去获取内容
                     EMTextMessageBody body = (EMTextMessageBody) message.getBody();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Long l = Long.valueOf(mConversation.getLastMessage().getMsgTime());
+                    String timeString = sdf.format(new Date(l));
+                    list.add(new ChatContent(1,body.getMessage(),timeString,user_icon,icon));
                     // 将新的消息内容和时间加入到下边
-                    mContentText.setText(mContentText.getText() + "\n接收：" + body.getMessage() + " - time: " + message.getMsgTime());
+                    mContentText.setText(mContentText.getText() + "\n接收：" + body.getMessage() + " - time: " + timeString);
                     break;
             }
         }

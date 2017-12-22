@@ -16,13 +16,13 @@ import okhttp3.ResponseBody;
  */
 
 public class UserRegModel {
-    public void getUserRegData(String mobile, String password, String token, final UserRegMessage userRegMessage){
+    public void getUserRegData(String regType,String mobile, String password, String token, final UserRegMessage userRegMessage){
         new HttpUtils.Builder()
                 .addCallAdapterFactory()
                 .addConverterFactory()
                 .build()
                 .getMyQusetUtils()
-                .getUserReg(mobile,password,token)
+                .getUserReg(regType,mobile,password,token)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<ResponseBody>() {

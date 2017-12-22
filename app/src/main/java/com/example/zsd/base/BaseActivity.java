@@ -147,9 +147,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         super.onDestroy();
 
         if(t != null) {
-
             t.deatach();
-
         }
     }
 }
