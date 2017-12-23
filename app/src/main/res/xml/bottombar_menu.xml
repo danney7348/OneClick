@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_recents"
+        title="推荐"
+        icon="@drawable/ic_tuijian2"
+        />
+    <tab
+        id="@+id/tab_favorites"
+        title="段子"
+        icon="@drawable/ic_duanzi1"
+        />
+    <tab
+        id="@+id/tab_nearby"
+        title="视频"
+        icon="@drawable/ic_shiping1"
+        />
+    <tab
+        id="@+id/tab_friends"
+        title="发现"
+        icon="@drawable/find"
+        />
+</tabs>

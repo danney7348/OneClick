@@ -137,4 +137,9 @@ dependencies {
 
     //searchView
     compile 'com.carson_ho:SearchLayout:1.0.1'
+
+
+    compile 'com.android.support.constraint:constraint-layout:1.0.1'
+
+    compile 'com.roughike:bottom-bar:2.3.1'
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/include"
+        android:background="#03A9F4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+        <com.example.zsd.RoView
+            android:id="@+id/img_icon"
+            android:layout_marginLeft="@dimen/x20"
+            android:padding="@dimen/x20"
+            android:layout_width="@dimen/x100"
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_height="match_parent"
+            />
+
+        <TextView
+            android:id="@+id/main_tv_title"
+            android:textColor="#fff"
+            android:textSize="@dimen/x40"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="推荐" />
+
+        <ImageView
+            android:id="@+id/img_biji"
+            android:layout_width="@dimen/x100"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="13dp"
+            android:layout_marginRight="13dp"
+            android:padding="@dimen/x20"
+            android:src="@drawable/biji" />
+</RelativeLayout>
+</RelativeLayout>

@@ -78,7 +78,6 @@ public class ShipinremenFragment extends Fragment implements GetHotVideosView {
 
     @Override
     public void success(GetHotVideos getHotVideos) {
-        Toast.makeText(getActivity(), "+++++++++++++success++++++++++++++++", Toast.LENGTH_SHORT).show();
         for (int i = 0; i < getHotVideos.data.size(); i++) {
             int height = new Random().nextInt(400) + 250;
             getHotVideos.data.get(i).height = height;

@@ -3,8 +3,11 @@ package com.example.zsd;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
@@ -27,6 +30,8 @@ import com.example.zsd.fragment.ShipinFragment;
 import com.example.zsd.fragment.TuijianFragment;
 import com.example.zsd.utils.GlideCircleTransform;
 import com.example.zsd.utils.ShareprefrensUtils;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import java.util.List;
 
@@ -35,47 +40,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
-
-    @BindView(R.id.img_icon)
-    ImageView imgIcon;
-    @BindView(R.id.img_biji)
-    ImageView imgBiji;
-    @BindView(R.id.include)
-    RelativeLayout include;
-    @BindView(R.id.frame_main)
-    FrameLayout frameMain;
-    @BindView(R.id.main_img_tuijian)
-    ImageView mainImgTuijian;
-    @BindView(R.id.main_tv_tuijain)
-    TextView mainTvTuijain;
-    @BindView(R.id.main_ll_tuijian)
-    LinearLayout mainLlTuijian;
-    @BindView(R.id.main_img_duanzi)
-    ImageView mainImgDuanzi;
-    @BindView(R.id.main_tv_dianzi)
-    TextView mainTvDianzi;
-    @BindView(R.id.main_ll_duanzi)
-    LinearLayout mainLlDuanzi;
-    @BindView(R.id.main_img_shiping)
-    ImageView mainImgShiping;
-    @BindView(R.id.main_tv_shipin)
-    TextView mainTvShipin;
-    @BindView(R.id.main_ll_shipin)
-    LinearLayout mainLlShipin;
-    @BindView(R.id.linearlaout)
-    LinearLayout linearlaout;
-    @BindView(R.id.main_fl)
-    FrameLayout mainFl;
-    @BindView(R.id.main_dl)
-    DrawerLayout mainDl;
-    @BindView(R.id.main_tv_title)
-    TextView mainTvTitle;
-    @BindView(R.id.main_img_faxian)
-    ImageView mainImgFaxian;
-    @BindView(R.id.main_tv_faxian)
-    TextView mainTvFaxian;
-    @BindView(R.id.main_ll_faxian)
-    LinearLayout mainLlFaxian;
+    private ImageView iconImg;
+    private DrawerLayout mainDl;
+    private TextView title;
+    private Fragment currentFragment;
 
     @Override
     public int bindLayout() {
@@ -87,13 +55,28 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.img_icon, R.id.img_biji, R.id.main_ll_tuijian, R.id.main_ll_duanzi, R.id.main_ll_shipin,R.id.main_ll_faxian})
     @Override
     public void Click(View view) {
-        switch (view.getId()) {
-            case R.id.img_icon:
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void initView() {
+        final DuanziFragment duanziFragment = new DuanziFragment();
+        final ShipinFragment shipinFragment = new ShipinFragment();
+        final TuijianFragment tuijianFragment = new TuijianFragment();
+        final FaxianFragment faxianFragment = new FaxianFragment();
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        title = findViewById(R.id.main_tv_title);
+        iconImg = findViewById(R.id.img_icon);
+        final FrameLayout fl = findViewById(R.id.main_fl);
+        mainDl = findViewById(R.id.main_dl);
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fl, new LeftFragment()).commit();
+        iconImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 mainDl.openDrawer(Gravity.LEFT);
-                String icon = (String) ShareprefrensUtils.get(this, "icon", "");
+                String icon = (String) ShareprefrensUtils.get(MainActivity.this, "icon", "");
                 System.out.println("icon ================= " + icon);
                 RequestOptions options = new RequestOptions()
                         .centerCrop()
@@ -102,98 +85,38 @@ public class MainActivity extends BaseActivity {
                         .priority(Priority.HIGH)
                         .transform(new GlideCircleTransform());
                 //调用glide显示图片：
-                Glide.with(this).load(icon).apply(options).into(imgIcon);
-                break;
-            case R.id.img_biji:
-                startActivity(ChuangzuoActivity.class);
-                break;
-            case R.id.main_ll_tuijian:
-                mainTvTitle.setText("推荐");
-                mainImgTuijian.setImageResource(R.drawable.tuijian2);
-                mainTvTuijain.setTextColor(Color.parseColor("#1296DB"));
-                mainImgDuanzi.setImageResource(R.drawable.duanzi1);
-                mainTvDianzi.setTextColor(Color.parseColor("#C5C5C5"));
-                mainImgShiping.setImageResource(R.drawable.shiping1);
-                mainTvShipin.setTextColor(Color.parseColor("#C5C5C5"));
-                mainImgFaxian.setImageResource(R.drawable.find);
-                mainTvFaxian.setTextColor(Color.parseColor("#C5C5C5"));
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new TuijianFragment()).commit();
-                break;
-            case R.id.main_ll_duanzi:
-                mainTvTitle.setText("段子");
-                mainImgTuijian.setImageResource(R.drawable.tuijian1);
-                mainTvTuijain.setTextColor(Color.parseColor("#C5C5C5"));
-                mainImgDuanzi.setImageResource(R.drawable.duanzi2);
-                mainTvDianzi.setTextColor(Color.parseColor("#1296DB"));
-                mainImgShiping.setImageResource(R.drawable.shiping1);
-                mainTvShipin.setTextColor(Color.parseColor("#C5C5C5"));
-                mainImgFaxian.setImageResource(R.drawable.find);
-                mainTvFaxian.setTextColor(Color.parseColor("#C5C5C5"));
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new DuanziFragment()).commit();
-                break;
-            case R.id.main_ll_shipin:
-                mainTvTitle.setText("视频");
-                mainImgTuijian.setImageResource(R.drawable.tuijian1);
-                mainTvTuijain.setTextColor(Color.parseColor("#C5C5C5"));
-                mainImgDuanzi.setImageResource(R.drawable.duanzi1);
-                mainTvDianzi.setTextColor(Color.parseColor("#C5C5C5"));
-                mainImgShiping.setImageResource(R.drawable.shiping2);
-                mainTvShipin.setTextColor(Color.parseColor("#1296DB"));
-                mainImgFaxian.setImageResource(R.drawable.find);
-                mainTvFaxian.setTextColor(Color.parseColor("#C5C5C5"));
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new ShipinFragment()).commit();
-                break;
-            case R.id.main_ll_faxian:
-                mainTvTitle.setText("发现");
-                mainImgTuijian.setImageResource(R.drawable.tuijian1);
-                mainTvTuijain.setTextColor(Color.parseColor("#C5C5C5"));
-                mainImgDuanzi.setImageResource(R.drawable.duanzi1);
-                mainTvDianzi.setTextColor(Color.parseColor("#C5C5C5"));
-                mainImgShiping.setImageResource(R.drawable.shiping1);
-                mainTvShipin.setTextColor(Color.parseColor("#C5C5C5"));
-                mainImgFaxian.setImageResource(R.drawable.find2);
-                mainTvFaxian.setTextColor(Color.parseColor("#1296DB"));
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new FaxianFragment()).commit();
-                break;
-        }
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    public void initView() {
-        initStatusBar(Color.parseColor("#03A9F4"));
-        ButterKnife.bind(this);
-        mainImgTuijian.setImageResource(R.drawable.tuijian2);
-        mainTvTuijain.setTextColor(Color.parseColor("#1296DB"));
-        mainImgDuanzi.setImageResource(R.drawable.duanzi1);
-        mainTvDianzi.setTextColor(Color.parseColor("#C5C5C5"));
-        mainImgShiping.setImageResource(R.drawable.shiping1);
-        mainTvShipin.setTextColor(Color.parseColor("#C5C5C5"));
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new TuijianFragment()).commit();
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fl, new LeftFragment()).commit();
-        mainDl.addDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-
-            }
-
-            @Override
-            public void onDrawerOpened(@NonNull View drawerView) {
-                drawerView.setClickable(true);
-
-            }
-
-            @Override
-            public void onDrawerClosed(@NonNull View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-
+                Glide.with(MainActivity.this).load(icon).apply(options).into(iconImg);
             }
         });
-
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                if (tabId == R.id.tab_favorites) {
+                    // The tab with id R.id.tab_favorites was selected,
+                    // change your content accordingly.
+                    title.setText("段子");
+                    switchFragment(duanziFragment).commit();
+                }
+                if (tabId == R.id.tab_recents) {
+                    // The tab with id R.id.tab_favorites was reselected,
+                    // change your content accordingly.
+                    title.setText("推荐");
+                    switchFragment(tuijianFragment).commit();
+                }
+                if (tabId == R.id.tab_nearby) {
+                    // The tab with id R.id.tab_favorites was reselected,
+                    // change your content accordingly.
+                    title.setText("视频");
+                    switchFragment(shipinFragment).commit();
+                }
+                if (tabId == R.id.tab_friends) {
+                    // The tab with id R.id.tab_favorites was reselected,
+                    // change your content accordingly.
+                    title.setText("发现");
+                    switchFragment(faxianFragment).commit();
+                }
+            }
+        });
     }
 
     @Override
@@ -222,4 +145,22 @@ public class MainActivity extends BaseActivity {
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
+    private FragmentTransaction switchFragment(Fragment targetFragment) {
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction();
+        if (!targetFragment.isAdded()) {
+            //第一次使用switchFragment()时currentFragment为null，所以要判断一下
+            if (currentFragment != null) {
+                transaction.hide(currentFragment);
+            }
+            transaction.add(R.id.frame_main, targetFragment, targetFragment.getClass().getName());
+        } else {
+            transaction
+                    .hide(currentFragment)
+                    .show(targetFragment);
+        }
+        currentFragment = targetFragment;
+        return transaction;
+    }
+
 }
