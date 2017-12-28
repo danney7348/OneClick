@@ -1,8 +1,10 @@
 package com.example.zsd.base;
+        import android.content.Context;
         import android.content.Intent;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
         import android.support.v4.app.Fragment;
+        import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -18,7 +20,8 @@ package com.example.zsd.base;
          */
 public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
 
-    public View view;
+            private static final String TAGF = "BaseFragment";
+            public View view;
     public T presenter;
     public abstract T initPresenter();
 
@@ -33,6 +36,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
         {
             view = LayoutInflater.from(getActivity()).inflate(getViewId(),null);
         }
+        Log.d(TAGF,"******************onCreateView******************=");
         ViewGroup viewGroup= (ViewGroup) view.getParent();
         if(viewGroup!=null)
         {
@@ -46,13 +50,14 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         presenter=initPresenter();
-
+        Log.d(TAGF,"******************onActivityCreated******************=");
         initFragment();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        Log.d(TAGF,"******************onResume******************=");
         resumFragment();
     }
     public void start(Class<?> tclass,boolean isFinish){
@@ -78,4 +83,52 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     public abstract int getViewId();
     public abstract void initFragment();
     public abstract void resumFragment();
-}
+
+            @Override
+            public void onAttach(Context context) {
+                super.onAttach(context);
+                Log.d(TAGF,"******************onAttach******************=");
+            }
+
+            @Override
+            public void onCreate(@Nullable Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                Log.d(TAGF,"******************onCreate******************=");
+            }
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                Log.d(TAGF,"******************onStart******************=");
+            }
+
+            @Override
+            public void onPause() {
+                super.onPause();
+                Log.d(TAGF,"******************onPause******************=");
+            }
+
+            @Override
+            public void onStop() {
+                super.onStop();
+                Log.d(TAGF,"******************onStop******************=");
+            }
+
+            @Override
+            public void onDestroyView() {
+                super.onDestroyView();
+                Log.d(TAGF,"******************onDestroyView******************=");
+            }
+
+            @Override
+            public void onDestroy() {
+                super.onDestroy();
+                Log.d(TAGF,"******************onDestroy******************=");
+            }
+
+            @Override
+            public void onDetach() {
+                super.onDetach();
+                Log.d(TAGF,"******************onDetach******************=");
+            }
+        }

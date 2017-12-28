@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.zsd.R;
 import com.example.zsd.adapter.MyGuanzhuRecycleViewAdapter;
 import com.example.zsd.base.BaseActivity;
@@ -26,6 +27,7 @@ public class MyGuanzhuActivity extends BaseActivity<GetFollowUsersPresenter> imp
     private XRecyclerView rv;
     private MyGuanzhuRecycleViewAdapter adapter;
     private TextView back;
+    private boolean sIsScrolling = false;
 
     @Override
     public int bindLayout() {
@@ -49,6 +51,27 @@ public class MyGuanzhuActivity extends BaseActivity<GetFollowUsersPresenter> imp
         rv = findViewById(R.id.guanzhu_follow_rv);
         back = findViewById(R.id.guanzhu_tv_back);
         rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING || newState == RecyclerView.SCROLL_STATE_SETTLING) {
+                    sIsScrolling = true;
+                    Glide.with(MyGuanzhuActivity.this).pauseRequests();
+                } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    if (sIsScrolling == true) {
+                        Glide.with(MyGuanzhuActivity.this).resumeRequests();
+
+                    }
+                    sIsScrolling = false;
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
     }
 
     @Override

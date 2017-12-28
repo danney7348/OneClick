@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,6 +23,7 @@ import java.util.List;
  */
 public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements View.OnClickListener{
 
+    private static final String TAG = "BaseActivity";
     public T t;
     private boolean isStatus = false;//沉浸式状态栏（是否支持透明）
     private boolean isShowActionBar = false;//actionbar是否显示
@@ -39,6 +41,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG,"================onCreate******************=");
         setContentView(bindLayout());
         t=binView();
         initView();
@@ -145,9 +148,39 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        Log.d(TAG,"******************onDestroy******************=");
         if(t != null) {
             t.deatach();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG,"******************onStart******************=");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG,"******************onPause******************=");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG,"******************onResume******************=");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG,"******************onRestart******************=");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG,"******************onStop******************=");
     }
 }

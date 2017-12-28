@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.zsd.R;
 import com.example.zsd.adapter.DuanziRecycleViewAdapter;
 
@@ -52,6 +53,7 @@ public class DuanziFragment extends Fragment implements GetJokesView, CommentJok
     private List<GetJokes.DataBean> list;
     @Inject
     CommentJokePresenter commentJokePresenter;
+    private boolean sIsScrolling = false;
 
     @Nullable
     @Override
@@ -97,11 +99,25 @@ public class DuanziFragment extends Fragment implements GetJokesView, CommentJok
                 getJokesPresenter.getJokesData(page+"");
             }
         });
-        duanzi_fragment_rv.setOnLongClickListener(new View.OnLongClickListener() {
+        duanzi_fragment_rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public boolean onLongClick(View view) {
-                return false;
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING || newState == RecyclerView.SCROLL_STATE_SETTLING) {
+                    sIsScrolling = true;
+                    Glide.with(getActivity()).pauseRequests();
+                } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    if (sIsScrolling == true) {
+                        Glide.with(getActivity()).resumeRequests();
 
+                    }
+                    sIsScrolling = false;
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.example.zsd.activity;
 
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
@@ -55,6 +56,7 @@ public class ChatActivity extends BaseActivity  implements EMMessageListener{
     private ListView lv;
     private String user_icon;
     private String icon;
+    private ListViewAdapter adapter;
 
     @Override
     public int bindLayout() {
@@ -99,6 +101,7 @@ public class ChatActivity extends BaseActivity  implements EMMessageListener{
                     Long l = Long.valueOf(message.getMsgTime());
                     String timeString = sdf.format(new Date(l));
                     list.add(new ChatContent(0,content,timeString,user_icon,icon));
+                    adapter.notifyDataSetChanged();
                     mContentText.setText(mContentText.getText() + "\n发送：" + content + " - time: " +timeString);
                     // 调用发送消息的方法
                     message.setChatType(EMMessage.ChatType.Chat);
@@ -160,8 +163,13 @@ public class ChatActivity extends BaseActivity  implements EMMessageListener{
 
     @Override
     public void initData() {
-        ListViewAdapter adapter = new ListViewAdapter(this,list);
-        lv.setAdapter(adapter);
+        if(adapter == null){
+            adapter = new ListViewAdapter(this,list);
+            lv.setAdapter(adapter);
+        }else {
+            adapter.notifyDataSetChanged();
+        }
+
     }
 
     @Override
@@ -174,6 +182,7 @@ public class ChatActivity extends BaseActivity  implements EMMessageListener{
         return null;
     }
 
+    @SuppressLint("HandlerLeak")
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -185,7 +194,11 @@ public class ChatActivity extends BaseActivity  implements EMMessageListener{
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     Long l = Long.valueOf(mConversation.getLastMessage().getMsgTime());
                     String timeString = sdf.format(new Date(l));
-                    list.add(new ChatContent(1,body.getMessage(),timeString,user_icon,icon));
+                    ChatContent chatContent = new ChatContent(1, body.getMessage(), timeString, user_icon, icon);
+                    list.add(chatContent);
+                    adapter.notifyDataSetChanged();
+
+
                     // 将新的消息内容和时间加入到下边
                     mContentText.setText(mContentText.getText() + "\n接收：" + body.getMessage() + " - time: " + timeString);
                     break;
